@@ -1,10 +1,11 @@
 import React from 'react';
+// import styled from "@emotion/styled";
+import Navigation from "./Navigation/Navigation";
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-
-    </div>
+      <Navigation/>
   );
 }
 
