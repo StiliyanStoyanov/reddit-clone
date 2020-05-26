@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "@emotion/styled";
 import { unit, colors } from "../../styles";
+import Icon from "./Icon";
 
 const Navigation = styled.nav`
   background-color: ${colors.darkGray};
@@ -14,7 +15,8 @@ const NavigationBar = () => {
     return (
         <header>
             <Navigation>
-                content
+                <Icon/>
+                <Icon/>
             </Navigation>
         </header>
     )

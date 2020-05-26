@@ -12,16 +12,15 @@ export const globalStyles = css`
     box-sizing: border-box;
     min-height: 100vh;
     font-size: ${unit * 3}px;
-    line-height: 1.5;
   }
   body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     background-color: ${colors.black};
-    color: ${colors.white};
+    color: ${colors.white}
   }
   *, *::before, *::after {
-    box-sizing: inherit;
+    box-sizing: inherit
   }
 `
