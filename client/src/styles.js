@@ -1,11 +1,17 @@
 import { css } from "@emotion/core";
 
+export const padding = '6px';
 export const unit = 8;
 export const colors = {
+    textColor: '#a5a6a8',
+    borderColor: '#343536',
     darkGray: '#1a1a1b',
     white: '#ffffff',
     black: '#000000',
 };
+export const border = {
+    radius: '8px'
+}
 
 export const globalStyles = css`
   html {

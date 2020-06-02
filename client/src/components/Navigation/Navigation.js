@@ -1,26 +1,30 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from "@emotion/styled";
 import { unit, colors } from "../../styles";
-import Icon from "./Icon";
+import { Logo, Dropdown, Search } from "./NavLinks";
 
-const Navigation = styled.nav`
+// TODO: Fix routing
+
+const NavigationBar = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: ${colors.darkGray};
   border: 1px solid ${colors.white};
-  padding: ${unit}px ${unit*2}px;
+  padding: ${unit}px ${unit * 2}px;
 `
 
-const NavigationBar = () => {
-
-
+const Navigation = () => {
     return (
-        <header>
-            <Navigation>
-                <Icon/>
-                <Icon/>
-            </Navigation>
-        </header>
+        <NavigationBar>
+            <Logo/>
+            <Dropdown panel={'Communities'}/>
+            <Search/>
+            <Dropdown panel={'User Panel'}/>
+        </NavigationBar>
     )
 }
 
 
-export default NavigationBar
+export default Navigation
