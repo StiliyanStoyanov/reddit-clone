@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /** @jsx jsx */
-import React from "react";
+import React, {useState} from "react";
 import {jsx, css} from "@emotion/core";
 import { colors, border, padding} from "../../styles";
 
@@ -15,18 +15,22 @@ const searchStyle = css`
   ::-moz-placeholder {
     color: ${colors.textColor};
   };
-  background-color: ${colors.darkGray};
+  background-color: ${colors.inputBackground};
   border: 1px solid ${colors.borderColor};
   border-radius: ${border.radius};
-  width: 30vw;
+  width: 35vw;
   margin-right: 10px;
   padding: ${padding};
   outline: none;
+  &:hover, &:active, &:focus {
+    border-color: white;
+  }
+
 `
 
 const Search = () => {
 
-    return <input type="text" placeholder="Search" css={searchStyle}/>
+    return <input type="text" placeholder="Search" css={searchStyle} />
 }
 
 export { Search }

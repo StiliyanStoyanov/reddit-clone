@@ -6,15 +6,6 @@ import { Logo, Dropdown, Search } from "./NavLinks";
 
 // TODO: Fix routing
 
-const NavigationBar = styled.nav`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${colors.darkGray};
-  border: 1px solid ${colors.white};
-  padding: ${unit}px ${unit * 2}px;
-`
-
 const Navigation = () => {
     return (
         <NavigationBar>
@@ -26,5 +17,17 @@ const Navigation = () => {
     )
 }
 
+/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
+const NavigationBar = styled.nav`
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${colors.backgroundColor};
+  border-bottom: 1px solid ${colors.borderColor};
+  padding: 3px;
+`
 
 export default Navigation

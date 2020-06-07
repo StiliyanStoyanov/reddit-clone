@@ -11,7 +11,6 @@ const DropdownMenu = (props) => {
         setIsActive(!isActive);
     };
 
-    console.log(props);
     return (
         <Dropdown onClick={showHideContent} isActive={isActive}>
             {props.panel}
@@ -30,9 +29,8 @@ const Dropdown = styled.div`
   position: relative;
   z-index: 1;
   color: ${colors.textColor};
-  background-color: ${colors.darkGray};
+  background-color: ${colors.backgroundColor};
   width: 270px;
-  margin-left: auto;
   margin-right: 10px;
   padding: ${padding};
   border-radius: 8px 8px 0 0;
@@ -53,7 +51,7 @@ const Dropdown = styled.div`
 const DropdownContent = styled.div`
   position: absolute;
   z-index: 1;
-  background-color: ${colors.darkGray};
+  background-color: ${colors.backgroundColor};
   max-height: 480px;
   width: 270px;
   padding: ${padding};
