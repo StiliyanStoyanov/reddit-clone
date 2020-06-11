@@ -3,62 +3,35 @@
 /* eslint-disable no-unused-vars */
 import React, {useEffect, useState} from 'react';
 import {css, jsx} from '@emotion/core';
-import { colors } from "../../styles";
-import { arrowsColors } from "../../styles";
 import data from "../../data.json";
-import { Arrow } from "./ArrowSvg";
-import { PostsContainer } from "./PostsContainer";
+import { PostContainer } from "./PostContainer";
+import { Votes } from "./Votes/Votes";
+import { PostContent } from "./Content/PostContent";
 
-const { borderColor, backgroundColor, textWhite} = colors
 
 
-const content = css`
-  position: relative;
-  z-index: 2;
-`
-
-const upvote = css`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  padding: 8px 4px 8px 0;
-  border-left: 4px solid transparent;
-  height: 100%;
-  overflow: hidden;
-  text-wrap: normal;
-  align-items: center;
-`
-const voteArrows = css`
-  font-size: 16px;
-`
-const upvoteCount = css`
-  font-size: 12px;
-  font-weight: bolder;
-  text-align: center;
-  color: ${textWhite}
-`
 
 export const Posts = () => {
     const [posts, setPosts] = useState();
     const [loading, setLoading] = useState(true);
-    const post = data[0];
 
-
+    useEffect(() => {
+        setPosts(data);
+        setLoading(false);
+        if (posts !== undefined) {
+            console.log(posts[0]);
+        }
+    }, [posts])
     return (
-        <>
-            <PostsContainer>
-                <div css={upvote}>
-                    <div css={voteArrows}>
-                        <Arrow direction={'up'}/>
-                        <div css={upvoteCount}>999</div>
-                        <Arrow direction={'down'}/>
-                    </div>
+        posts ? posts.map((post) => {
+            return (
+                <div key={post.postId}>
+                    <PostContainer>
+                        <Votes upvotes={post.upvotes}/>
+                        <PostContent post={post}/>
+                    </PostContainer>
                 </div>
-                <div css={content}> Stuff </div>
-            </PostsContainer>
-        </>
+            )
+        }) : <div> Loading </div>
     )
 }

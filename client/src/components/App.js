@@ -18,13 +18,12 @@ const App = () => {
             <Navigation/>
             <div css={wrapper}>
                 <Switch>
-                    <Route path="/posts">
-                        <Posts/>
-                    </Route>
                     <Route path="/user">
                         <UserPanel/>
                     </Route>
-                    <Route path="/" />
+                    <Route path="/" >
+                        <Posts/>
+                    </Route>
                 </Switch>
             </div>
         </>

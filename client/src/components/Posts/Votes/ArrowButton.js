@@ -3,13 +3,13 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import {css, jsx} from "@emotion/core";
-import {arrowsColors} from "../../styles";
+import {arrowsColors} from "../../../styles";
 import styled from "@emotion/styled";
-import { ReactComponent as ArrowSvg } from "../../assets/arrow.svg"
+import { ReactComponent as ArrowSvg } from "../../../assets/arrow.svg"
 
 const {upvoteRed, downvoteBlue, arrowColor, hoverBackground} = arrowsColors
 
-export const Arrow = ({ direction }) => {
+export const ArrowButton = ({ direction }) => {
 
     const arrowHandler = () => {
 
