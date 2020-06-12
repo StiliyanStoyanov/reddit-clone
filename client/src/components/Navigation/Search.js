@@ -29,7 +29,6 @@ const searchStyle = css`
 `
 
 const Search = () => {
-
     return <input type="text" placeholder="Search" css={searchStyle} />
 }
 

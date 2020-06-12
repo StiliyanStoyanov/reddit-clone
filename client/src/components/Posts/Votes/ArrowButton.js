@@ -9,6 +9,7 @@ import { ReactComponent as ArrowSvg } from "../../../assets/arrow.svg"
 
 const {upvoteRed, downvoteBlue, arrowColor, hoverBackground} = arrowsColors
 
+// TODO: Implement up and down votes functionality
 export const ArrowButton = ({ direction }) => {
 
     const arrowHandler = () => {

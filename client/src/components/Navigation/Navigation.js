@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import styled from "@emotion/styled";
-import { unit, colors } from "../../styles";
-import { Logo, Dropdown, Search } from "./NavLinks";
+import { colors } from "../../styles";
+import { Logo } from "./Logo";
+import Dropdown from "./Dropdown";
+import { Search } from "./Search";
 
 // TODO: Fix routing
-
 const Navigation = () => {
     return (
         <NavigationBar>

@@ -8,6 +8,7 @@ export const colors = {
     textColor: '#a5a6a8',
     textWhite: '#d7dadc',
     borderColor: '#343536',
+    borderHover: '#818384',
     white: '#ffffff',
     black: '#000000',
 

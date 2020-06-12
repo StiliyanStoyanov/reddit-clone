@@ -3,12 +3,12 @@
 import React from 'react';
 import {css, jsx} from '@emotion/core'
 import styled from "@emotion/styled";
-import logo from '../../../assets/logo.svg'
+import logo from '../../assets/logo.svg'
 import { Link } from "react-router-dom";
 
 export const Logo = () => {
     return (
-        <Link css={LinkCss} to="/posts">
+        <Link css={LinkCss} to="/">
             <LogoStyled src={logo}/>
         </Link>
     )

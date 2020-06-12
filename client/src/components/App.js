@@ -18,12 +18,10 @@ const App = () => {
             <Navigation/>
             <div css={wrapper}>
                 <Switch>
-                    <Route path="/user">
-                        <UserPanel/>
-                    </Route>
-                    <Route path="/" >
-                        <Posts/>
-                    </Route>
+                    <Route exact path="/" component={Posts}/>
+                    <Route path="/e/:subForum" component={() => <div>Sub Forum</div>}/>
+                    <Route path="/user/:userName" component={UserPanel}/>
+                    <Route path="*" component={() => <div>Not Found</div>} />
                 </Switch>
             </div>
         </>

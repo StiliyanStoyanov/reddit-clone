@@ -3,6 +3,7 @@
 import React, {useEffect, useRef} from "react";
 import { css, jsx } from "@emotion/core"
 import { colors } from "../../../styles";
+import { Link } from "react-router-dom";
 
 // TODO: Convert date to represent how much time ago it was posted instead of the actual date
 // TODO: Change up subForum && creator styles and set them as actual links
@@ -17,16 +18,20 @@ export const Details = ({subThumbnail, subForum, creator, createdAt}) => {
             return `${number}`
         }
     }
+    date = `${date.getFullYear()}/${getDateConcatZero(date.getMonth())}/${getDateConcatZero(date.getDate())}`
 
     return (
         <div css={container}>
-            <img css={imageCss} src={subThumbnail} alt="None" />
+            <Link css={imageLink} to={`${subForum}`}>
+                <img css={imageLink} src={subThumbnail} alt="None" />
+            </Link>
             <div css={innerContainer}>
-                <div css={subName}>{subForum}</div>
-                <div css={postedBy}>Posted by u/{creator}</div>
-                <div css={createDate}>
-                    {date.getFullYear()}/{getDateConcatZero(date.getMonth())}/{getDateConcatZero(date.getDate())}
+                <Link css={subForumLink} to={`${subForum}`}>{subForum}</Link>
+                <div>
+                    <span>Posted By</span>
+                    <Link css={postedByLink} to={`/user/${creator}`}>u/{creator}</Link>
                 </div>
+                <div css={createDate}>{date}</div>
             </div>
         </div>
     )
@@ -43,26 +48,39 @@ const container = css`
   overflow: hidden;
 `;
 
-const imageCss = css`
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-`;
-
 const innerContainer = css`
   display: flex;
   width: 100%;
 `;
 
-const subName = css`
+const imageLink = css`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`;
+
+const subForumLink = css`
+  display: inline-block;
+  text-decoration: none;
   font-size: 12px;
   font-weight: 600;
-  margin-right: 5px;
   color: ${colors.textWhite};
-`
-const postedBy = css`
   margin-right: 5px;
+  &:hover { 
+      text-decoration: underline;
+  }
+`
+const postedByLink = css`
+  display: inline-block;
+  padding-left: 5px;
+  text-decoration: none;
+  color: ${colors.textColor};
+  &:hover { 
+      text-decoration: underline;
+  }
+  
 `
 const createDate = css`
-  margin-right: 5px;
+  margin-left: 5px;
 `
+

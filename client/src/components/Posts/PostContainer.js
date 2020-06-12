@@ -17,4 +17,7 @@ export const PostContainer = styled.div`
   max-height: 500px;
   width: 100%;
   cursor: pointer;
+  &:hover, &:active {
+    border: 1px solid ${colors.borderHover};
+  }
 `

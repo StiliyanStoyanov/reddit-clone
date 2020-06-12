@@ -18,9 +18,9 @@ export const Posts = () => {
     useEffect(() => {
         setPosts(data);
         setLoading(false);
-        if (posts !== undefined) {
-            console.log(posts[0]);
-        }
+        // if (posts !== undefined) {
+        //     console.log(posts[0]);
+        // }
     }, [posts])
     return (
         posts ? posts.map((post) => {

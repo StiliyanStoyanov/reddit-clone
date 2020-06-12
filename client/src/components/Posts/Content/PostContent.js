@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { Details } from "./PostDetails";
 import { Title } from "./PostTitle";
@@ -7,13 +7,13 @@ import { Info } from "./PostInfo";
 
 export const PostContent = ({post}) => {
 
-    let DetailsRef = useRef(null);
-    useEffect(() => {
-        if (DetailsRef.current) {
-            console.log(DetailsRef);
-            let height = DetailsRef.current.offsetHeight;
-        }
-    }, [DetailsRef])
+    // let DetailsRef = useRef(null);
+    // useEffect(() => {
+    //     if (DetailsRef.current) {
+    //         console.log(DetailsRef);
+    //         let height = DetailsRef.current.offsetHeight;
+    //     }
+    // }, [DetailsRef])
 
     return (
         <Container>
