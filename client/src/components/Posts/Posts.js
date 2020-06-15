@@ -4,34 +4,33 @@
 import React, {useEffect, useState} from 'react';
 import {css, jsx} from '@emotion/core';
 import data from "../../data.json";
-import { PostContainer } from "./PostContainer";
-import { Votes } from "./Votes/Votes";
-import { PostContent } from "./Content/PostContent";
+import {PostContainer} from "./PostContainer";
+import {Votes} from "./Votes/Votes";
+import {PostContent} from "./Content/Content";
+import {useLocation} from "react-router";
 
-
-
-
+// TODO: implement loader
 export const Posts = () => {
     const [posts, setPosts] = useState();
     const [loading, setLoading] = useState(true);
+    let location = useLocation();
 
     useEffect(() => {
         setPosts(data);
         setLoading(false);
-        // if (posts !== undefined) {
-        //     console.log(posts[0]);
-        // }
-    }, [posts])
+    }, [posts]);
+
     return (
         posts ? posts.map((post) => {
             return (
-                <div key={post.postId}>
-                    <PostContainer>
-                        <Votes upvotes={post.upvotes}/>
-                        <PostContent post={post}/>
-                    </PostContainer>
-                </div>
+                <PostContainer key={post.postId}>
+                    <PostContent post={post}/>
+                    <Votes upvotes={post.upvotes}/>
+                </PostContainer>
             )
         }) : <div> Loading </div>
     )
-}
+};
+
+
+

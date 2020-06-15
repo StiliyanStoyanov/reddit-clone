@@ -11,6 +11,12 @@ export const VotesContainer = styled.div`
   border-left: 4px solid transparent;
   height: 100%;
   overflow: hidden;
-  text-wrap: normal;
   align-items: center;
+  @media (max-width: 420px) {
+    height: 32px;
+    width: 86px;
+    top: auto;
+    bottom: 0;
+    justify-content: center;
+  }
 `

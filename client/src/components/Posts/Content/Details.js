@@ -6,7 +6,6 @@ import { colors } from "../../../styles";
 import { Link } from "react-router-dom";
 
 // TODO: Convert date to represent how much time ago it was posted instead of the actual date
-// TODO: Change up subForum && creator styles and set them as actual links
 
 export const Details = ({subThumbnail, subForum, creator, createdAt}) => {
     let date = new Date(createdAt);
@@ -22,17 +21,10 @@ export const Details = ({subThumbnail, subForum, creator, createdAt}) => {
 
     return (
         <div css={container}>
-            <Link css={imageLink} to={`${subForum}`}>
-                <img css={imageLink} src={subThumbnail} alt="None" />
-            </Link>
-            <div css={innerContainer}>
-                <Link css={subForumLink} to={`${subForum}`}>{subForum}</Link>
-                <div>
-                    <span>Posted By</span>
-                    <Link css={postedByLink} to={`/user/${creator}`}>u/{creator}</Link>
-                </div>
-                <div css={createDate}>{date}</div>
-            </div>
+            <Link css={imageLink} to={`${subForum}`}><img css={imageLink} src={subThumbnail} alt="None" /></Link>
+            <Link css={subForumLink} to={`${subForum}`}>{subForum}</Link>
+            <div>Posted By<Link css={postedByLink} to={`/user/${creator}`}>u/{creator}</Link></div>
+            <div css={createDate}>{date}</div>
         </div>
     )
 };
@@ -40,6 +32,7 @@ export const Details = ({subThumbnail, subForum, creator, createdAt}) => {
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
 const container = css`
   font-size: 12px;
+  height: 20px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -48,18 +41,17 @@ const container = css`
   overflow: hidden;
 `;
 
-const innerContainer = css`
-  display: flex;
-  width: 100%;
-`;
-
 const imageLink = css`
+  position: relative;
+  z-index: 2;
   width: 20px;
   height: 20px;
   margin-right: 5px;
 `;
 
 const subForumLink = css`
+  position: relative;
+  z-index: 2;
   display: inline-block;
   text-decoration: none;
   font-size: 12px;
@@ -71,6 +63,8 @@ const subForumLink = css`
   }
 `
 const postedByLink = css`
+  position: relative;
+  z-index: 2;
   display: inline-block;
   padding-left: 5px;
   text-decoration: none;
@@ -78,9 +72,9 @@ const postedByLink = css`
   &:hover { 
       text-decoration: underline;
   }
-  
-`
+`;
+
 const createDate = css`
   margin-left: 5px;
-`
+`;
 

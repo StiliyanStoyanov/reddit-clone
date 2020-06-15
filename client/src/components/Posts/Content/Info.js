@@ -13,17 +13,20 @@ export const Info = ({ img }) => {
     )
 }
 
+const [detailsHeight, titleHeight, bottomHeight , padding] = [20, 23, 32, 8];
+
 const imgCss = css`
   display: block;
   width: 100%;
-  max-height: 431px;
+  max-height: 100%;
   object-fit: cover;
 `
 
 const container = css`
   width: 100%;
   max-width: 100%;
-  max-height: calc(100% - 51px);
+  max-height: calc(100% - ${detailsHeight + titleHeight + bottomHeight + padding}px);
+  height: 100%;
 `
 
 

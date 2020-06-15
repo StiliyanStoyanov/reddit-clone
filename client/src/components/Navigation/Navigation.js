@@ -22,7 +22,7 @@ const Navigation = () => {
 const NavigationBar = styled.nav`
   position: sticky;
   top: 0;
-  z-index: 3;
+  z-index: 90;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -6,7 +6,7 @@ import {jsx, css} from "@emotion/core";
 import Navigation from "./Navigation/Navigation";
 import {Global} from "@emotion/core";
 import {globalStyles} from "../styles";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import {Posts} from "./Posts/Posts";
 import {UserPanel} from "./UserPanel/UserPanel";
 
