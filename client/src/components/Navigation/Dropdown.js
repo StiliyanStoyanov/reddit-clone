@@ -1,23 +1,26 @@
-import React, {useState} from "react";
+/* eslint-disable no-unused-vars */
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import styled from "@emotion/styled";
-import { colors, padding }  from "../../styles";
+import {colors, padding} from "../../styles";
 
 
 // TODO: Setup actual links after setting up the server
 
 const DropdownMenu = (props) => {
     const [isActive, setIsActive] = useState(false);
+
     const showHideContent = () => {
         setIsActive(!isActive);
+        console.log(props);
     };
 
     return (
         <Dropdown onClick={showHideContent} isActive={isActive}>
             {props.panel}
-            <DropdownContent isActive={isActive}>
-                <div>Link 1</div>
-                <div>Link 2</div>
-                <div>Link 3</div>
+            <DropdownContent isActive={isActive} panel={props.panel}>
+                <div>Test</div>
+                <div>Test</div>
+                <div>Test</div>
             </DropdownContent>
         </Dropdown>
     )
@@ -34,12 +37,12 @@ const Dropdown = styled.div`
   margin-right: 10px;
   padding: ${padding};
   border-radius: 8px 8px 0 0;
-  ${props => props.isActive 
-    ? ({border: `1px solid ${colors.borderColor}`, borderBottom: 'none'}) 
+  ${props => props.isActive
+    ? ({border: `1px solid ${colors.borderColor}`, borderBottom: 'none'})
     : null};
   &:hover {
-    ${props => props.isActive ? 
-    null : 
+    ${props => props.isActive ?
+    null :
     ({
         border: `1px solid ${colors.borderColor}`,
         borderRadius: '8px'

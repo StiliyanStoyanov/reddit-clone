@@ -1,20 +1,17 @@
 /** @jsx jsx */
 /* eslint-disable no-unused-vars */
-import React, {useRef} from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { Details } from "./Details";
 import { Title } from "./Title";
 import { Info } from "./Info";
-import { BottomBar } from "./bottom-bar";
+import { BottomBar } from "./BottomBar";
 import {Link} from "react-router-dom";
 import {css, jsx} from "@emotion/core";
 
 
 
 export const PostContent = ({ post }) => {
-    const detailsHeight = React.createRef();
-    const titleHeight = useRef();
-    const bottomBarHeight = useRef();
 
     return (
         <Container>

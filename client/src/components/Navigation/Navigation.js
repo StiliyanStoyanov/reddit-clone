@@ -5,6 +5,7 @@ import { colors } from "../../styles";
 import { Logo } from "./Logo";
 import Dropdown from "./Dropdown";
 import { Search } from "./Search";
+import { AuthContainer } from "./AuthContainer";
 
 // TODO: Fix routing
 const Navigation = () => {
@@ -13,7 +14,7 @@ const Navigation = () => {
             <Logo/>
             <Dropdown panel={'Communities'}/>
             <Search/>
-            <Dropdown panel={'User Panel'}/>
+            <Dropdown panel={'User'} isAuth={false}/>
         </NavigationBar>
     )
 }

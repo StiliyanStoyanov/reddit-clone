@@ -19,11 +19,15 @@ const searchStyle = css`
   border: 1px solid ${colors.borderColor};
   border-radius: ${border.radius};
   width: 35vw;
+  height: 2em;
   margin-right: 10px;
   padding: ${padding};
   outline: none;
   &:hover, &:active, &:focus {
     border-color: white;
+  };
+  @media (max-width: 1000px) {
+    width: 20vw;
   }
 
 `
