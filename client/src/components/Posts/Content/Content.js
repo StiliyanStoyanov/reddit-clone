@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { Details } from "./Details";
 import { Title } from "./Title";
 import { Info } from "./Info";
-import { BottomBar } from "./BottomBar";
+import { BottomBar } from "./bottom-bar";
 import {Link} from "react-router-dom";
 import {css, jsx} from "@emotion/core";
 
