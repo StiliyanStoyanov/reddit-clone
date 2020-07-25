@@ -13,7 +13,8 @@ export const colors = {
     black: '#000000',
 
 };
-export const arrowsColors = {
+
+export const scoresButton = {
     hoverBackground: 'rgba(215, 218, 220, 0.1)',
     arrowColor: '#818384',
     upvoteRed: '#ff4500',

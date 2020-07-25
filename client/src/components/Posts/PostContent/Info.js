@@ -3,7 +3,6 @@
 import React from "react";
 import {css, jsx} from "@emotion/core";
 
-// TODO: Fix up image scaling to be more responsive
 export const Info = ({ img }) => {
 
     return (
@@ -18,7 +17,7 @@ const [detailsHeight, titleHeight, bottomHeight , padding] = [20, 23, 32, 8];
 const imgCss = css`
   display: block;
   width: 100%;
-  max-height: 100%;
+  height: 100%;
   object-fit: cover;
 `
 

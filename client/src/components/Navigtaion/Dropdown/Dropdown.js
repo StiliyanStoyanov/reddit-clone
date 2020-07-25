@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useState} from "react";
 import styled from "@emotion/styled";
-import {colors, padding} from "../../styles";
+import {colors, padding} from "../../../styles";
+import AnonymousUser from "./AnonymousUser";
+import {Avatar} from "../Avatar";
 
 
-// TODO: Setup actual links after setting up the server
 
 const DropdownMenu = (props) => {
     const [isActive, setIsActive] = useState(false);
@@ -16,14 +17,12 @@ const DropdownMenu = (props) => {
 
     return (
         <Dropdown onClick={showHideContent} isActive={isActive}>
-            {props.panel}
+            {props.panel === 'anonymous' && <Avatar/>}
             <DropdownContent isActive={isActive} panel={props.panel}>
-                <div>Test</div>
-                <div>Test</div>
-                <div>Test</div>
+                <AnonymousUser/>
             </DropdownContent>
         </Dropdown>
-    )
+    );
 };
 
 /* STYLED COMPONENTS USED IN THIS FILE BELOW */
@@ -48,12 +47,15 @@ const Dropdown = styled.div`
         borderRadius: '8px'
     })};
     cursor: pointer;
+  };
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 `;
 
 const DropdownContent = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   background-color: ${colors.backgroundColor};
   max-height: 480px;
   width: 270px;
@@ -64,7 +66,11 @@ const DropdownContent = styled.div`
   overflow: auto;
   border: 1px solid ${colors.borderColor};
   border-top: 0;
-  display: ${props => props.isActive ? 'block' : 'none'}
+  display: ${props => props.isActive ? 'block' : 'none'};
+  @media (max-width: 1000px) {
+    width: 160px;
+    min-width: 160px;
+  }
 }
 `;
 

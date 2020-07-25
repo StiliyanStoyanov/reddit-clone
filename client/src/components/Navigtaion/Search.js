@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /** @jsx jsx */
-import React, {useState} from "react";
+import React from "react";
 import {jsx, css} from "@emotion/core";
 import { colors, border, padding} from "../../styles";
 
@@ -26,10 +26,6 @@ const searchStyle = css`
   &:hover, &:active, &:focus {
     border-color: white;
   };
-  @media (max-width: 1000px) {
-    width: 20vw;
-  }
-
 `
 
 const Search = () => {

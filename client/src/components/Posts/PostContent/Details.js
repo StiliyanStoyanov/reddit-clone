@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /** @jsx jsx */
-import React, {useEffect, useRef} from "react";
+import React from "react";
 import { css, jsx } from "@emotion/core"
 import { colors } from "../../../styles";
-import { Link } from "react-router-dom";
+import {Link} from "@reach/router";
 
 // TODO: Convert date to represent how much time ago it was posted instead of the actual date
 

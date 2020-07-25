@@ -5,8 +5,8 @@ import styled from "@emotion/styled";
 import { Details } from "./Details";
 import { Title } from "./Title";
 import { Info } from "./Info";
-import { BottomBar } from "./BottomBar";
-import {Link} from "react-router-dom";
+import { Bottom } from "./Bottom";
+import { Link } from "@reach/router";
 import {css, jsx} from "@emotion/core";
 
 
@@ -23,7 +23,7 @@ export const PostContent = ({ post }) => {
                 createdAt={post.createdAt}/>
             <Title postName={post.postName}/>
             <Info img={post.img ? post.img : 'Image Not Found'}/>
-            <BottomBar/>
+            <Bottom/>
         </Container>
     )
 }

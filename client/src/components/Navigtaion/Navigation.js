@@ -3,18 +3,19 @@ import React from 'react';
 import styled from "@emotion/styled";
 import { colors } from "../../styles";
 import { Logo } from "./Logo";
-import Dropdown from "./Dropdown";
+import Dropdown from "./Dropdown/Dropdown";
 import { Search } from "./Search";
-import { AuthContainer } from "./AuthContainer";
+import AuthContainer from "./Auth/AuthContainer";
 
 // TODO: Fix routing
-const Navigation = () => {
+const Navigation = ({isAuth}) => {
     return (
         <NavigationBar>
             <Logo/>
-            <Dropdown panel={'Communities'}/>
+            {isAuth && <Dropdown panel={'Communities'}/>}
             <Search/>
-            <Dropdown panel={'User'} isAuth={false}/>
+            {isAuth && <Dropdown panel={'User'}/>}
+            {!isAuth && <AuthContainer/>}
         </NavigationBar>
     )
 }

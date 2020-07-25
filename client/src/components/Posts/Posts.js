@@ -1,36 +1,52 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 /* eslint-disable no-unused-vars */
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import styled from "@emotion/styled";
 import {css, jsx} from '@emotion/core';
-import data from "../../data.json";
-import {PostContainer} from "./PostContainer";
-import {Votes} from "./Votes/Votes";
-import {PostContent} from "./Content/Content";
-import {useLocation} from "react-router";
+import {Scores} from "./Scores/Scores";
+import {PostContent} from "./PostContent/PostContent";
+import {colors} from "../../styles";
+const {borderColor, backgroundColor} = colors
 
-// TODO: implement loader
-export const Posts = () => {
-    const [posts, setPosts] = useState();
-    const [loading, setLoading] = useState(true);
-    let location = useLocation();
-
-    useEffect(() => {
-        setPosts(data);
-        setLoading(false);
-    }, [posts]);
+export const Posts = ({ posts }) => {
 
     return (
         posts ? posts.map((post) => {
             return (
                 <PostContainer key={post.postId}>
                     <PostContent post={post}/>
-                    <Votes upvotes={post.upvotes}/>
+                    <Scores upvotes={post.upvotes}/>
                 </PostContainer>
             )
         }) : <div> Loading </div>
     )
 };
+
+/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
+const PostContainer = styled.div`
+  display: flex;
+  position: relative;
+  z-index: 1;
+  margin: 10px auto;
+  padding-top: 8px;
+  padding-left: 40px;
+  border: 1px solid ${borderColor};
+  border-radius: 4px;
+  background-color: ${backgroundColor};
+  min-width: 380px;
+  max-width: 700px;
+  min-height: 80px;
+  max-height: 500px;
+  width: 100%;
+  cursor: pointer;
+  &:hover, &:active {
+    border: 1px solid ${colors.borderHover};
+  }
+  @media (max-width: 420px) {
+    padding-left: 0;
+  }
+`
 
 
 

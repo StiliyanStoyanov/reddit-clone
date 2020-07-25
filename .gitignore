@@ -2,3 +2,14 @@ node_modules
 .DS_Store
 .env
 .idea
+
+#debug logs
+debug.log
+*.log
+
+# Temporary testing files
+data.json
+test.js
+
+# Firebase
+.firebaserc
