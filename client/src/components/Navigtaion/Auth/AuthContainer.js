@@ -1,18 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
 import LoginLink from "./LoginLink";
-import RegisterLink from "./RegisterLink";
-import DropdownMenu from "../Dropdown/Dropdown";
-
+import SignUpLink from "./SignUpLink";
 
 const AuthContainer = () => {
-
-
     return (
         <Container>
             <LoginLink/>
-            <RegisterLink/>
-            <DropdownMenu panel={'anonymous'}/>
+            <SignUpLink/>
         </Container>
     )
 }
@@ -23,6 +18,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: auto;
+  white-space: nowrap;
 `
 
 export default AuthContainer

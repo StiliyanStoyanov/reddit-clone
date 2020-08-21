@@ -1,47 +1,69 @@
 /** @jsx jsx */
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, {useEffect, useState} from "react";
 import styled from "@emotion/styled";
 import {jsx, css} from "@emotion/core";
 
+const Login = ({loginAction, user}) => {
 
-const Login = () => {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
 
-
-    const LoginHandler = (event) => {
-        console.log(event.target);
+    const emailHandler = (event) => {
+        setEmail(event.target.value);
+    }
+    const passwordHandler = (event) => {
+        setPassword(event.target.value);
     }
 
-    return (
-        <LoginContainer>
-            <label css={loginLabelsCSS} htmlFor="username-login">Username</label>
-            <input type="text" id="username-login"/>
 
-            <label css={loginLabelsCSS} htmlFor="password-login">Password</label>
-            <input type="password" id="password-login"/>
+    if (!user) {
+        return (
+            <LoginForm>
+                <label css={loginLabel}>
+                    Username
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={emailHandler}
+                    />
+                </label>
 
-            <button css={loginButtonCSS} onClick={LoginHandler}>Login</button>
-        </LoginContainer>
-    )
+                <label css={loginLabel}>
+                    Password
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={passwordHandler}
+                    />
+                </label>
+
+                <button css={loginButton} onClick={loginAction(email, password)}>Login</button>
+                <button css={loginButton}>Test</button>
+            </LoginForm>
+        );
+    } else {
+        return null
+    }
 }
 
 
-
-
-
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const loginLabelsCSS = css`
-  
-`
-const LoginContainer = styled.div`
+const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 `
-const loginButtonCSS = css`
+const loginLabel = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;`
+
+const loginButton = css`
   margin-top: 10px;
 `
-
 
 export default Login

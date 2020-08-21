@@ -1,36 +1,42 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+/** @jsx jsx */
+import {jsx} from "@emotion/core";
 import styled from "@emotion/styled";
-import { colors } from "../../styles";
-import { Logo } from "./Logo";
 import Dropdown from "./Dropdown/Dropdown";
-import { Search } from "./Search";
+import LogoAndSearch from "./LogoAndSearch/LogoAndSearch";
 import AuthContainer from "./Auth/AuthContainer";
 
-// TODO: Fix routing
-const Navigation = ({isAuth}) => {
+const Navigation = ({ logoutAction, user, loading}) => {
     return (
-        <NavigationBar>
-            <Logo/>
-            {isAuth && <Dropdown panel={'Communities'}/>}
-            <Search/>
-            {isAuth && <Dropdown panel={'User'}/>}
-            {!isAuth && <AuthContainer/>}
-        </NavigationBar>
-    )
-}
+        <header>
+            <NavigationBar>
+                <LogoAndSearch/>
+                {!user && <AuthContainer/>}
+                <DropdownContainer>
+                    <Dropdown user={user} logoutAction={logoutAction}/>
+                </DropdownContainer>
+            </NavigationBar>
+        </header>
 
+    );
+}
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
 const NavigationBar = styled.nav`
   position: sticky;
   top: 0;
   z-index: 90;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: ${colors.backgroundColor};
-  border-bottom: 1px solid ${colors.borderColor};
+  background-color: ${({theme}) => theme.navBackgroundColor};
+  border-bottom: 1px solid ${({theme}) => theme.borderColor};
   padding: 3px;
 `
+const DropdownContainer = styled.div`
+  position: relative;
+  display: flex;
+  z-index: 1;
+  margin-left: auto;
+  cursor:pointer;
+`;
 
 export default Navigation

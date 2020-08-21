@@ -1,5 +1,4 @@
-import { css } from "@emotion/core";
-
+/* eslint-disable no-unused-vars */
 export const padding = '6px';
 export const unit = 8;
 export const colors = {
@@ -23,20 +22,7 @@ export const scoresButton = {
 export const border = {
     radius: '8px'
 }
-
-export const globalStyles = css`
-  html {
-    box-sizing: border-box;
-    font-size: ${unit * 3}px;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-color: ${colors.black};
-    color: ${colors.textColor}
-  }
-  *, *::before, *::after {
-    box-sizing: inherit
-  }
-`
+export const navIconsContainerStyle = {
+    backgroundColor: '#3a3b3c',
+    hoverBackgroundColor: '#4e4f50'
+}

@@ -1,25 +1,39 @@
+/** @jsx jsx */
+/** @jsxFrag React.Fragment */
 /* eslint-disable no-unused-vars */
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import styled from "@emotion/styled";
-import {colors, padding} from "../../../styles";
-import AnonymousUser from "./AnonymousUser";
-import {Avatar} from "../Avatar";
+import {jsx} from "@emotion/core";
+import {faPlus, faUser} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ThemeSwitch from "./ThemeSwitch/ThemeSwitch";
+import Logout from "./Logout/Logout";
+import User from "./User/User";
+import {useClickOutside} from "../../../hooks/useClickOutside";
 
 
+const DropdownMenu = ({user, logoutAction, menu}) => {
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef();
+    const themeRef = useRef();
 
-const DropdownMenu = (props) => {
-    const [isActive, setIsActive] = useState(false);
-
-    const showHideContent = () => {
-        setIsActive(!isActive);
-        console.log(props);
+    const onClickOutside = () => {
+        setOpen(false);
     };
+    const showHideContent = (event) => {
+        setOpen(!open);
+    }
 
+    useClickOutside(dropdownRef, onClickOutside, open, themeRef);
     return (
-        <Dropdown onClick={showHideContent} isActive={isActive}>
-            {props.panel === 'anonymous' && <Avatar/>}
-            <DropdownContent isActive={isActive} panel={props.panel}>
-                <AnonymousUser/>
+        <Dropdown ref={dropdownRef}>
+            <UserIconContainer onClick={showHideContent} open={open}>
+                <UserIcon icon={faUser}/>
+            </UserIconContainer>
+            <DropdownContent open={open}>
+                <User user={user}/>
+                <ThemeSwitch ref={themeRef}/>
+                <Logout logoutAction={logoutAction}/>
             </DropdownContent>
         </Dropdown>
     );
@@ -27,52 +41,58 @@ const DropdownMenu = (props) => {
 
 /* STYLED COMPONENTS USED IN THIS FILE BELOW */
 const Dropdown = styled.div`
-  display: inline-block;
   position: relative;
   z-index: 1;
-  color: ${colors.textColor};
-  background-color: ${colors.backgroundColor};
-  width: 270px;
-  margin-right: 10px;
-  padding: ${padding};
-  border-radius: 8px 8px 0 0;
-  ${props => props.isActive
-    ? ({border: `1px solid ${colors.borderColor}`, borderBottom: 'none'})
-    : null};
-  &:hover {
-    ${props => props.isActive ?
-    null :
-    ({
-        border: `1px solid ${colors.borderColor}`,
-        borderRadius: '8px'
-    })};
-    cursor: pointer;
-  };
+  margin-left: auto;
+  cursor:pointer;
+  padding-left: 5px;
   @media (max-width: 1000px) {
-    width: 100%;
+    
   }
 `;
 
 const DropdownContent = styled.div`
   position: absolute;
   z-index: 2;
-  background-color: ${colors.backgroundColor};
-  max-height: 480px;
-  width: 270px;
-  padding: ${padding};
-  border-radius: 0 0 8px 8px;
-  top: 33px;
-  left: -1px;
+  background-color: ${ ({theme}) => theme.navBackgroundColor };
+  width: 360px;
+  border-radius: 8px;
+  top: 50px;
+  left: -318px;
   overflow: auto;
-  border: 1px solid ${colors.borderColor};
-  border-top: 0;
-  display: ${props => props.isActive ? 'block' : 'none'};
+  border: 1px solid ${ ({theme}) => theme.borderColor };
+  display: ${props => props.open ? 'block' : 'none'};
   @media (max-width: 1000px) {
-    width: 160px;
-    min-width: 160px;
+  
   }
 }
 `;
+const UserIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: ${({theme}) => theme.navIconsBackgroundColor};
+  &:hover {
+    background-color: ${({theme}) => theme.navIconsHoverBackground};
+    opacity: 1;
+  }
+  color: ${({open, theme}) => open ? theme.navIconActiveColor : null};
+`
+const UserIcon = styled(FontAwesomeIcon)`
+  height: 20px;
+  width: 20px;
+  opacity: 0.8;
+`;
+
+const CreateIcon = styled(FontAwesomeIcon)`
+  height: 20px;
+  width: 20px;
+  opacity: 0.8;
+  path {fill: ${ ({theme}) => theme.navIconsPathFillColor} }
+`
 
 export default DropdownMenu
 

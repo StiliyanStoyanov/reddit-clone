@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 /** @jsx jsx */
-import React from 'react';
 import {css, jsx} from '@emotion/core'
 import styled from "@emotion/styled";
-import logo from '../../assets/logo.svg'
+import logo from '../../../assets/logo.svg'
 import {Link} from "@reach/router";
 
 export const Logo = () => {
