@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import {createHistory, LocationProvider} from "@reach/router";
-import {StoreProvider} from "./store/useStore";
+import {StoreProvider} from "./store/StoreProvider";
 import {ThemeProvider} from "./store/ThemeProvider";
 
 const history = createHistory(window);

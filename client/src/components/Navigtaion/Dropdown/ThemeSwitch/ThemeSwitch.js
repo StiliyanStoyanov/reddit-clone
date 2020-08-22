@@ -3,13 +3,13 @@ import {forwardRef, useState} from "react";
 import {jsx} from "@emotion/core";
 import styled from "@emotion/styled";
 import {MoonIcon} from "./MoonIcon";
-import useStore from "../../../../store/useStore";
+import {useDispatch} from "../../../../store/StoreProvider";
 
 const ThemeSwitch = forwardRef((props, ref) => {
     const [checked, setChecked] = useState(true);
-    const [store, setStore] = useStore();
+    const dispatch = useDispatch();
     const changeTheme = () => {
-        setStore({...store, isThemeDark: !store.isThemeDark})
+        dispatch({type: 'CHANGE_THEME'})
         setChecked(!checked);
     }
 
@@ -38,12 +38,12 @@ const ThemeSwitchContainer = styled.div`
 const ThemeText = styled.span`
   font-size: 0.9rem;
   padding: 10px 0;
-  cursor: default;
 `
 
 const ThemeCheckbox = styled.input`
   margin-left: auto;
   position: relative;
+  cursor:pointer;
   width: 52px;
   height: 28px;
   -webkit-appearance: none;

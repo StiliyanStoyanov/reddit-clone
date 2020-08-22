@@ -19,15 +19,17 @@ const {
     sessionLogin
 } = userService
 
-const App = (props) => {
+const App = () => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const loginAction = (email, password) => (event) => {};
-    const logoutAction = (event) => {};
+    const loginAction = (email, password) => (event) => {
+
+    };
     const signUpAction = (event) => {};
+    const logoutAction = (event) => {};
 
     // TODO: Improve loading implementation better
     if (loading) {

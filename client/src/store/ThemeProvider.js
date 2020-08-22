@@ -2,7 +2,7 @@
 import React from "react";
 import {ThemeProvider as Provider, useTheme} from "emotion-theming";
 import {css, Global} from "@emotion/core";
-import useStore from "./useStore";
+import {useStore} from "./StoreProvider";
 
 const darkTheme = {
     theme: 'dark',
@@ -52,7 +52,7 @@ const lightTheme = {
 }
 
 export const ThemeProvider = (props) => {
-    const [{isThemeDark}] = useStore();
+    const {isThemeDark} = useStore();
     return (
         <Provider theme={isThemeDark ? darkTheme : lightTheme}>
             <GlobalStyles/>
