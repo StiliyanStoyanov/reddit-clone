@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import {Link} from "@reach/router";
 import {Name} from "./Name";
 import {Avatar} from "./Avatar";
-import {useStore} from "../../../../store/StoreProvider";
+import {useStore} from "../../../../../../store/StoreProvider";
 
 export const User = () => {
     const {user} = useStore();

@@ -73,7 +73,8 @@ const GlobalStyles = () => {
                 padding: '0',
                 fontFamily: 'Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;',
                 backgroundColor: `${theme.bodyBackgroundColor}`,
-                color: `${theme.color}`
+                color: `${theme.color}`,
+                minWidth: '375px'
             },
             '*, *::before, *::after': {
                 boxSizing: "inherit"

@@ -3,21 +3,20 @@
 import React from "react";
 import styled from "@emotion/styled";
 import {jsx} from "@emotion/core";
-import {SignIcon} from "./SignIcon";
-import {useStore} from "../../../../store/StoreProvider";
+import {useStore} from "../../../../../store/StoreProvider";
 import {useNavigate} from "@reach/router";
+import ContentIcon from "../../shared/ContentIcons";
+import {faSignInAlt} from "@fortawesome/free-solid-svg-icons/faSignInAlt";
 
-const SignUser = () => {
+const SignUserLink = () => {
     const {user} = useStore();
     const navigate = useNavigate();
-    const redirect = () => {
-        navigate('/register');
-    }
+    const redirect = () => navigate('/register');
 
     if (!user) {
         return (
             <SignUserContainer onClick={redirect}>
-                <SignIcon/>
+                <ContentIcon icon={faSignInAlt}/>
                 <SignUserText>Sign Up / Sign In</SignUserText>
             </SignUserContainer>
         );
@@ -45,4 +44,4 @@ const SignUserText = styled.span`
   padding: 10px 0;
 `
 
-export default SignUser
+export default SignUserLink

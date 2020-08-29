@@ -1,21 +1,21 @@
 /** @jsx jsx */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "@emotion/styled";
 import {jsx, css} from "@emotion/core";
 import {useForm} from "react-hook-form";
-import {useAuth, useAuthTypes} from "../hooks/useAuth";
 import {validateEmail} from "../utils/validateEmail";
-const {loginUser} = useAuthTypes
+import {useLogin} from "../hooks/useLogin";
 
 // TODO: restyle form and validation error message display
 const Login = () => {
     const {register, handleSubmit, errors} = useForm();
-    const [login, {error, buttonState}] = useAuth(loginUser);
+    const [login, {error, buttonDisabled}] = useLogin();
 
     const onLoginSubmit = ({email, password}) => {
         login(email, password);
     }
+
     return (
         <LoginForm onSubmit={handleSubmit(onLoginSubmit)}>
             <label css={loginLabel} htmlFor="username">
@@ -24,6 +24,7 @@ const Login = () => {
                     id="email"
                     name="email"
                     type="text"
+                    autoComplete="on"
                     ref={register({required: true, minLength: 6, maxLength: 254, validate: validateEmail})}
                 />
             </label>
@@ -39,6 +40,7 @@ const Login = () => {
                     id="password"
                     name="password"
                     type="password"
+                    autoComplete="on"
                     ref={register({required: true, minLength: 6, maxLength: 128})}
                 />
             </label>
@@ -47,7 +49,7 @@ const Login = () => {
             {errors.password && errors.password.type === "minLength" && <div>Min Length is 6</div>}
             {errors.password && errors.password.type === "maxLength" && <div>Max Length is 128</div>}
 
-            <button css={loginButton} type="submit" disabled={buttonState}>Login</button>
+            <button css={loginButton} type="submit" disabled={buttonDisabled}>Login</button>
         </LoginForm>
     );
 }

@@ -2,10 +2,11 @@
 import {forwardRef, useState} from "react";
 import {jsx} from "@emotion/core";
 import styled from "@emotion/styled";
-import {MoonIcon} from "./MoonIcon";
 import {useTheme} from "emotion-theming";
-import {useDispatch} from "../../../../store/StoreProvider";
-import {ActionType} from "../../../../store/StoreProvider";
+import {useDispatch} from "../../../../../store/StoreProvider";
+import {ActionType} from "../../../../../store/StoreProvider";
+import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
+import ContentIcon from "../../shared/ContentIcons";
 
 const ThemeSwitch = forwardRef((props, ref) => {
     const {theme} = useTheme();
@@ -19,7 +20,7 @@ const ThemeSwitch = forwardRef((props, ref) => {
 
     return (
         <ThemeSwitchContainer onClick={changeTheme} ref={ref}>
-            <MoonIcon/>
+            <ContentIcon icon={faMoon}/>
             <ThemeText>Night Mode</ThemeText>
             <ThemeCheckbox type="checkbox" checked={checked} readOnly/>
         </ThemeSwitchContainer>

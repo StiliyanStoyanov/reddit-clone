@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
-import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export const MoonIcon = () => {
-    return(
-        <MoonIconContainer>
-            <Moon icon={faMoon}/>
-        </MoonIconContainer>
+const ContentIcon = ({icon}) => {
+    return (
+        <ContentIconContainer>
+            <Icon icon={icon}/>
+        </ContentIconContainer>
     )
 }
-
-const MoonIconContainer = styled.div`
+const ContentIconContainer = styled.div`
   display: flex; 
   align-items: center; 
   justify-content: center; 
@@ -21,7 +19,9 @@ const MoonIconContainer = styled.div`
   border-radius: 50%;
   background-color: ${ ({theme}) => theme.dropdownIconBackground };
 `
-const Moon = styled(FontAwesomeIcon)`
+const Icon = styled(FontAwesomeIcon)`
   height: 20px;
   width: 20px;
 `
+
+export default ContentIcon

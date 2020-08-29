@@ -1,22 +1,21 @@
 /* eslint-disable no-unused-vars */
-/** @jsx jsx */
-import {jsx} from "@emotion/core";
+import React from "react";
 import styled from "@emotion/styled";
-import Dropdown from "./Dropdown/Dropdown";
 import LogoAndSearch from "./LogoAndSearch/LogoAndSearch";
 import AuthContainer from "./Auth/AuthContainer";
-import {useStore} from "../../store/StoreProvider";
+import CreateDropdown from "./Dropdown/CreateDropdown/CreateDropdown";
+import UserDropdown from "./Dropdown/UserDropdown/UserDropdown";
 
 const Navigation = () => {
-    const {user} = useStore();
     return (
         <header>
             <NavigationBar>
                 <LogoAndSearch/>
-                {!user && <AuthContainer/>}
-                <DropdownContainer>
-                    <Dropdown/>
-                </DropdownContainer>
+                <AuthContainer/>
+                <DropdownMenusContainer>
+                    <CreateDropdown/>
+                    <UserDropdown/>
+                </DropdownMenusContainer>
             </NavigationBar>
         </header>
 
@@ -33,12 +32,10 @@ const NavigationBar = styled.nav`
   border-bottom: 1px solid ${({theme}) => theme.borderColor};
   padding: 3px;
 `
-const DropdownContainer = styled.div`
-  position: relative;
-  display: flex;
-  z-index: 1;
+
+const DropdownMenusContainer = styled.div`
   margin-left: auto;
-  cursor:pointer;
-`;
+  display: flex;
+`
 
 export default Navigation

@@ -3,12 +3,14 @@
 import React from "react";
 import styled from "@emotion/styled";
 import {jsx} from "@emotion/core";
-import firebase from "../../../../firebase";
-import {LogoutIcon} from "./LogoutIcon";
-import {useStore} from "../../../../store/StoreProvider";
+import firebase from "../../../../../firebase";
+import {useStore} from "../../../../../store/StoreProvider";
+import ContentIcon from "../../shared/ContentIcons";
+import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 
 const Logout = () => {
     const {user} = useStore();
+
     const logout = () => {
         firebase.auth().signOut().catch(err => {
             console.error('LOGOUT ERROR: ', err);
@@ -18,14 +20,13 @@ const Logout = () => {
     if (user) {
         return (
             <LogoutContainer onClick={logout}>
-                <LogoutIcon/>
+                <ContentIcon icon={faSignOutAlt}/>
                 <LogoutText>Logout</LogoutText>
             </LogoutContainer>
         );
     } else {
         return null;
     }
-
 }
 
 /* STYLED COMPONENTS || STYLES USED IN THIS FILE BELOW */

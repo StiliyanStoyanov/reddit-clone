@@ -7,20 +7,14 @@ const storeDefault = {
 
 const ActionType = {
     CHANGE_THEME: "CHANGE_THEME",
-    LOGIN: "LOGIN",
     SESSION_LOGIN: "SESSION_LOGIN",
-    SIGN_UP: "SIGN_UP"
 }
 const {
     CHANGE_THEME,
-    LOGIN,
     SESSION_LOGIN,
-    SIGN_UP
 } = ActionType
 
 const reducer = (state, action) => {
-    // console.log('STATE:  ', state);
-    // console.log('ACTION: ', action);
     switch (action.type) {
         case CHANGE_THEME: {
             const theme = state.theme === 'dark' ? 'light': 'dark'
@@ -30,19 +24,7 @@ const reducer = (state, action) => {
                 theme: theme
             };
         }
-        case LOGIN: {
-            return {
-                ...state,
-                user: action.payload
-            }
-        }
         case SESSION_LOGIN: {
-            return {
-                ...state,
-                user: action.payload
-            }
-        }
-        case SIGN_UP: {
             return {
                 ...state,
                 user: action.payload

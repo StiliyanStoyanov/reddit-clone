@@ -9,7 +9,7 @@ export const Name = ({user}) => {
         </div>
     )
 }
-/* STYLED COMPONENTS USED IN THIS FILE BELOW */
+/* EMOTION STYLES USED IN THIS FILE BELOW */
 const nameContainer = css`
   display: flex;
   flex-flow: column;

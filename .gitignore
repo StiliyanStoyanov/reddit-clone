@@ -28,6 +28,8 @@ debug.log
 
 # Firebase
 .firebaserc
+firestore.rules
+storage.rules
 
 # Firebase cache
 .firebase/

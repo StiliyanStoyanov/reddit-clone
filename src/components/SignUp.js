@@ -4,16 +4,14 @@ import React from "react";
 import styled from "@emotion/styled";
 import {jsx, css} from "@emotion/core";
 import {useForm} from "react-hook-form";
-import {useAuth, useAuthTypes} from "../hooks/useAuth";
 import {validateEmail} from "../utils/validateEmail";
-
-const {signUpUser} = useAuthTypes
+import {useSignUp} from "../hooks/useSignUp";
 
 const SignUp = () => {
     const {register, handleSubmit, errors} = useForm();
-    const [signUp, { error, buttonState}] = useAuth(signUpUser);
+    const [signUp, {error, buttonState}] = useSignUp();
     const onSignUpSubmit = ({email, password}) => {
-        signUp(email, password)
+        signUp(email, password);
     }
 
     return (
@@ -24,6 +22,7 @@ const SignUp = () => {
                     id="email"
                     name="email"
                     type="text"
+                    autoComplete="on"
                     ref={register({required: true, minLength: 6, maxLength: 254, validate: validateEmail})}
                 />
             </label>
@@ -39,6 +38,7 @@ const SignUp = () => {
                     id="password"
                     name="password"
                     type="password"
+                    autoComplete="on"
                     ref={register({required: true, minLength: 6, maxLength:128})}
                 />
             </label>

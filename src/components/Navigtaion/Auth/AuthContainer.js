@@ -2,14 +2,19 @@ import React from "react";
 import styled from "@emotion/styled";
 import LoginLink from "./LoginLink";
 import SignUpLink from "./SignUpLink";
+import {useStore} from "../../../store/StoreProvider";
 
 const AuthContainer = () => {
-    return (
-        <Container>
-            <LoginLink/>
-            <SignUpLink/>
-        </Container>
-    )
+    const {user} = useStore();
+    if (!user) {
+        return (
+            <Container>
+                <LoginLink/>
+                <SignUpLink/>
+            </Container>
+        )
+    } else return null
+
 }
 
 

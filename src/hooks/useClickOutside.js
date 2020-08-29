@@ -10,7 +10,6 @@ export const useClickOutside = (elementRef, callback, open, additionalRef) => {
             // Meaning the click was outside
             if (!elementRef?.current?.contains(event.target) && callbackRef.current) {
                 callbackRef.current(event);
-
             }
             // Special case to trigger the callback if additionalRef is provided
             if (additionalRef?.current && !additionalRef.current.contains(event.target)) {
