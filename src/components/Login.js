@@ -1,6 +1,6 @@
 /** @jsx jsx */
 /* eslint-disable no-unused-vars */
-import React, {useEffect} from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import {jsx, css} from "@emotion/core";
 import {useForm} from "react-hook-form";
@@ -12,7 +12,8 @@ const Login = () => {
     const {register, handleSubmit, errors} = useForm();
     const [login, {error, buttonDisabled}] = useLogin();
 
-    const onLoginSubmit = ({email, password}) => {
+    const onLoginSubmit = (data) => {
+        const {email, password} = data
         login(email, password);
     }
 

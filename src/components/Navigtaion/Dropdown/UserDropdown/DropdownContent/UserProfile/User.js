@@ -4,35 +4,23 @@ import {Link} from "@reach/router";
 import {Name} from "./Name";
 import {Avatar} from "./Avatar";
 import {useStore} from "../../../../../../store/StoreProvider";
+import DropdownItemsContainer from "../../../shared/DropdownItemsContainer";
 
 export const User = () => {
-    const {user} = useStore();
+    const {user, userExtraData} = useStore();
     if (user) {
         return (
-            <UserContainer>
-                <UserProfileLink to={`/user/${user?.email}`} />
+            <DropdownItemsContainer>
+                <UserProfileLink to={`/user/${userExtraData.username}`}/>
                 <Avatar/>
-                <Name user={user?.email}/>
-            </UserContainer>
+                <Name user={userExtraData.username}/>
+            </DropdownItemsContainer>
         );
     } else {
         return null
     }
 }
 /* STYLED COMPONENTS USED IN THIS FILE BELOW */
-const UserContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 8px;
-  border-radius: 8px; 
-  cursor:pointer;
-  user-select: none;
-  &:hover {
-    background-color: ${ ({theme}) => theme.dropdownHoverColor }
-  }
-`
 const UserProfileLink = styled(Link)`
   position: absolute;
   top: 0;

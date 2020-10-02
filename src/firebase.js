@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore"
 import "firebase/functions"
+import "firebase/storage"
 firebase.initializeApp(firebaseConfig);
 if (window.location.hostname === 'localhost') {
     console.log("testing locally -- hitting local functions and firestore emulators");

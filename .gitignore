@@ -3,6 +3,7 @@
 # Temporary testing files
 data.json
 test.js
+src/data.js
 
 # dependencies
 /node_modules
@@ -14,6 +15,7 @@ test.js
 
 # misc
 .idea
+.vscode
 .DS_Store
 .env
 .env.local

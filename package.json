@@ -27,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "firebaseff": "firebase emulators:start --only functions,firestore",
+    "firestore": "firebase emulators:start --only firestore"
   },
   "eslintConfig": {
     "extends": "react-app"

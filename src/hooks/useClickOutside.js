@@ -12,7 +12,7 @@ export const useClickOutside = (elementRef, callback, open, additionalRef) => {
                 callbackRef.current(event);
             }
             // Special case to trigger the callback if additionalRef is provided
-            if (additionalRef?.current && !additionalRef.current.contains(event.target)) {
+            if (additionalRef && additionalRef?.current && !additionalRef.current.contains(event.target)) {
                 callbackRef.current(event);
             }
         }

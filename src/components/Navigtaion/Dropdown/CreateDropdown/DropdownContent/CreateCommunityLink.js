@@ -1,12 +1,22 @@
 import React from "react";
+import DropdownItemsContainer from "../../shared/DropdownItemsContainer";
+import ContentIcon from "../../shared/ContentIcons";
+import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
+import styled from "@emotion/styled";
 
 
 const CreateCommunityLink = () => {
 
     return (
-        <div>Create Community</div>
+        <DropdownItemsContainer>
+            <ContentIcon icon={faUsers}/>
+            <Text>Create Community</Text>
+        </DropdownItemsContainer>
     )
 }
-
+const Text = styled.span`
+  font-size: 0.9rem;
+  padding: 10px 0;
+`
 
 export default CreateCommunityLink

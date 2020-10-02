@@ -1,36 +1,29 @@
 /* eslint-disable no-unused-vars */
 import firebase from "../firebase";
-import {useCallback, useEffect, useReducer} from "react";
+import {useReducer} from "react";
 import {useNavigate} from "@reach/router";
-import {authSubmitStatusReducer, authSubmitStatusReducerTypes} from "./shared/authSubmitStatusReducer";
-
+import {authSubmitStatusReducer, authSubmitStatusReducerTypes} from "../reducers/shared/authSubmitStatusReducer";
 const {ERROR, DISABLE_BUTTON} = authSubmitStatusReducerTypes;
 
 export function useSignUp() {
     const navigate = useNavigate();
+    const createUser = firebase.functions().httpsCallable("createUser");
     const [state, dispatch] = useReducer(authSubmitStatusReducer, {
         isLoading: false,
         error: null,
         buttonDisabled: false
     });
 
-    const signUp = useCallback((email, password) => {
-        dispatch({type: DISABLE_BUTTON})
-        const usersCollection = firebase.firestore().collection("users");
-
-        firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
-            const user = res.user;
-
-            usersCollection.doc(user.uid).set({}).catch(err => {
-                console.error(err);
-                dispatch({type: ERROR, payload: {code: "auth/permission-denied"}});
-                navigate("/");
-            });
-            navigate("/");
+    const signUp = (data) => {
+        const {username, email, password} = data;
+        dispatch({type: DISABLE_BUTTON});
+        createUser({username, email, password}).then(res => {
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(err => console.error(err));
+            navigate('/');
         }).catch(err => {
             console.error(err);
-        })
-    }, [navigate]);
-
+            dispatch({type: ERROR, payload: err.details});
+        });
+    };
     return [signUp, state]
 }

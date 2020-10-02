@@ -1,6 +1,4 @@
 export function authSubmitStatusReducer (state, action) {
-    console.log(state);
-    console.log(action);
     switch (action.type) {
         case "ERROR": {
             return {

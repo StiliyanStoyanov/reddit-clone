@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import {Router} from "@reach/router";
+import {Redirect, Router} from "@reach/router";
 import styled from "@emotion/styled";
 import Navigation from "./Navigtaion/Navigation";
 import Login from "./Login";
@@ -10,11 +10,12 @@ import {NotFound} from "./NotFound";
 import {useStore} from "../store/StoreProvider";
 import {useSessionLogin} from "../hooks/useSessionLogin";
 import Create from "./CreatePost/Create";
+import {useUserUpdatesListener} from "../hooks/useUserUpdatesListener";
 
 const App = () => {
     const {user} = useStore();
     const isLoading = useSessionLogin();
-
+    useUserUpdatesListener();
     // TODO: Improve loading implementation
     if (isLoading) return <div>Loading</div>;
     return (
@@ -23,7 +24,7 @@ const App = () => {
             <PageContainer>
                 <Router>
                     <Posts path="/"/>
-                    <Create path="/create"/>
+                    {!user ? <Redirect from="/create" to="/login" noThrow/> : <Create path="/create"/>}
                     {!user && <Login path="/login" />}
                     {!user && <SignUp path="/register"/>}
                     <NotFound default/>

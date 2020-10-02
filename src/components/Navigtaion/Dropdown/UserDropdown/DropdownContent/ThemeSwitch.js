@@ -7,6 +7,7 @@ import {useDispatch} from "../../../../../store/StoreProvider";
 import {ActionType} from "../../../../../store/StoreProvider";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import ContentIcon from "../../shared/ContentIcons";
+import DropdownItemsContainer from "../../shared/DropdownItemsContainer";
 
 const ThemeSwitch = forwardRef((props, ref) => {
     const {theme} = useTheme();
@@ -19,27 +20,14 @@ const ThemeSwitch = forwardRef((props, ref) => {
     }
 
     return (
-        <ThemeSwitchContainer onClick={changeTheme} ref={ref}>
+        <DropdownItemsContainer onClick={changeTheme} ref={ref}>
             <ContentIcon icon={faMoon}/>
             <ThemeText>Night Mode</ThemeText>
             <ThemeCheckbox type="checkbox" checked={checked} readOnly/>
-        </ThemeSwitchContainer>
+        </DropdownItemsContainer>
     )
 });
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const ThemeSwitchContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 8px;
-  border-radius: 8px; 
-  cursor:pointer;
-  user-select: none;
-  &:hover {
-    background-color: ${ ({theme}) => theme.dropdownHoverColor };
-  }
-`
 const ThemeText = styled.span`
   font-size: 0.9rem;
   padding: 10px 0;

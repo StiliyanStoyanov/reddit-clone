@@ -7,6 +7,7 @@ import {useStore} from "../../../../../store/StoreProvider";
 import {useNavigate} from "@reach/router";
 import ContentIcon from "../../shared/ContentIcons";
 import {faSignInAlt} from "@fortawesome/free-solid-svg-icons/faSignInAlt";
+import DropdownItemsContainer from "../../shared/DropdownItemsContainer";
 
 const SignUserLink = () => {
     const {user} = useStore();
@@ -15,10 +16,10 @@ const SignUserLink = () => {
 
     if (!user) {
         return (
-            <SignUserContainer onClick={redirect}>
+            <DropdownItemsContainer onClick={redirect}>
                 <ContentIcon icon={faSignInAlt}/>
                 <SignUserText>Sign Up / Sign In</SignUserText>
-            </SignUserContainer>
+            </DropdownItemsContainer>
         );
     } else {
         return null;
@@ -26,19 +27,6 @@ const SignUserLink = () => {
 
 }
 /* STYLED COMPONENTS || STYLES USED IN THIS FILE BELOW */
-const SignUserContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 8px;
-  border-radius: 8px;
-  cursor:pointer;
-  user-select: none; 
-  &:hover {
-    background-color: ${ ({theme}) => theme.dropdownHoverColor }
-  }
-`
 const SignUserText = styled.span`
   font-size: 0.9rem;
   padding: 10px 0;

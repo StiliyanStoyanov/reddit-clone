@@ -7,10 +7,16 @@ export function useSessionLogin() {
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-            dispatch({type: "SESSION_LOGIN", payload: user});
+        const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                dispatch({
+                    type: "SESSION_LOGIN",
+                    payload: user
+                });
+                setLoading(false);
+            }
             setLoading(false);
-        })
+        });
         return () => unsubscribe();
     }, [dispatch]);
     return isLoading
