@@ -10,18 +10,19 @@ import LinkContent from "./ContentTypes/LinkContent";
 import {useStore} from "../../../../store/StoreProvider";
 import {css, jsx} from "@emotion/core";
 import {usePostStore} from "../../../../store/PostStoreProvider";
-import {validateForm, selectSubmitContent} from "../../../../utils/formHelpers";
+import {selectSubmitContent} from "../../../../utils/formHelpers";
+import {validateForm} from "../../../../utils/formHelpers";
 
 const Forms = () => {
     const [allowSubmit, setAllowSubmit] = useState(false);
-    const {user, userExtraData: {communitiesFollowed, username}} = useStore();
+    const {userExtraData: {communitiesFollowed, username}} = useStore();
     const postStore = usePostStore();
     const {selectedCommunity, title, selectedFormType} = postStore
 
     useEffect(() => {
         //TODO: Think of a way to prevent the extra run of the validateForm function when allowSubmit state changes
-        const validateFormState = validateForm(postStore, communitiesFollowed);
-        if (validateFormState !== allowSubmit) setAllowSubmit(validateFormState);
+        const validatedFormState = validateForm(postStore);
+        if (validatedFormState !== allowSubmit) setAllowSubmit(validatedFormState);
     }, [postStore, allowSubmit, communitiesFollowed]);
     const submitPost = () => {
         if (!allowSubmit) return false;
@@ -37,11 +38,12 @@ const Forms = () => {
         };
         if (selectedFormType === 'post' || selectedFormType === 'link') {
             communityCollection
-                .doc(selectedCommunity)
+                .doc(selectedCommunity.name)
                 .collection('posts')
                 .add(data)
                 .catch(err => console.error(err));
         } else if (selectedFormType === 'image') {
+            //TODO: Implement cloud storage
             communityCollection
                 .doc(selectedCommunity)
                 .collection('posts')

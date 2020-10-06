@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
-import {usePostDispatch} from "../../../../../store/PostStoreProvider";
+import {usePostDispatch, usePostStore} from "../../../../../store/PostStoreProvider";
 
 const LinkContent = () => {
     const postDispatch = usePostDispatch();
+    const {linkContent} = usePostStore();
     const changeContent = (event) => {
         postDispatch({type: "CHANGE_LINK_CONTENT", payload: event.target.value});
     }
 
     return (
-        <UrlTextArea onChange={changeContent} name="urlLink" id="urlLink" rows="1" placeholder="Url"/>
+        <UrlTextArea onChange={changeContent} value={linkContent} name="urlLink" id="urlLink" rows="1" placeholder="Url"/>
     )
 }
 

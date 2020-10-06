@@ -1,27 +1,22 @@
-export function validateForm (postStore, communitiesFollowed) {
+export function validateForm (postStore) {
     const {
         selectedFormType,
         selectedCommunity,
         imageFile,
         linkContent,
-        title,
-        queriedCommunities
+        title
     } = postStore
     const isBlank = str => (!str || /^\s*$/.test(str));
-    if (!isBlank(selectedCommunity) && !isBlank(title)) {
-        if (communitiesFollowed.some(community => community.name === selectedCommunity) || queriedCommunities.some(community => community.name === selectedCommunity)) {
-            switch (selectedFormType) {
-                case 'post':
-                    return true;
-                case 'image':
-                    return !!imageFile;
-                case 'link':
-                    return !isBlank(linkContent);
-                default:
-                    return console.error('Something went wrong with post validation');
-            }
-        } else {
-            return false;
+    if (selectedCommunity && !isBlank(title)) {
+        switch (selectedFormType) {
+            case 'post':
+                return true;
+            case 'image':
+                return !!imageFile;
+            case 'link':
+                return !isBlank(linkContent);
+            default:
+                return console.error('Something went wrong with post validation');
         }
     } else {
         return false;

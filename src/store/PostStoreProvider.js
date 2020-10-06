@@ -1,14 +1,14 @@
 import makeStore from "../hooks/useStore";
 
 const storeDefault = {
-    selectedFormType: 'image',
-    selectedCommunity: {},
+    selectedFormType: 'post',
+    selectedCommunity: null,
     title: '',
     postContent: '',
     imageFile: null,
     imageDataUrl: null,
     linkContent: '',
-    queriedCommunities: []
+    queriedCommunities: [],
 }
 
 const reducer = (state, action) => {
@@ -34,11 +34,8 @@ const reducer = (state, action) => {
         case "SELECT_COMMUNITY": {
             return {...state, selectedCommunity: action.payload}
         }
-        case "SET_QUERY_RESULT": {
-            if (state.queriedCommunities !== action.payload) {
-                return {...state, queriedCommunities: [...state.queriedCommunities, ...action.payload]};
-            }
-            return state;
+        case "CLEAR_COMMUNITY": {
+            return {...state, selectedCommunity: null}
         }
         default: {
             console.error("Invalid Reducer Case");

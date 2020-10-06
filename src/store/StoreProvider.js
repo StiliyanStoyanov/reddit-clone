@@ -6,20 +6,23 @@ const storeDefault = {
     userExtraData: {
         communitiesFollowed: [],
         username: ''
-    }
+    },
+    loadingUserData: true
 }
 
 const ActionType = {
     CHANGE_THEME: "CHANGE_THEME",
     SESSION_LOGIN: "SESSION_LOGIN",
     UPDATE_USER: "UPDATE_USER",
-    LOGOUT: "LOGOUT"
+    LOGOUT: "LOGOUT",
+    LOADING_USER_DATA: "LOADING_USER_DATA"
 }
 const {
     CHANGE_THEME,
     SESSION_LOGIN,
     UPDATE_USER,
-    LOGOUT
+    LOGOUT,
+    LOADING_USER_DATA
 } = ActionType
 
 const reducer = (state, action) => {
@@ -37,7 +40,7 @@ const reducer = (state, action) => {
                 ...state,
                 user: action.payload,
                 userExtraData: {
-                    username: action.payload.displayName || "Unknown",
+                    username: action.payload.displayName,
                     communitiesFollowed: state.userExtraData.communitiesFollowed
                 }
             }
@@ -47,9 +50,12 @@ const reducer = (state, action) => {
                 ...state,
                 userExtraData: {
                     username: state.userExtraData.username,
-                    communitiesFollowed: [...state.userExtraData.communitiesFollowed, action.payload]
+                    communitiesFollowed: [...action.payload]
                 }
             }
+        }
+        case LOADING_USER_DATA: {
+            return {...state, loadingUserData: action.payload}
         }
         case LOGOUT: {
             return storeDefault

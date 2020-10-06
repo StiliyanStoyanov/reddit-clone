@@ -13,14 +13,20 @@ export function useUserUpdatesListener() {
             .collection("users")
             .doc(user.uid)
             .onSnapshot(async (snapshot) => {
+                dispatch({type: "LOADING_USER_DATA", payload: true});
                 if (!snapshot.exists) {
+                    dispatch({type: "LOADING_USER_DATA", payload: false});
                     return null;
                 }
                 const userExtraData = (await firebase.firestore().collection('users').doc(user.uid).get()).data();
-                userExtraData.communitiesFollowed.map(async docSnapshot => {
-                    const community = (await docSnapshot.get()).data();
-                    dispatch({type: "UPDATE_USER", payload: community})
+                if (!userExtraData.communitiesFollowed) { return false; }
+                const dataList = await userExtraData.communitiesFollowed.map(async docSnapshot => {
+                    return (await docSnapshot.get()).data();
                 });
+                Promise.all(dataList).then(result => {
+                    dispatch({type: "UPDATE_USER", payload: result});
+                    dispatch({type: "LOADING_USER_DATA", payload: false});
+                }).catch(err => console.error(err));
 
             });
         return () => unsubscribe();
