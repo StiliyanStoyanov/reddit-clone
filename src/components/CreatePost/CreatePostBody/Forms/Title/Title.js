@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import React from "react";
 import {usePostDispatch, usePostStore} from "../../../../../store/PostStoreProvider";
 import {css, jsx} from "@emotion/core";
 import {useTheme} from "emotion-theming";

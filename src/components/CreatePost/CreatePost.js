@@ -4,7 +4,7 @@ import CreatePostHeader from "./CreatePostHeader/CreatePostHeader";
 import CreatePostBody from "./CreatePostBody/CreatePostBody";
 
 // TODO: Add Rich Text Editor
-const Create = () => {
+const CreatePost = () => {
     return (
         <CreatePostContainer>
             <CreatePostHeader/>
@@ -22,4 +22,4 @@ const CreatePostContainer = styled.div`
   margin: 0 auto;
 `
 
-export default Create
+export default CreatePost

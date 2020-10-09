@@ -3,12 +3,13 @@ import DropdownItemsContainer from "../../shared/DropdownItemsContainer";
 import ContentIcon from "../../shared/ContentIcons";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
 import styled from "@emotion/styled";
+import {useNavigate} from "@reach/router";
 
 
 const CreateCommunityLink = () => {
-
+    const navigate = useNavigate();
     return (
-        <DropdownItemsContainer>
+        <DropdownItemsContainer onClick={() => navigate('/create-community')}>
             <ContentIcon icon={faUsers}/>
             <Text>Create Community</Text>
         </DropdownItemsContainer>

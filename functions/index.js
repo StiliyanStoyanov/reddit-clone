@@ -40,6 +40,10 @@ exports.createUser = functions.region('europe-west3').https.onCall(async (data, 
     username: username,
     communitiesFollowed: []
   });
-  console.log(user);
   return { result: 'account creation successful' }
 });
+
+exports.createCommunity = functions.region('europe-west3').https.onCall(async (data, context) => {
+  console.log(data);
+  return 'Success'
+})

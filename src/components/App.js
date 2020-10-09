@@ -9,8 +9,9 @@ import {Posts} from "./Posts/Posts";
 import {NotFound} from "./NotFound";
 import {useStore} from "../store/StoreProvider";
 import {useSessionLogin} from "../hooks/useSessionLogin";
-import Create from "./CreatePost/Create";
+import CreatePost from "./CreatePost/CreatePost";
 import {useUserUpdatesListener} from "../hooks/useUserUpdatesListener";
+import CreateCommunity from "./CreateCommunity/CreateCommunity";
 
 const App = () => {
     const {user} = useStore();
@@ -24,7 +25,8 @@ const App = () => {
             <PageContainer>
                 <Router>
                     <Posts path="/"/>
-                    {!user ? <Redirect from="/create" to="/login" noThrow/> : <Create path="/create"/>}
+                    {!user ? <Redirect from="/create" to="/login" noThrow/> : <CreateCommunity path="/create-community"/>}
+                    {!user ? <Redirect from="/create" to="/login" noThrow/> : <CreatePost path="/create"/>}
                     {!user && <Login path="/login" />}
                     {!user && <SignUp path="/register"/>}
                     <NotFound default/>
