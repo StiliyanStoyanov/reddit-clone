@@ -9,12 +9,15 @@ const SearchIcon = ({focused, selectedCommunity}) => {
         return <Icon icon={faSearch}/>;
     } else if (selectedCommunity && selectedCommunity.imageUrl) {
         return <span css={css`
-          ${fetchedIconStyle};
+          ${iconStyle};
           border: 0;
           background-image: url("${selectedCommunity.imageUrl}");
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 22px 20px;
         `}/>
     } else {
-        return <span css={fetchedIconStyle}/>
+        return <span css={iconPlaceholderStyle}/>
     }
 }
 
@@ -23,10 +26,15 @@ const Icon = styled(FontAwesomeIcon)`
   height: 22px;
   width: 22px;
 `
-const fetchedIconStyle = css`
+const iconPlaceholderStyle = css`
   width: 24px;
   height: 20px;
   border: 1px dashed cornflowerblue;
+  border-radius: 50%;
+`
+const iconStyle = css`
+  width: 24px;
+  height: 20px;
   border-radius: 50%;
 `
 export default SearchIcon

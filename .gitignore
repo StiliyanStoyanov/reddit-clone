@@ -4,6 +4,7 @@
 data.json
 test.js
 src/data.js
+styles.js
 
 # dependencies
 /node_modules

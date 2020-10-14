@@ -170,6 +170,7 @@ const CommunitySelector = () => {
             event.preventDefault();
             // if no input add the user communities to the array, otherwise add the filtered result to the array
             const allCommunitiesList = [...(userInput.length > 0 ? userCommunitiesFiltered : communitiesFollowed), ...queriedCommunitiesFiltered];
+            console.log(allCommunitiesList);
             if (allCommunitiesList.length > 0) {
                 switch (event.key) {
                     case "Down": // IE/Edge specific value
@@ -236,7 +237,6 @@ const CommunitySelector = () => {
                 <CaretDown icon={faCaretDown} onMouseDown={handleCaretMouseDown}/>
             </SearchCommunityContainer>
             <SearchCommunityDropdownContent open={open}>
-                <YourProfileItem username={username}/>
                 <CommunityList
                     type={"My Communities"}
                     communityList={userInput.length > 0 ? userCommunitiesFiltered : communitiesFollowed}
@@ -298,6 +298,7 @@ const SearchCommunityDropdownContent = styled.div`
   display: block;
   position: absolute;
   max-height: 300px;
+  padding: 3px;
   visibility: ${props => props.open ? 'visible' : 'hidden'};
   z-index: 3;
   background-color: #1a1a1b;

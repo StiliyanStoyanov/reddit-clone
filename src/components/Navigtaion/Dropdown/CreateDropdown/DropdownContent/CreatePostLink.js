@@ -5,10 +5,13 @@ import ContentIcon from "../../shared/ContentIcons";
 import styled from "@emotion/styled";
 import {useNavigate} from "@reach/router";
 
-const CreatePostLink = () => {
+const CreatePostLink = ({showHideContent}) => {
     const navigate = useNavigate();
     return (
-        <DropdownItemsContainer onClick={() => navigate('/create')}>
+        <DropdownItemsContainer onClick={() => {
+            navigate('/create');
+            showHideContent()
+        }}>
             <ContentIcon icon={faEdit}/>
             <Text>Create Post</Text>
         </DropdownItemsContainer>

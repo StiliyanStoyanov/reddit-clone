@@ -12,8 +12,8 @@ const CreateDropdownContent = ({dropdownRef, onClickOutside, open, showHideConte
         <>
             <TopIcon icon={faPlus} showHideContent={showHideContent} open={open}/>
             <DropdownContentContainer open={open}>
-                <CreatePostLink/>
-                <CreateCommunityLink/>
+                <CreatePostLink showHideContent={showHideContent}/>
+                <CreateCommunityLink showHideContent={showHideContent}/>
             </DropdownContentContainer>
         </>
 

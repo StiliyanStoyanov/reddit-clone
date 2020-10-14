@@ -1,16 +1,21 @@
 /** @jsx jsx */
 import {css, jsx} from "@emotion/core";
 
-const YourProfileItem = ({username}) => {
-    return (
-        <div>
-            <div css={yourProfileStyle}>Your Profile</div>
-            <div css={profileItemsContainerStyle}>
-                <div css={imagePlaceholder}/>
-                <div css={usernameStyle}>u/{username}</div>
+// TODO: Think of a way to implement the user profile in the community selector
+const YourProfileItem = ({username, userInput}) => {
+    if (username.startsWith(userInput)) {
+        return (
+            <div>
+                <div css={yourProfileStyle}>Your Profile</div>
+                <div css={profileItemsContainerStyle}>
+                    <div css={imagePlaceholder}/>
+                    <div css={usernameStyle}>u/{username}</div>
+                </div>
             </div>
-        </div>
-    )
+        );
+    } else {
+        return null
+    }
 }
 
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */

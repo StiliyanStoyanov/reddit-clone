@@ -6,10 +6,13 @@ import styled from "@emotion/styled";
 import {useNavigate} from "@reach/router";
 
 
-const CreateCommunityLink = () => {
+const CreateCommunityLink = ({showHideContent}) => {
     const navigate = useNavigate();
     return (
-        <DropdownItemsContainer onClick={() => navigate('/create-community')}>
+        <DropdownItemsContainer onClick={() => {
+            navigate('/create-community')
+            showHideContent()
+        }}>
             <ContentIcon icon={faUsers}/>
             <Text>Create Community</Text>
         </DropdownItemsContainer>
