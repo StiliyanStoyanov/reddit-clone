@@ -1,4 +1,4 @@
-import makeStore from "../hooks/useStore";
+import makeStore from "../hooks/makeStore";
 
 const storeDefault = {
     selectedFormType: 'post',

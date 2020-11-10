@@ -22,10 +22,9 @@ const SearchIconContainer = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: ${({theme}) => theme.navIconsBackgroundColor};
+  background-color: ${({theme}) => theme.nav.iconContainerBackground};
   &:hover {
-    background-color: ${({theme}) => theme.navIconsHoverBackground};
-    opacity: 1;
+    background-color: ${({theme}) => theme.nav.hoverBackgroundColor};
   }
   cursor: pointer;
 `

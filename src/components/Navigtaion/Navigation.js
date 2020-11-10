@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import styled from "@emotion/styled";
 import LogoAndSearch from "./LogoAndSearch/LogoAndSearch";
@@ -28,7 +27,7 @@ const NavigationBar = styled.nav`
   z-index: 90;
   display: flex;
   align-items: center;
-  background-color: ${({theme}) => theme.navBackgroundColor};
+  background-color: ${({theme}) => theme.nav.backgroundColor};
   border-bottom: 1px solid ${({theme}) => theme.borderColor};
   padding: 3px;
 `

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const useClickOutside = (elementRef, callback, open, additionalRef) => {
+export const useClickOutside = (elementRef, callback, open) => {
     const callbackRef = React.useRef();
     callbackRef.current = callback;
 
@@ -8,11 +8,7 @@ export const useClickOutside = (elementRef, callback, open, additionalRef) => {
         const handleClickOutside = event => {
             // Check if the referenced element doesn't contain the clicked element (e.target)
             // Meaning the click was outside
-            if (!elementRef?.current?.contains(event.target) && callbackRef.current) {
-                callbackRef.current(event);
-            }
-            // Special case to trigger the callback if additionalRef is provided
-            if (additionalRef && additionalRef?.current && !additionalRef.current.contains(event.target)) {
+            if (!elementRef?.current.contains(event.target) && callbackRef.current) {
                 callbackRef.current(event);
             }
         }
@@ -23,12 +19,12 @@ export const useClickOutside = (elementRef, callback, open, additionalRef) => {
         }
         // Only Attach this listener when the dropdown menu is open
         if (open) {
-            document.addEventListener('click', handleClickOutside);
+            document.addEventListener("mousedown", handleClickOutside);
             document.addEventListener("keydown", handleKeyPress);
         }
         return () => {
-            document.removeEventListener('click', handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
             document.removeEventListener("keydown", handleKeyPress);
         };
-    }, [elementRef, callbackRef, additionalRef, open]);
+    }, [elementRef, callbackRef, open]);
 }

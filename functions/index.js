@@ -6,7 +6,6 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey),
   storageBucket: 'echo-blue.appspot.com'
 });
-const db = admin.firestore();
 
 exports.createUser = functions.region('europe-west3').https.onCall(async (data, context) => {
   const email = data.email;
@@ -49,21 +48,33 @@ exports.createUser = functions.region('europe-west3').https.onCall(async (data, 
 });
 
 exports.createCommunity = functions.region('europe-west3').https.onCall(async (data, context) => {
+  const invalidDataError = () => {
+    throw new functions.https.HttpsError('invalid-argument', 'Invalid community name, topic or description text', {
+      code: 'create-community/missing-data',
+      message: 'Invalid community name, topic or description text'
+    });
+  }
+  const parseAdditionalTopics = (topicsArrayJSON) => {
+    try {
+      return JSON.parse(topicsArrayJSON);
+    } catch (e) {
+      return invalidDataError();
+    }
+  }
   const user = context.auth
-  const communitiesCollection = db.collection('communities');
+  const communitiesCollection = admin.firestore().collection('communities');
+  const userCollection = admin.firestore().collection('users');
   const isValidCommunityNameRegex = /^(?=.{3,24}$)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*$/
-  const {communityName, topics, descriptionText} = data
+  const {communityName, primaryTopic, descriptionText} = data
+  const additionalTopics = parseAdditionalTopics(data.additionalTopics);
   if (!user) {
-    throw new functions.https.HttpsError('Only authenticated users can create a creating a community', {
+    throw new functions.https.HttpsError('invalid-argument','Only authenticated users can create a creating a community', {
       code: 'auth/unauthorized',
       message: 'Only authenticated users can create a creating a community'
     });
   }
-  if (!communityName || !topics || !descriptionText) {
-    throw new functions.https.HttpsError('invalid-argument', 'Missing community name, topic or description text', {
-      code: 'create-community/invalid-data',
-      message: 'Missing community name, topic or description text'
-    });
+  if (!communityName || !primaryTopic || !descriptionText) {
+    invalidDataError()
   }
   if (!isValidCommunityNameRegex.test(communityName) || !descriptionText || typeof descriptionText !== 'string') {
     throw new functions.https.HttpsError('invalid-argument', 'Invalid community name, topic or description text', {
@@ -80,12 +91,13 @@ exports.createCommunity = functions.region('europe-west3').https.onCall(async (d
   }
   const bucket = admin.storage().bucket();
   const file = await bucket.file('public/globe.svg');
-  const signedUrl = await file.getSignedUrl({action: 'read',expires: '1/12/2200'});
+  const signedUrl = await file.getSignedUrl({action: 'read', expires: '1/12/2200'});
   const newCommunity = { 
     owner: user.token.name,
-    membersCount: 0,
-    topics: topics,
-    created: admin.firestore.FieldValue.serverTimestamp(),
+    subscribers: 0,
+    primaryTopic: primaryTopic,
+    additionalTopics: additionalTopics,
+    created: new Date(Date.now()),
     about: descriptionText,
     title: communityName,
     imageUrl: signedUrl[0],
@@ -93,14 +105,24 @@ exports.createCommunity = functions.region('europe-west3').https.onCall(async (d
     queryParam: communityName[0],
     moderators: []
   }
-  await communitiesCollection.doc(communityName)
-  .set(newCommunity)
-  .catch(err => {
-    console.error(err)
+  const newCommunityRef = communitiesCollection.doc(communityName);
+  await newCommunityRef.set(newCommunity).catch(err => {
     throw new functions.https.HttpsError('invalid-argument', 'Something went wrong please try again later', {
       code: 'create-community/failed-to-create-community',
       message: 'Something went wrong please try again later'
     });
   });
-  return newCommunity
+  
+  await userCollection.doc(user.uid)
+  .update({
+    subscriptions: admin.firestore.FieldValue.arrayUnion(newCommunityRef),
+    communitiesOwned: admin.firestore.FieldValue.arrayUnion(newCommunityRef),
+  }).catch(e => {
+    newCommunityRef.delete();
+    throw new functions.https.HttpsError('invalid-argument', 'Something went wrong please try again later', {
+      code: 'create-community/failed-to-create-community',
+      message: 'Something went wrong please try again later'
+    });
+  });
+  return {...newCommunity, created: newCommunity.created.getTime()}
 })

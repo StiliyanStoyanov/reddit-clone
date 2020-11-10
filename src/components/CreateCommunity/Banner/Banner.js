@@ -1,15 +1,9 @@
 /** @jsx jsx */
 import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 
 const Banner = () => {
-    const theme = useTheme()
-
     return (
-        <div css={css`
-          ${bannerPlaceholder};
-          background-color: ${theme.navIconActiveColor};`
-        }/>
+        <div css={bannerPlaceholder}/>
     )
 }
 
@@ -19,6 +13,7 @@ const bannerPlaceholder = css`
   width: 200px;
   min-width: 100px;
   min-height: 100%;
+  background-color: #2e89ff;
   @media screen and (max-width: 560px) {
     display: none;
   }

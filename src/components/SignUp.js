@@ -12,7 +12,6 @@ const SignUp = () => {
     const {register, handleSubmit, errors} = useForm();
     const [signUp, {error, buttonDisabled}] = useSignUp();
     const onSignUpSubmit = data => signUp(data);
-
     return (
         <SignUpForm onSubmit={handleSubmit(onSignUpSubmit)}>
             <label css={signUpLabelCss} htmlFor="username">

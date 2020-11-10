@@ -15,14 +15,14 @@ const SubmitInput = () => {
               margin: 50px auto 0;
               border-radius: 4px;
               background-color: ${theme.navIconActiveColor};
-              box-shadow: 0 2px 0 0 black;
+              box-shadow: 1px 1px 2px 0 ${theme.theme === 'dark' ? 'black' : 'gray'};
               &:focus {
                 outline: 0;
-                box-shadow: 0 0 4px #ffffff;
+                box-shadow: 0 0 4px ${theme.theme === 'dark' ? 'black' : 'gray'};
               }
               &:active {
                 outline: 0;
-                box-shadow: inset 0 0 4px #000000;
+                box-shadow: inset 0 0 4px #181818;
               }`
             }
             type="submit"

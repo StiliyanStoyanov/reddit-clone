@@ -1,13 +1,20 @@
-import React from "react";
+import React from 'react';
 import Dropdown from "../Dropdown";
-import CreateDropdownContent from "./CreateDropdownContent";
+import CreatePostLink from "./DropdownItems/CreatePostLink";
+import CreateCommunityLink from "./DropdownItems/CreateCommunityLink";
+import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 
 const CreateDropdown = () => {
     return (
-        <Dropdown>
-            <CreateDropdownContent/>
+        <Dropdown icon={faPlus}>
+            {props => (
+                <>
+                    <CreatePostLink {...props}/>
+                    <CreateCommunityLink {...props}/>
+                </>
+            )}
         </Dropdown>
-    )
-}
+    );
+};
 
-export default CreateDropdown
+export default CreateDropdown;

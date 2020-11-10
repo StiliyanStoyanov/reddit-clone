@@ -2,10 +2,10 @@ import React from "react";
 import styled from "@emotion/styled";
 import LoginLink from "./LoginLink";
 import SignUpLink from "./SignUpLink";
-import {useStore} from "../../../store/StoreProvider";
+import {useUserStore} from "../../../store/UserStoreProvider";
 
 const AuthContainer = () => {
-    const {user} = useStore();
+    const {user} = useUserStore();
     if (!user) {
         return (
             <Container>
@@ -24,6 +24,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: auto;
+  margin-right: 5px;
   white-space: nowrap;
 `
 

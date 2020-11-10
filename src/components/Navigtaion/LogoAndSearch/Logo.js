@@ -6,7 +6,7 @@ import {Link} from "@reach/router";
 
 export const Logo = () => {
     return (
-        <Link css={LinkCss} to="/">
+        <Link css={linkStyle} to="/">
             <LogoStyled src={logo}/>
         </Link>
     )
@@ -19,6 +19,6 @@ const LogoStyled = styled.img`
   display: block;
 `
 
-const LinkCss = css`
+const linkStyle = css`
   display: inline-block;
 `

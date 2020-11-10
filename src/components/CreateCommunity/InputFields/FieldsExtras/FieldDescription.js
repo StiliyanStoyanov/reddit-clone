@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import {css, jsx} from "@emotion/core";
+import TooltipOnHover from "./TooltipOnHover";
 
-const FieldDescription = ({descriptionText, Tooltip}) => {
+const FieldDescription = ({descriptionText, tooltipMessage}) => {
     return (
         <div css={descriptionContainer}>
             <p css={description}>
                 {descriptionText}
             </p>
-            {Tooltip && <Tooltip/>}
+            {tooltipMessage && <TooltipOnHover message={tooltipMessage}/>}
         </div>
     );
 };
@@ -20,6 +21,7 @@ const description = css`
 
 const descriptionContainer = css`
   display: flex;
+  position: relative;
   align-items: center;
 `
 

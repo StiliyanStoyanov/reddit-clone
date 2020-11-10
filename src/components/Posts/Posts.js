@@ -10,24 +10,22 @@ import {colors} from "../../styles";
 import firebase from "../../firebase";
 const {borderColor, backgroundColor} = colors
 
-
 export const Posts = () => {
     const [posts, setPosts] = useState([]);
-    const db = firebase.firestore();
 
-    useEffect(() => {
-        const unsubscribe = db.collection("posts").onSnapshot(snapshot => {
-            const newData = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }))
-            setPosts(newData);
-        });
-        return () => {
-            console.log('unsub');
-            unsubscribe();
-        }
-    }, [db]);
+    // useEffect(() => {
+    //     const unsubscribe = db.collection("posts").onSnapshot(snapshot => {
+    //         const newData = snapshot.docs.map(doc => ({
+    //             id: doc.id,
+    //             ...doc.data()
+    //         }))
+    //         setPosts(newData);
+    //     });
+    //     return () => {
+    //         console.log('unsub');
+    //         unsubscribe();
+    //     }
+    // }, []);
     return (
         posts ? posts.map((post) => {
             return (
