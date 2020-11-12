@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/react": "^16.9.36",
     "emotion-theming": "^10.0.27",
-    "firebase": "^7.23.0",
+    "firebase": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-focus-lock": "^2.4.1",
@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "firebaseff": "firebase emulators:start --only functions,firestore",
+    "fe": "firebase emulators:start --only functions,firestore,auth",
     "firestore": "firebase emulators:start --only firestore"
   },
   "eslintConfig": {
