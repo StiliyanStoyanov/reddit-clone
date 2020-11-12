@@ -28,7 +28,6 @@ const CreateCommunity = () => {
     const createCommunity = firebase.functions().httpsCallable('createCommunity');
     const {register, control, handleSubmit, setError, errors} = useForm();
     const onSubmit = data => {
-        // TODO: Add Convert Topics to array and add array check in cloud functions
         createCommunity(data)
             .then(r => {
                 const {data} = r;

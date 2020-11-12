@@ -1,14 +1,14 @@
 import {useEffect} from "react";
 import {useUserDispatch} from "../store/UserStoreProvider";
-import firebase from "../firebase";
+import {auth, firestore} from "../firebase";
 
 export function useSessionLogin() {
     const dispatch = useUserDispatch();
 
     useEffect(() => {
-        const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
-                const usersCollection = firebase.firestore().collection('users');
+                const usersCollection = firestore.collection('users');
                 const userData = (await usersCollection.doc(user.uid).get()).data();
                 const {subscriptions} = userData || { subscriptions : [] };
                 const userSubscriptionsCommunityData = await Promise.all(

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import firebase from "../firebase";
+import {auth} from "../firebase";
 import React, {useReducer} from "react";
 import {useNavigate} from "@reach/router";
 import {authSubmitStatusReducer, authSubmitStatusReducerTypes} from "../reducers/shared/authSubmitStatusReducer";
@@ -16,7 +16,7 @@ export function useLogin() {
 
     const login = (email, password) => {
         dispatch({type: DISABLE_BUTTON});
-        firebase.auth().signInWithEmailAndPassword(email, password).then(res => {
+        auth.signInWithEmailAndPassword(email, password).then(res => {
             navigate("/");
         }).catch(err => {
             dispatch({type: ERROR, payload: err})

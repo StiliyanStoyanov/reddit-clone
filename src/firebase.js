@@ -13,5 +13,8 @@ if (window.location.hostname === 'localhost') {
         ssl: false
     });
 }
-
+export const firestore = firebase.firestore();
+export const auth = firebase.auth();
+export const storage = firebase.storage();
+export const functions = firebase.functions();
 export default firebase;

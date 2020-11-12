@@ -7,16 +7,17 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import {Posts} from "./Posts/Posts";
 import {NotFound} from "./NotFound";
-import {useUserDispatch, useUserStore} from "../store/UserStoreProvider";
+import {useUserStore} from "../store/UserStoreProvider";
 import {useSessionLogin} from "../hooks/useSessionLogin";
 import CreatePost from "./CreatePost/CreatePost";
 import CreateCommunity from "./CreateCommunity/CreateCommunity";
 import Test from "./Test";
+import {useTestingLogin} from "../hooks/useTestingLogin";
 
 const App = () => {
-    useSessionLogin();
+    // useSessionLogin();
+    useTestingLogin();
     const {user, isLoading} = useUserStore();
-
     // TODO: Improve loading implementation
     if (isLoading) return <div>Loading</div>;
     return (

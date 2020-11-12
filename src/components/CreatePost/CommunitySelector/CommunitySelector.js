@@ -34,8 +34,8 @@ const CommunitySelector = () => {
         if (!userInput) {
             return;
         }
-        const filterQueriedCommunities = queriedCommunities?.filter(community => community.name.startsWith(userInput)) || [];
-        const filterUserCommunities = subscriptionsData?.filter(community => community.name.startsWith(userInput)) || [];
+        const filterQueriedCommunities = queriedCommunities?.filter(community => community.name.startsWith(userInput));
+        const filterUserCommunities = subscriptionsData?.filter(community => community.name.startsWith(userInput));
         setUserCommunitiesFiltered(filterUserCommunities);
         setQueriedCommunitiesFiltered(filterQueriedCommunities);
     },[queriedCommunities, subscriptionsData, userInput, isLoading]);
@@ -212,7 +212,7 @@ const CommunitySelector = () => {
             <SearchCommunityDropdownContent open={open}>
                 <CommunityList
                     type={"My Communities"}
-                    communityList={userInput.length > 0 ? userCommunitiesFiltered : subscriptionsData || []}
+                    communityList={userInput.length > 0 ? userCommunitiesFiltered : subscriptionsData}
                     selectCommunity={selectCommunity}
                     currentlySelectedCommunity={arrowsSelectedCommunity ? arrowsSelectedCommunity : userInput}
                 />

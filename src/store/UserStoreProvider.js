@@ -39,7 +39,6 @@ const reducer = (state, action) => {
             };
         }
         case UPDATE_SUBSCRIPTIONS_DATA: {
-            console.log(payload);
             return {
                 ...state,
                 subscriptions: [
@@ -58,7 +57,7 @@ const reducer = (state, action) => {
                 ...state,
                 ...payload.userData,
                 user: action.payload.user,
-                subscriptionsData: payload.userSubscriptionsCommunityData,
+                username: action.payload.user.displayName,
                 isLoading: false
             }
         }
