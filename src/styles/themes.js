@@ -26,6 +26,13 @@ export const darkTheme = {
         backgroundColor: '#1a1a1b',
         borderColorOnFocus: '#d7dadc',
         boxShadowColor: '#343536'
+    },
+    settings: {
+        backgroundColor: '#1a1a1b',
+        optionColor: '#818384',
+        optionHover: '#d7dadc',
+        selectedOptionColor: '#d7dadc',
+        selectedOptionBorder: '#d7dadc'
     }
 }
 
@@ -56,5 +63,13 @@ export const lightTheme = {
     createCommunity: {
         backgroundColor: '#ffffff',
         borderColorOnFocus: '#000000'
+    },
+    settings: {
+        backgroundColor: '#ffffff',
+        optionColor: '#7c7c7c',
+        optionHover: '#1c1c1c',
+        selectedOptionColor: '#1c1c1c',
+        selectedOptionBorder: '#0079d3',
+
     }
 }

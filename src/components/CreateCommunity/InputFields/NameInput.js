@@ -3,7 +3,7 @@
 import React, {useRef} from 'react';
 import {css, jsx} from "@emotion/core";
 import FieldDescription from "./FieldsExtras/FieldDescription";
-import {inputFieldBase} from "../../../styles/CreateCommunityPage/inputFieldBase";
+import {inputFieldBase} from "../../../styles/CreateCommunity/inputFieldBase";
 import ErrorMessage from "../Error/ErrorMessage";
 import {validateCommunityName} from "../../../utils/validateCommunityName";
 import {useTheme} from "emotion-theming";

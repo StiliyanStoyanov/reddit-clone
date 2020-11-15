@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import {css, jsx} from "@emotion/core";
-import {inputFieldBase} from "../../../../../styles/CreateCommunityPage/inputFieldBase";
+import {inputFieldBase} from "../../../../../styles/CreateCommunity/inputFieldBase";
 import {useTheme} from "emotion-theming";
 
 const PrimaryTopicSelect = ({register, topics, selectedPrimaryTopics}) => {

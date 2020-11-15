@@ -2,17 +2,17 @@
 import {jsx} from "@emotion/core";
 import {useUserStore} from "../../../../../store/UserStoreProvider";
 import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
-import {faSignInAlt} from "@fortawesome/free-solid-svg-icons/faSignInAlt";
+import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
 import DropdownLinkItem from "../../DropdownItems/DropdownLinkItem";
 import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
 
-const SignLink = (props) => {
+const SettingsLink = (props) => {
     const {user} = useUserStore();
-    if (!user) {
+    if (user) {
         return (
-            <DropdownLinkItem to={'/register'} {...props}>
-                <DropdownItemIcon icon={faSignInAlt}/>
-                <span css={itemTextStyle}>Sign Up / Sign In</span>
+            <DropdownLinkItem to={'/settings'} {...props}>
+                <DropdownItemIcon icon={faCog}/>
+                <span css={itemTextStyle}>Settings</span>
             </DropdownLinkItem>
         );
     } else {
@@ -20,4 +20,4 @@ const SignLink = (props) => {
     }
 
 }
-export default SignLink
+export default SettingsLink

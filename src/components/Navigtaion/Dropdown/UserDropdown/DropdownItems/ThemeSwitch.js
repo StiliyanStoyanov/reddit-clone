@@ -7,6 +7,7 @@ import {UserStoreActionTypes} from "../../../../../store/UserStoreProvider";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
 import DropdownItemContainer from "../../DropdownItems/DropdownItemContainer";
+import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
 
 const ThemeSwitch = () => {
     const theme = useTheme();
@@ -23,23 +24,15 @@ const ThemeSwitch = () => {
             changeTheme();
         }
     }
-
     return (
-        <div tabIndex={0} onKeyDown={handleKeydown} onMouseDown={e => e.preventDefault()}>
-            <DropdownItemContainer tabIndex={-1} onMouseDown={changeTheme}>
-                <DropdownItemIcon icon={faMoon}/>
-                <span css={themeTextStyle}>Night Mode</span>
-                <input tabIndex={-1} css={themeCheckboxStyle} type="checkbox" checked={checked} readOnly/>
-            </DropdownItemContainer>
-        </div>
+        <DropdownItemContainer tabIndex={0} onMouseDown={changeTheme} onKeyDown={handleKeydown} role="button">
+            <DropdownItemIcon icon={faMoon}/>
+            <span css={itemTextStyle}>Night Mode</span>
+            <input tabIndex={-1} css={themeCheckboxStyle} type="checkbox" checked={checked} readOnly/>
+        </DropdownItemContainer>
     )
 };
-
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const themeTextStyle = css`
-  font-size: 0.9rem;
-  padding: 10px 0;
-`
 const themeCheckboxStyle = css`
   margin-left: auto;
   position: relative;

@@ -9,9 +9,9 @@ const DropdownItemContainer = styled.div`
   border-radius: 8px; 
   cursor:pointer;
   user-select: none;
-  &:hover, &:focus {
+  &:hover, &:focus-visible {
     background-color: ${ ({theme}) => theme.nav.hoverOverlay };
-  }
+  };
 `
 
 export default DropdownItemContainer

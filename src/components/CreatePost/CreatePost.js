@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
 import CreatePostBody from "./CreatePostBody";
+import {useUserStore} from "../../store/UserStoreProvider";
+import {useNavigate} from "@reach/router";
 
-// TODO: Add Rich Text Editor
 const CreatePost = () => {
+    const {user} = useUserStore();
+    const navigate = useNavigate();
+    if (!user) {
+        navigate('/login');
+        return null;
+    }
     return (
         <CreatePostContainer>
             <CreatePostHeader>Create Post</CreatePostHeader>
@@ -11,7 +18,6 @@ const CreatePost = () => {
         </CreatePostContainer>
     );
 }
-
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
 const CreatePostContainer = styled.div`
   min-height: 500px;

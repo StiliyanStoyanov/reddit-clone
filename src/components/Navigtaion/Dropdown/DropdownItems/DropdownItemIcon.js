@@ -20,8 +20,7 @@ const IconContainer = styled.div`
   background-color: ${ ({theme}) => theme.nav.iconContainerBackground };
 `
 const Icon = styled(FontAwesomeIcon)`
-  height: 20px;
-  width: 20px;
+  font-size: 20px;
 `
 
 export default DropdownItemIcon

@@ -32,6 +32,9 @@ const GlobalStyles = () => {
             '*, *::before, *::after': {
                 boxSizing: "inherit"
             },
+            '&:focus:not(:focus-visible)': {
+                outline: 0
+            },
             a: {
                 textDecoration: "none",
                 color: "inherit"

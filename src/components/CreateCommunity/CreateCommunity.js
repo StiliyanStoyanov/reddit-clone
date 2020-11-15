@@ -13,7 +13,7 @@ import SelectTopics from "./InputFields/Topics/SelectTopics";
 import DescriptionInput from "./InputFields/DescriptionInput";
 import SubmitInput from "./InputFields/SubmitInput";
 import {useNavigate} from "@reach/router";
-import {useUserDispatch} from "../../store/UserStoreProvider";
+import {useUserDispatch, useUserStore} from "../../store/UserStoreProvider";
 
 const descriptions = {
     name: 'Community names including capitalization cannot be changed',
@@ -24,9 +24,11 @@ const descriptions = {
 const CreateCommunity = () => {
     const theme = useTheme();
     const navigate = useNavigate();
+    const {user} = useUserStore();
     const userDispatch = useUserDispatch();
     const createCommunity = firebase.functions().httpsCallable('createCommunity');
     const {register, control, handleSubmit, setError, errors} = useForm();
+
     const onSubmit = data => {
         createCommunity(data)
             .then(r => {
@@ -49,25 +51,35 @@ const CreateCommunity = () => {
                 });
             });
     };
+
+    if (!user) {
+        navigate('login');
+        return null;
+    }
     return (
         <>
-            <div css={css(pageContainer(theme))}>
+            <div css={pageContainer(theme)}>
                 <Banner/>
                 <div css={contentContainer}>
                     <Header/>
                     <form css={form} onSubmit={handleSubmit(onSubmit)}>
-                        <NameInput register={register} descriptionText={descriptions.name} nameError={errors.communityName}/>
-                        <SelectTopics register={register} control={control} topicsError={errors.primaryTopic || errors.additionalTopics} descriptionText={descriptions.topics}/>
-                        <DescriptionInput register={register} descriptionText={descriptions.descriptionText} descriptionError={errors.descriptionText}/>
+                        <NameInput register={register} descriptionText={descriptions.name}
+                                   nameError={errors.communityName}/>
+                        <SelectTopics register={register} control={control}
+                                      topicsError={errors.primaryTopic || errors.additionalTopics}
+                                      descriptionText={descriptions.topics}/>
+                        <DescriptionInput register={register} descriptionText={descriptions.descriptionText}
+                                          descriptionError={errors.descriptionText}/>
                         <SubmitInput/>
                     </form>
                 </div>
             </div>
         </>
     );
+
 }
 
-const pageContainer= theme => css`
+const pageContainer = theme => css`
   height: 100%;
   background-color: ${theme.createCommunity.backgroundColor};
   min-height: calc(100vh - 71px);

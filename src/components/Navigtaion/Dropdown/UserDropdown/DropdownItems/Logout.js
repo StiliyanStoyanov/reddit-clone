@@ -1,15 +1,15 @@
 /** @jsx jsx */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import styled from "@emotion/styled";
 import {jsx} from "@emotion/core";
 import firebase from "../../../../../firebase";
 import {useUserDispatch, useUserStore} from "../../../../../store/UserStoreProvider";
 import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
 import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import DropdownItemContainer from "../../DropdownItems/DropdownItemContainer";
+import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
 
-const Logout = (props) => {
+const Logout = () => {
     const {user} = useUserStore();
     const dispatch = useUserDispatch();
 
@@ -23,20 +23,14 @@ const Logout = (props) => {
 
     if (user) {
         return (
-            <DropdownItemContainer tabIndex={0} onClick={logout}>
+            <DropdownItemContainer tabIndex={0} onClick={logout} role="button">
                 <DropdownItemIcon icon={faSignOutAlt}/>
-                <LogoutText>Logout</LogoutText>
+                <span css={itemTextStyle}>Logout</span>
             </DropdownItemContainer>
         );
     } else {
         return null;
     }
 }
-
-/* STYLED COMPONENTS || STYLES USED IN THIS FILE BELOW */
-const LogoutText = styled.span`
-  font-size: 0.9rem;
-  padding: 10px 0;
-`
 
 export default Logout

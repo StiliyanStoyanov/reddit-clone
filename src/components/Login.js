@@ -6,17 +6,22 @@ import {jsx, css} from "@emotion/core";
 import {useForm} from "react-hook-form";
 import {validateEmail} from "../utils/validateEmail";
 import {useLogin} from "../hooks/useLogin";
+import {useUserStore} from "../store/UserStoreProvider";
 
 // TODO: restyle form and validation error message display
 const Login = () => {
     const {register, handleSubmit, errors} = useForm();
     const [login, {error, buttonDisabled}] = useLogin();
+    const {user} = useUserStore();
 
     const onLoginSubmit = (data) => {
         const {email, password} = data
         login(email, password);
     }
 
+    if (user) {
+        return null;
+    }
     return (
         <LoginForm onSubmit={handleSubmit(onLoginSubmit)}>
             <label css={loginLabel} htmlFor="username">

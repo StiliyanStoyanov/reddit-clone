@@ -7,7 +7,7 @@ import "firebase/storage"
 firebase.initializeApp(firebaseConfig);
 if (window.location.hostname === 'localhost') {
     console.log("testing locally -- hitting local functions and firestore emulators");
-    firebase.functions().useEmulator('http://localhost', 5001);
+    firebase.functions().useEmulator('localhost', 5001)
     firebase.firestore().settings({
         host: 'localhost:8080',
         ssl: false

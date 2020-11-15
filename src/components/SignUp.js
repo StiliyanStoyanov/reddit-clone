@@ -7,11 +7,17 @@ import {useForm} from "react-hook-form";
 import {validateEmail} from "../utils/validateEmail";
 import {validateUsername} from "../utils/validateUsername";
 import {useSignUp} from "../hooks/useSignUp";
+import {useUserStore} from "../store/UserStoreProvider";
 
 const SignUp = () => {
+    const {user} = useUserStore();
     const {register, handleSubmit, errors} = useForm();
     const [signUp, {error, buttonDisabled}] = useSignUp();
     const onSignUpSubmit = data => signUp(data);
+
+    if (user) {
+        return null
+    }
     return (
         <SignUpForm onSubmit={handleSubmit(onSignUpSubmit)}>
             <label css={signUpLabelCss} htmlFor="username">

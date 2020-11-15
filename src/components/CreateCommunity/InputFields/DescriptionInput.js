@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import React from 'react';
 import {css, jsx} from "@emotion/core";
-import {inputFieldBase} from "../../../styles/CreateCommunityPage/inputFieldBase";
+import {inputFieldBase} from "../../../styles/CreateCommunity/inputFieldBase";
 import FieldDescription from "./FieldsExtras/FieldDescription";
 import ErrorMessage from "../Error/ErrorMessage";
 import {useTheme} from "emotion-theming";

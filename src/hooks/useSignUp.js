@@ -18,7 +18,13 @@ export function useSignUp() {
         const {username, email, password} = data;
         dispatch({type: DISABLE_BUTTON});
         createUser({username, email, password}).then(res => {
-            auth.signInWithEmailAndPassword(email, password).catch(err => console.error(err));
+            const actionCodeSettings = {
+                url: "http://localhost:3000"
+            }
+            auth.signInWithEmailAndPassword(email, password).then(() => {
+                auth.currentUser.sendEmailVerification(actionCodeSettings).catch(e => console.error(e))
+            }).catch(err => console.error(err));
+
             navigate('/');
         }).catch(err => {
             console.error(err);

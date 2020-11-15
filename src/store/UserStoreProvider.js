@@ -68,7 +68,10 @@ const reducer = (state, action) => {
             }
         }
         case LOGOUT: {
-            return userStoreDefault
+            return {
+                ...userStoreDefault,
+                isLoading: false
+            }
         }
         default: {
             console.error("Invalid Action Type");
