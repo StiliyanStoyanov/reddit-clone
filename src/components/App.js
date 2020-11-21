@@ -11,7 +11,6 @@ import {useUserStore} from "../store/UserStoreProvider";
 import {useSessionLogin} from "../hooks/useSessionLogin";
 import CreatePost from "./CreatePost/CreatePost";
 import CreateCommunity from "./CreateCommunity/CreateCommunity";
-import Test from "./Test";
 import UserSettings from "./UserSettings/UserSettings";
 
 const App = () => {
@@ -27,12 +26,11 @@ const App = () => {
                     <Posts path="/"/>
                     <CreateCommunity path="/create-community"/>
                     <CreatePost path="/create-post"/>
-                    <UserSettings path="settings/*"/>
+                    <UserSettings path="/settings/*"/>
                     <Login path="/login" />
                     <SignUp path="/register"/>
                     <NotFound default/>
                 </Router>
-                <Test/>
             </PageContainer>
         </>
     );

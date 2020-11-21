@@ -4,7 +4,7 @@ import {Router, useNavigate} from "@reach/router";
 import SettingsNavigation from "./SettingsNavigation/SettingsNavigation";
 import {useUserStore} from "../../store/UserStoreProvider";
 import {useTheme} from "emotion-theming";
-import Account from "./SettingsModules/Account";
+import AccountView from "./SettingsModules/Account/AccountView";
 
 const UserSettings = () => {
     const {user} = useUserStore();
@@ -20,7 +20,8 @@ const UserSettings = () => {
             <div css={itemsContainer(theme)}>
                 <SettingsNavigation/>
                 <Router primary={false}>
-                    <Account path="account"/>
+                    <AccountView path="/"/>
+                    <AccountView path="account"/>
                 </Router>
             </div>
         </div>
@@ -29,7 +30,6 @@ const UserSettings = () => {
 /* STYLES USED IN THIS FILE BELOW */
 const pageContainer = css`
   padding: 0 8px;
-  height: calc(100vh - 71px);
   @media screen and (max-width: 1000px) {
     padding: 0 4px;
   }

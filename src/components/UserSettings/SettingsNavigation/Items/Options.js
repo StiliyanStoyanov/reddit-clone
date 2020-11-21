@@ -1,18 +1,19 @@
 /** @jsx jsx */
 import {css, jsx} from "@emotion/core";
-import SettingOptionLink from "./SettingOptionLink";
+import OptionLink from "./OptionLink";
 import {useState} from "react";
+import {useMatch} from "@reach/router";
 
 const Options = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
+    const optionMatch = useMatch('/settings/:option');
+    const [selectedOption, setSelectedOption] = useState(optionMatch ? optionMatch.option : 'account');
     const selectOption = option => setSelectedOption(option);
-
     return (
         <div css={container}>
-            <SettingOptionLink option={'account'} selectedOption={selectedOption} selectOption={selectOption}>Account</SettingOptionLink>
-            <SettingOptionLink option={'profile'} selectedOption={selectedOption} selectOption={selectOption}>Profile</SettingOptionLink>
-            <SettingOptionLink option={'notifications'} selectedOption={selectedOption} selectOption={selectOption}>Notifications</SettingOptionLink>
-            <SettingOptionLink option={'privacy'} selectedOption={selectedOption} selectOption={selectOption}>Safety & Privacy</SettingOptionLink>
+            <OptionLink option={'account'} selectedOption={selectedOption} selectOption={selectOption}>Account</OptionLink>
+            <OptionLink option={'profile'} selectedOption={selectedOption} selectOption={selectOption}>Profile</OptionLink>
+            <OptionLink option={'notifications'} selectedOption={selectedOption} selectOption={selectOption}>Notifications</OptionLink>
+            <OptionLink option={'privacy'} selectedOption={selectedOption} selectOption={selectOption}>Safety & Privacy</OptionLink>
         </div>
     );
 };

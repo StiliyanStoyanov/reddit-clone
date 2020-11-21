@@ -70,7 +70,7 @@ const reducer = (state, action) => {
         case LOGOUT: {
             return {
                 ...userStoreDefault,
-                isLoading: false
+                isLoading: false,
             }
         }
         default: {

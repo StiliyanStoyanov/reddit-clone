@@ -28,11 +28,21 @@ export const darkTheme = {
         boxShadowColor: '#343536'
     },
     settings: {
+        color: '#d7dadc',
+        metaText: '#818384',
+        button: '#d7dadc',
+        formErrorBorderColor: '#ea0027',
+        formFocusBorderColor: '#ffffff',
+        formButtonBackground: '#d7dadc',
+        formButtonColor: '#1a1a1b',
+        formButtonHover: '#ebeced',
+        formButtonActive: '#acaeb0',
         backgroundColor: '#1a1a1b',
+        borderColor: '#343536',
         optionColor: '#818384',
         optionHover: '#d7dadc',
         selectedOptionColor: '#d7dadc',
-        selectedOptionBorder: '#d7dadc'
+        selectedOptionBorder: '#d7dadc',
     }
 }
 
@@ -65,11 +75,20 @@ export const lightTheme = {
         borderColorOnFocus: '#000000'
     },
     settings: {
+        color: '#1c1c1c',
+        metaText: '#7c7c7c',
+        button: '#0079d3',
+        formErrorBorderColor: '#ea0027',
+        formFocusBorderColor: '#000000',
+        formButtonBackground: '#0079d3',
+        formButtonColor: '#ffffff',
+        formButtonHover: '#7fbce9',
+        formButtonActive: '#acaeb0',
         backgroundColor: '#ffffff',
+        borderColor: '#edeff1',
         optionColor: '#7c7c7c',
         optionHover: '#1c1c1c',
         selectedOptionColor: '#1c1c1c',
         selectedOptionBorder: '#0079d3',
-
     }
 }

@@ -20,6 +20,12 @@ export function authSubmitStatusReducer (state, action) {
                 buttonDisabled: false
             }
         }
+        case "CLEAR_ERROR": {
+            return {
+                ...state,
+                error: null
+            }
+        }
         default: {
             console.error("Invalid Reducer Action Type");
             return state

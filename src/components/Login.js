@@ -11,12 +11,17 @@ import {useUserStore} from "../store/UserStoreProvider";
 // TODO: restyle form and validation error message display
 const Login = () => {
     const {register, handleSubmit, errors} = useForm();
-    const [login, {error, buttonDisabled}] = useLogin();
+    const [login, {error, buttonDisabled}, dispatch] = useLogin();
     const {user} = useUserStore();
 
     const onLoginSubmit = (data) => {
         const {email, password} = data
         login(email, password);
+    }
+    const handleChange = event => {
+        if (error && error?.code === "auth/user-not-found") {
+            dispatch({type: 'CLEAR_ERROR'});
+        }
     }
 
     if (user) {
@@ -24,13 +29,14 @@ const Login = () => {
     }
     return (
         <LoginForm onSubmit={handleSubmit(onLoginSubmit)}>
-            <label css={loginLabel} htmlFor="username">
+            <label css={loginLabel} htmlFor="email">
                 Email
                 <input
                     id="email"
                     name="email"
                     type="text"
                     autoComplete="on"
+                    onChange={handleChange}
                     ref={register({required: true, minLength: 6, maxLength: 254, validate: validateEmail})}
                 />
             </label>

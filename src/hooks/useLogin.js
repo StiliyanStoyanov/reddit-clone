@@ -23,5 +23,5 @@ export function useLogin() {
         })
     };
     
-    return [login, state]
+    return [login, state, dispatch]
 }

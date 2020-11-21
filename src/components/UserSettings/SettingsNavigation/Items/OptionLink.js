@@ -2,10 +2,17 @@
 import {Link} from "@reach/router";
 import {css, jsx} from "@emotion/core";
 import {useTheme} from "emotion-theming";
+import {useEffect, useRef} from "react";
 
-const SettingOptionLink = ({option, children, selectedOption, selectOption}) => {
+const OptionLink = ({option, children, selectedOption, selectOption}) => {
+    const inputRef = useRef();
     const theme = useTheme();
     const selected = selectedOption === option;
+
+    useEffect(() => {
+        inputRef.current && selected && inputRef.current.focus();
+    }, [selected]);
+
     const handleMouseDown = () => {
         selectOption(option);
     }
@@ -26,6 +33,8 @@ const SettingOptionLink = ({option, children, selectedOption, selectOption}) => 
     }
     return (
         <Link
+            ref={inputRef}
+            autoFocus={selected}
             css={settingOptionLinkStyle(selected, theme)}
             to={option}
             aria-selected={selected}
@@ -55,4 +64,4 @@ const settingOptionLinkStyle = (selected, theme) => css`
   }
 `
 
-export default SettingOptionLink;
+export default OptionLink;

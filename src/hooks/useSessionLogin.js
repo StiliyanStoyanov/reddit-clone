@@ -1,8 +1,10 @@
 import {useEffect} from "react";
 import {useUserDispatch} from "../store/UserStoreProvider";
 import {auth, firestore} from "../firebase";
+import {useNavigate} from "@reach/router";
 
 export function useSessionLogin() {
+    const navigate = useNavigate();
     const dispatch = useUserDispatch();
 
     useEffect(() => {
@@ -24,9 +26,10 @@ export function useSessionLogin() {
                     }
                 });
             } else {
-                dispatch({type: "SET_LOADING", payload: false});
+                dispatch({type: "LOGOUT"});
+                navigate('/');
             }
         });
         return () => unsubscribe();
-    }, [dispatch]);
+    }, [dispatch, navigate]);
 }
