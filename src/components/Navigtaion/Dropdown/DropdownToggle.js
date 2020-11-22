@@ -23,7 +23,7 @@ const DropdownToggle = ({icon, open, toggleDropdown, enableFocusLock}) => {
     return (
         <div css={toggleFocusableContainerStyle(theme)} tabIndex={0} onKeyDown={handleKeyDown} onMouseDown={preventDefault}>
             <div css={toggleContainerStyle(theme, open)} tabIndex={-1} onMouseDown={handleMouseDown}>
-                <ToggleIcon icon={icon}/>
+                <ToggleIcon open={open} icon={icon}/>
                 <div css={overlayStyle(theme)}/>
             </div>
         </div>
