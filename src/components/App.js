@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import 'react-toastify/dist/ReactToastify.css'
 import {Router} from "@reach/router";
 import styled from "@emotion/styled";
 import Navigation from "./Navigtaion/Navigation";
@@ -12,6 +13,7 @@ import {useSessionLogin} from "../hooks/useSessionLogin";
 import CreatePost from "./CreatePost/CreatePost";
 import CreateCommunity from "./CreateCommunity/CreateCommunity";
 import UserSettings from "./UserSettings/UserSettings";
+import {ToastContainer} from "react-toastify";
 
 const App = () => {
     useSessionLogin();
@@ -31,6 +33,12 @@ const App = () => {
                     <SignUp path="/register"/>
                     <NotFound default/>
                 </Router>
+                <ToastContainer
+                    autoClose={4000}
+                    position="top-center"
+                    draggablePercent={60}
+                    pauseOnHover={false}
+                />
             </PageContainer>
         </>
     );
