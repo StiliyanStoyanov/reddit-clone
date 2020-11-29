@@ -9,6 +9,7 @@ import Form from "../../../../Form/Form";
 import {useForm} from "react-hook-form";
 import firebase ,{auth} from "../../../../../../firebase";
 import {useUserStore} from "../../../../../../store/UserStoreProvider";
+import {toast} from "react-toastify";
 
 const PasswordForm = ({visible, closeForm}) => {
     const {user} = useUserStore();
@@ -23,11 +24,14 @@ const PasswordForm = ({visible, closeForm}) => {
         );
         return auth.currentUser.reauthenticateWithCredential(credential).then(res => {
             auth.currentUser.updatePassword(newPassword).then(res => {
-                console.log('password updated');
+                toast.dark('🚀 password updated!', {
+                    autoClose: 2000,
+                    hideProgressBar: true
+                })
                 setDisabled(false);
                 closeForm();
             }).catch(err => {
-                console.log(err);
+                toast.error(err.message)
                 setDisabled(false);
             });
         }).catch(err => {

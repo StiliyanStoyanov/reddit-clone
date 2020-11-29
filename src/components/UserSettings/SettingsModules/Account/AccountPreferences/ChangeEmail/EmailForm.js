@@ -10,11 +10,16 @@ import {useForm} from "react-hook-form";
 import {useUserStore} from "../../../../../../store/UserStoreProvider";
 import firebase, {auth} from "../../../../../../firebase";
 import {validateEmail} from "../../../../../../utils/validateEmail";
+import {toast} from "react-toastify";
 
 const EmailForm = ({visible, closeForm}) => {
     const {user} = useUserStore();
     const [disabled, setDisabled] = useState(false);
     const {register, setError, errors, handleSubmit, control} = useForm();
+
+    const notify = message => {
+        toast.dark(message);
+    }
 
     const onSubmit = ({currentPassword, newEmail}) => {
         setDisabled(true);
@@ -24,11 +29,10 @@ const EmailForm = ({visible, closeForm}) => {
         );
         return auth.currentUser.reauthenticateWithCredential(credential).then(res => {
             auth.currentUser.updateEmail(newEmail).then(res => {
-                console.log('email updated');
+                notify('🚀 Email successfully updated');
                 setDisabled(false);
                 closeForm();
             }).catch(err => {
-                console.log(err);
                 setDisabled(false);
             });
         }).catch(err => {
