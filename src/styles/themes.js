@@ -1,6 +1,11 @@
 export const darkTheme = {
     theme: 'dark',
     color: '#e4e6eb',
+    itemDefault: '#818384',
+    itemHighlight: '#d7dadc',
+    itemHighlightBackground: '#272729',
+    itemActive: '#d7dadc',
+    itemActiveBackground: '#272729',
     backgroundColor: '#030303',
     borderColor:  '#343536',
     activeBorderColor: '#d7dadc',
@@ -49,6 +54,11 @@ export const darkTheme = {
 export const lightTheme = {
     theme: 'light',
     color: '#030303',
+    itemDefault: '#878a8c',
+    itemHighlight: '#1c1c1c',
+    itemHighlightBackground: '#f6f7f8',
+    itemActive: '#0079d3',
+    itemActiveBackground: '#f6f7f8',
     backgroundColor: '#f0f2f5',
     borderColor: '#dedede',
     activeBorderColor: '#1a1a1b',
