@@ -34,7 +34,9 @@ const ContentFields = () => {
             title: title,
             content: selectSubmitContent(postStore),
             createdAt: createTimestamp,
-            contentType: selectedFormType
+            contentType: selectedFormType,
+            communityName: postStore.selectedCommunity.name,
+            communityImageUrl: postStore.selectedCommunity.imageUrl
         };
         if (selectedFormType === 'post' || selectedFormType === 'link') {
             communityCollection
