@@ -48,6 +48,12 @@ export const darkTheme = {
         optionHover: '#d7dadc',
         selectedOptionColor: '#d7dadc',
         selectedOptionBorder: '#d7dadc',
+    },
+    scoresButton: {
+        hoverBackground: 'rgba(215, 218, 220, 0.1)',
+        arrowColor: '#818384',
+        upvoteRed: '#ff4500',
+        downvoteBlue: '#7193ff'
     }
 }
 
@@ -100,5 +106,11 @@ export const lightTheme = {
         optionHover: '#1c1c1c',
         selectedOptionColor: '#1c1c1c',
         selectedOptionBorder: '#0079d3',
+    },
+    scoresButton: {
+        hoverBackground: 'rgba(215, 218, 220, 0.1)',
+        arrowColor: '#818384',
+        upvoteRed: '#ff4500',
+        downvoteBlue: '#7193ff'
     }
 }
