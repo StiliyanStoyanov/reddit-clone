@@ -14,6 +14,7 @@ import CreatePost from "./CreatePost/CreatePost";
 import CreateCommunity from "./CreateCommunity/CreateCommunity";
 import UserSettings from "./UserSettings/UserSettings";
 import {ToastContainer} from "react-toastify";
+import {Test} from "./Test";
 
 const App = () => {
     useSessionLogin();
@@ -25,7 +26,7 @@ const App = () => {
             <Navigation/>
             <PageContainer>
                 <Router>
-                    <Posts path="/"/>
+                    <Posts path="/*"/>
                     <CreateCommunity path="/create-community"/>
                     <CreatePost path="/create-post"/>
                     <UserSettings path="/settings/*"/>
@@ -39,6 +40,7 @@ const App = () => {
                     draggablePercent={60}
                     pauseOnHover={false}
                 />
+                <Test/>
             </PageContainer>
         </>
     );
