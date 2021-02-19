@@ -12,22 +12,21 @@ export function useSessionLogin() {
             if (user) {
                 const usersCollection = firestore.collection('users');
                 const userData = (await usersCollection.doc(user.uid).get()).data();
-                const {subscriptions} = userData || { subscriptions : [] };
+                const {subscriptions} = userData || {subscriptions: []};
                 const userSubscriptionsCommunityData = await Promise.all(
                     await subscriptions.map(async docRef => {
-                    return (await docRef.get()).data();
-                })).catch(error => console.error(error));
+                        return (await docRef.get()).data();
+                    })).catch(error => console.error(error));
                 dispatch({
                     type: "SESSION_LOGIN",
                     payload: {
                         user,
                         userData,
-                        userSubscriptionsCommunityData
+                        subscriptionsData: userSubscriptionsCommunityData
                     }
                 });
             } else {
                 dispatch({type: "LOGOUT"});
-                navigate('/');
             }
         });
         return () => unsubscribe();

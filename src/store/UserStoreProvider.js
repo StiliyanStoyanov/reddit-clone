@@ -9,6 +9,8 @@ const userStoreDefault = {
     subscriptions: [],
     subscriptionsData: [],
     moderatorIn: [],
+    preferredViewType: 'card',
+    preferredSortType: 'top',
     isLoading: true
 }
 
@@ -56,6 +58,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 ...payload.userData,
+                subscriptionsData: payload.subscriptionsData,
                 user: action.payload.user,
                 username: action.payload.user.displayName,
                 isLoading: false

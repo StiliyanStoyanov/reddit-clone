@@ -9,13 +9,13 @@ import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import DropdownItemContainer from "../../DropdownItems/DropdownItemContainer";
 import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
 
-const Logout = () => {
+const Logout = ({toggleDropdown}) => {
     const {user} = useUserStore();
     const dispatch = useUserDispatch();
 
     const logout = () => {
         firebase.auth().signOut().then(() => {
-            dispatch({type: "LOGOUT"});
+            toggleDropdown();
         }).catch(err => {
             console.error('LOGOUT ERROR: ', err);
         });
