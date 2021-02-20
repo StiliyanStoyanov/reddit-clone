@@ -2,14 +2,14 @@
 import {css, jsx} from "@emotion/core";
 import {useTheme} from "emotion-theming";
 import SortSelect from "./SortSelect/SortSelect";
-import ViewTypeSelect from "./ViewTypeSelect/ViewTypeSelect";
+import ViewSelect from "./ViewSelect/ViewSelect";
 
-const ViewSelector = ({viewType, setViewType}) => {
+const ViewSelector = ({view, setView, sort, setSort}) => {
     const theme = useTheme();
     return (
         <div css={container(theme)}>
-            <SortSelect/>
-            <ViewTypeSelect viewType={viewType} setViewType={setViewType}/>
+            <SortSelect sort={sort} setSort={setSort}/>
+            <ViewSelect viewType={view} setView={setView}/>
         </div>
     );
 };

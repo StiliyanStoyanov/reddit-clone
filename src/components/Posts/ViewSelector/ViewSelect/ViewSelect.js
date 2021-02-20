@@ -10,30 +10,32 @@ import {ReactComponent as CardSvg} from "../../../../assets/card.svg";
 import {ReactComponent as CompactSvg} from "../../../../assets/compact.svg";
 import Svg from "./Items/SvgIcon";
 
-const ViewTypeSelect = ({viewType, setViewType}) => {
+const ViewSelect = ({viewType, setView}) => {
     const theme = useTheme();
     const [visible, setVisible] = useState(false);
-    const dropdownContainerRef = useRef();
-    const closeDropdown = event => setVisible(false);
-    const changeToCardView = event => setViewType('card');
-    const changeToCompactView = event => setViewType('compact');
+    const viewDropdownContainerRef = useRef();
+    const closeDropdown = e => setVisible(false);
+    const changeView = (view, e) => {
+        setView(view);
+        closeDropdown();
+    }
 
-    useClickOutside(dropdownContainerRef, closeDropdown, visible);
+    useClickOutside(viewDropdownContainerRef, closeDropdown, visible);
     return (
-        <div css={container}>
+        <div css={container} ref={viewDropdownContainerRef}>
             <div>
-                <button css={dropdownToggleButton} onClick={() => setVisible(prevState => !prevState)}>
+                <button css={dropdownToggleStyle} onClick={() => setVisible(prevState => !prevState)}>
                     {viewType === 'card' && <Svg Svg={CardSvg}/>}
                     {viewType === 'compact' && <Svg Svg={CompactSvg}/>}
                     <FontAwesomeIcon css={css`color: ${theme.itemActive}; margin-left: 2px`} icon={faCaretDown}/>
                 </button>
             </div>
-            <div css={dropdownContainer(theme,visible)} ref={dropdownContainerRef}>
-                <Button onClick={changeToCardView}>
+            <div css={dropdownContainer(theme,visible)}>
+                <Button onClick={(e) => changeView('card', e)}>
                     <Svg Svg={CardSvg} secondary={true}/>
                     Card
                 </Button>
-                <Button onClick={changeToCompactView}>
+                <Button onClick={(e) => changeView('compact', e)}>
                     <Svg Svg={CompactSvg} secondary={true}/>
                     Compact
                 </Button>
@@ -42,7 +44,7 @@ const ViewTypeSelect = ({viewType, setViewType}) => {
     );
 };
 
-const dropdownToggleButton = theme => css`
+const dropdownToggleStyle = theme => css`
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -62,6 +64,7 @@ const container = css`
 `
 const dropdownContainer = (theme, visible) => css`
   display: flex;
+  z-index: 3;
   flex-direction: column;
   visibility: ${visible ? 'visible' : 'hidden'};
   position: absolute;
@@ -74,4 +77,4 @@ const dropdownContainer = (theme, visible) => css`
   background-color: ${theme.nav.backgroundColor};
 `
 
-export default ViewTypeSelect;
+export default ViewSelect;

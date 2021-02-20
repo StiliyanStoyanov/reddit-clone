@@ -4,15 +4,15 @@ import {useTheme} from "emotion-theming";
 import {Link} from "@reach/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const SortLink = ({to, icon, selectedSort, setSelectedSort}) => {
+const SortLink = ({to, icon, sort, setSort}) => {
     const theme = useTheme();
-    const isSelected = selectedSort === to;
-    const handleClick = event => {
+    const isSelected = sort === to;
+    const handleSelect = event => {
         event.preventDefault();
-        setSelectedSort(to);
+        setSort(to);
     }
     return (
-        <Link css={link(theme, isSelected)} to={to.toLowerCase()} onClick={handleClick}>
+        <Link css={link(theme, isSelected)} to={to} onClick={handleSelect}>
             <FontAwesomeIcon css={iconStyle(theme, isSelected)} icon={icon}/>
             {to}
         </Link>
@@ -37,6 +37,7 @@ const link = (theme, isSelected) => css`
       color: ${isSelected ? theme.itemActive : theme.itemHighlight};
     }
   }
+  text-transform: capitalize;
 `
 
 const iconStyle = (theme, isSelected) => css`

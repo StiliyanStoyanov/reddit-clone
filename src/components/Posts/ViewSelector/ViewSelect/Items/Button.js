@@ -15,7 +15,7 @@ const buttonStyle = theme => css`
   color: ${theme.itemDefault};
   border: 0;
   background-color: transparent;
-  outline-offset: -1px;
+  outline-offset: -2px;
   cursor:pointer;
   &:hover, &:focus-visible {
     color: ${theme.itemHighlight};
