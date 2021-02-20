@@ -1,66 +1,42 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 /* eslint-disable no-unused-vars */
-import React, {useEffect, useState} from 'react';
-import styled from "@emotion/styled";
-import {jsx} from '@emotion/core';
-import {Scores} from "./Scores/Scores";
-import {PostContent} from "./PostContent/PostContent";
-import {colors} from "../../styles";
-import firebase from "../../firebase";
-const {borderColor, backgroundColor} = colors
+import React, {useState} from 'react';
+import {css, jsx} from '@emotion/core';
+import ViewSelector from "./ViewSelector/ViewSelector";
+import {Router, useNavigate} from "@reach/router";
+import SingleCommunity from "./Pages/SingleCommunity";
+import SinglePost from "./Pages/SinglePost";
+import AllCommunities from "./Pages/AllCommunities";
+import {NotFound} from "../NotFound";
 
 export const Posts = () => {
-    const [posts, setPosts] = useState([]);
-
-    // useEffect(() => {
-    //     const unsubscribe = db.collection("posts").onSnapshot(snapshot => {
-    //         const newData = snapshot.docs.map(doc => ({
-    //             id: doc.id,
-    //             ...doc.data()
-    //         }))
-    //         setPosts(newData);
-    //     });
-    //     return () => {
-    //         console.log('unsub');
-    //         unsubscribe();
-    //     }
-    // }, []);
+    const [view, setView] = useState('card');
+    const [sort, setSort] = useState('top');
+    const navigate = useNavigate();
     return (
-        posts ? posts.map((post) => {
-            return (
-                <PostContainer key={post.id}>
-                    <PostContent post={post}/>
-                    <Scores upvotes={post.upvotes}/>
-                </PostContainer>
-            )
-        }) : <div> Loading </div>
-    )
+        <div css={container}>
+            <button onClick={() => {navigate('/all')}}>Navigate</button>
+            <ViewSelector
+                view={view}
+                setView={setView}
+                sort={sort}
+                setSort={setSort}
+            />
+            <Router primary={false}>
+                {["/", "/all"].map(page => <AllCommunities key={page} view={view} sort={sort} path={page}/>)}
+                <SingleCommunity view={view} sort={sort} path="/e/:communityId"/>
+                <SinglePost view={view} path="/e/:communityId/comments/:postId/:postName"/>
+                <NotFound default/>
+            </Router>
+        </div>
+    );
 };
 
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const PostContainer = styled.div`
-  display: flex;
-  position: relative;
-  z-index: 1;
-  margin: 10px auto;
-  padding-top: 8px;
-  padding-left: 40px;
-  border: 1px solid ${borderColor};
-  border-radius: 4px;
-  background-color: ${backgroundColor};
-  min-width: 380px;
+const container = css`
   max-width: 700px;
-  min-height: 80px;
-  max-height: 500px;
-  width: 100%;
-  cursor: pointer;
-  &:hover, &:active {
-    border: 1px solid ${colors.borderHover};
-  }
-  @media (max-width: 420px) {
-    padding-left: 0;
-  }
+  margin: 0 auto
 `
 
 
