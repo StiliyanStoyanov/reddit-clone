@@ -18,6 +18,8 @@ const BottomLink = ({icon, children, to}) => {
 
 const linkContainer = theme => css`
   display: flex;
+  position: relative;
+  z-index: 2;
   align-items: center;
   white-space: nowrap;
   word-break: normal;

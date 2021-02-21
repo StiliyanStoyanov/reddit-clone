@@ -1,7 +1,6 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-/* eslint-disable no-unused-vars */
-import React, {useEffect} from "react";
+import React from "react";
 import {css, jsx} from "@emotion/core";
 import { ReactComponent as ArrowSvg } from "../../../../../assets/arrow.svg"
 import {useTheme} from "emotion-theming";
@@ -24,6 +23,8 @@ export const ScoresButton = ({ direction }) => {
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
 const buttonStyle = ({hoverBackground, upvoteRed, downvoteBlue, arrowColor}, direction) => css`
   max-height: 24px;
+  position: relative;
+  z-index: 2;
   background-color: transparent;
   outline: none;
   border: none;
@@ -33,7 +34,7 @@ const buttonStyle = ({hoverBackground, upvoteRed, downvoteBlue, arrowColor}, dir
     width: 24px;
     height: auto;
     border-radius: 2px;
-    ${direction === 'down' ? 'transform: rotate(180deg)' : null };
+    ${direction === 'down' ? 'transform: rotate(180deg)' : null};
   }
   &:hover, &:focus-visible {
     svg {
