@@ -2,13 +2,38 @@ import {useEffect, useState} from "react";
 import {firestore} from "../firebase";
 
 export function useFetchAll(sort) {
-    const [{data, lastIndex}, setData] = useState({data: [], lastIndex: {}});
-    const postsCollection = firestore.collectionGroup('posts').limit(12);
+    const initialState = {
+        data: [],
+        startAfterIndex: {},
+        isFetching: false,
+        isLastIndex: false
+    };
+    const [{data, startAfterIndex, isFetching, isLastIndex}, setState] = useState(initialState);
+    const postsCollection = firestore.collectionGroup('posts').limit(10);
     const newSort = postsCollection.orderBy('createdAt', 'desc')
     const topSort = postsCollection.orderBy('upvotes', 'desc').orderBy('createdAt', 'desc')
     const fetchBySort = sort === 'new' ? newSort : topSort;
 
+    const fetchInitialized = () => {
+        return setState(prevState => {
+            return {
+                ...prevState,
+                isFetching: true
+            }
+        });
+    }
+    const noMoreIndexes = () => {
+        return setState(prevState => {
+            return {
+                ...prevState,
+                isFetching: false,
+                isLastIndex: true
+            }
+        });
+    }
+
     const initialFetch = () => {
+        fetchInitialized();
         return fetchBySort.get().then(snapshot => {
             if (snapshot.empty) return null;
             const fetchedData = snapshot.docs.map(post => {
@@ -19,16 +44,22 @@ export function useFetchAll(sort) {
                     docSnapshot: post
                 };
             });
-            setData({
-                data: fetchedData,
-                lastIndex: fetchedData[fetchedData.length - 1].docSnapshot
+            setState(prevState => {
+                return {
+                    ...prevState,
+                    data: fetchedData,
+                    startAfterIndex: fetchedData[fetchedData.length - 1].docSnapshot,
+                    isFetching: false
+                }
             })
         })
     }
 
     const fetchNext = () => {
-        return fetchBySort.startAfter(lastIndex).get().then(snapshot => {
-            if (snapshot.empty) return null;
+        if (isFetching || isLastIndex) return null;
+        fetchInitialized();
+        return fetchBySort.startAfter(startAfterIndex).get().then(snapshot => {
+            if (snapshot.empty) return noMoreIndexes();
             const fetchedData = snapshot.docs.map(post => {
                 if (!post.exists) return null;
                 return {
@@ -37,17 +68,21 @@ export function useFetchAll(sort) {
                     docSnapshot: post
                 };
             });
-            setData(prevData => {
-                const {data} = prevData
+            setState(prevState => {
+                const {data} = prevState
                 return {
+                    ...prevState,
                     data: [...data, ...fetchedData],
-                    lastIndex: fetchedData[fetchedData.length - 1].docSnapshot
+                    lastIndex: fetchedData[fetchedData.length - 1].docSnapshot,
+                    isFetching: false
                 }
             })
         });
     }
+
     useEffect(() => {
         initialFetch().catch(error => console.error(error));
     }, [sort]);
-    return {data, lastIndex, fetchNext}
+
+    return {data, fetchNext}
 }
