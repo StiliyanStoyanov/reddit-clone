@@ -2,15 +2,19 @@
 /** @jsxFrag React.Fragment */
 import { ScoresButton } from "./ScoresButton";
 import {css, jsx} from "@emotion/core";
-import { colors } from "../../../../../styles";
+import {useTheme} from "emotion-theming";
 
-export const Scores = ({ upvotes, hideOnSmallSize }) => {
-
+export const Scores = ({ upvotes, hideOnSmallSize, hideOnBigSize }) => {
+    const theme = useTheme();
     return (
-        <div css={[outerContainer, hideOnSmallSize && hide]}>
+        <div css={[
+            outerContainer(theme.scores),
+            hideOnSmallSize && hideSmall,
+            hideOnBigSize && hideBig
+        ]}>
             <div css={innerContainer}>
                 <ScoresButton direction={'up'}/>
-                <span css={scoreCount}>{upvotes}</span>
+                <span css={scoreCount(theme.scores)}>{upvotes}</span>
                 <ScoresButton direction={'down'}/>
             </div>
         </div>
@@ -18,16 +22,21 @@ export const Scores = ({ upvotes, hideOnSmallSize }) => {
 };
 
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const hide = css`
+const hideBig = css`
+  @media (min-width: 420px) {
+    display: none;
+  }
+`
+const hideSmall = css`
   @media (max-width: 420px) {
     display: none;
   }
 `
-const outerContainer = css`
+const outerContainer = theme => css`
   position: absolute;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  background-color: #161617;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  background-color: ${theme.containerBackgroundColor};
   top: 0;
   left: 0;
   padding: 8px 4px 8px 0;
@@ -51,10 +60,10 @@ const innerContainer = css`
     align-items: center;
   }
 `
-const scoreCount = css`
+const scoreCount = theme => css`
   font-size: 12px;
   font-weight: bolder;
   text-align: center;
-  color: ${colors.textWhite};
+  color: ${theme.textColor};
   margin: 0 2px;
 `
