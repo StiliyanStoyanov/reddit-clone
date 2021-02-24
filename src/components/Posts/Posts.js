@@ -1,6 +1,5 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-/* eslint-disable no-unused-vars */
 import React, {useState} from 'react';
 import {css, jsx} from '@emotion/core';
 import ViewSelector from "./ViewSelector/ViewSelector";
@@ -23,7 +22,7 @@ export const Posts = () => {
                 sort={sort}
                 setSort={setSort}
             />
-            <Router primary={false}>
+            <Router primary={false} id="Posts">
                 {["/", "/all"].map(page => <AllCommunities key={page} view={view} sort={sort} path={page}/>)}
                 <SingleCommunity view={view} sort={sort} path="/e/:communityId"/>
                 <SinglePost view={view} path="/e/:communityId/comments/:postId/:postName"/>
