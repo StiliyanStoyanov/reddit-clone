@@ -73,7 +73,7 @@ export function useFetchAll(sort) {
                 return {
                     ...prevState,
                     data: [...data, ...fetchedData],
-                    lastIndex: fetchedData[fetchedData.length - 1].docSnapshot,
+                    startAfterIndex: fetchedData[fetchedData.length - 1].docSnapshot,
                     isFetching: false
                 }
             })
