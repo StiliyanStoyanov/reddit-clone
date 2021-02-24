@@ -49,6 +49,22 @@ export const darkTheme = {
         selectedOptionColor: '#d7dadc',
         selectedOptionBorder: '#d7dadc',
     },
+    post: {
+        titleColor: '#d7dadc',
+        infoCommunityNameColor: '#d7dadc',
+        infoPostedByColor: '#818384',
+        bottomTextColor: '#818384',
+        bottomHoverContainerBackground: 'rgba(215, 218, 220, 0.1)',
+        textColor: '#d7dadc',
+        borderColor: '#343536',
+        borderHover: '#818384',
+        backgroundColor: '#1a1a1b',
+        compactViewIconBackground: '#202021'
+    },
+    scores: {
+        containerBackgroundColor: '#161617',
+        textColor: '#d8d7dc'
+    },
     scoresButton: {
         hoverBackground: 'rgba(215, 218, 220, 0.1)',
         arrowColor: '#818384',
@@ -107,10 +123,26 @@ export const lightTheme = {
         selectedOptionColor: '#1c1c1c',
         selectedOptionBorder: '#0079d3',
     },
+    post: {
+        titleColor: '#222222',
+        infoCommunityNameColor: '#1c1c1c',
+        infoPostedByColor: '#787c7e',
+        bottomTextColor: '#878a8c',
+        bottomHoverContainerBackground: 'rgba(26, 26, 27, 0.1)',
+        textColor: '#1a1a1b',
+        borderColor: '#ccc',
+        borderHover: '#898989',
+        backgroundColor: '#ffffff',
+        compactViewIconBackground: 'rgba(28, 28, 28, 0.03)'
+    },
+    scores: {
+        containerBackgroundColor: '#f8f9fa',
+        textColor: '#1a1a1b'
+    },
     scoresButton: {
-        hoverBackground: 'rgba(215, 218, 220, 0.1)',
-        arrowColor: '#818384',
-        upvoteRed: '#ff4500',
-        downvoteBlue: '#7193ff'
+        hoverBackground: 'rgba(26, 26, 27, 0.1)',
+        arrowColor: '#878a8c',
+        upvoteRed: '#cc3700',
+        downvoteBlue: '#5a75cc'
     }
 }
