@@ -8,13 +8,13 @@ import {useTheme} from "emotion-theming";
 
 // TODO: Implement up and down votes functionality
 export const ScoresButton = ({ direction }) => {
-    const {scoresButton} = useTheme();
+    const theme = useTheme();
     const scoreHandler = () => {
-        console.log('click');
+        console.log('score click');
     };
 
     return (
-        <button css={buttonStyle(scoresButton, direction)} onClick={scoreHandler}>
+        <button css={buttonStyle(theme.scoresButton, direction)} onClick={scoreHandler}>
             <ArrowSvg/>
         </button>
     )

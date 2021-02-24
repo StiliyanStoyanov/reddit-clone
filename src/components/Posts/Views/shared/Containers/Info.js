@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /** @jsx jsx */
 import React from "react";
 import {css, jsx} from "@emotion/core";
