@@ -10,7 +10,7 @@ import InfoContainer from "../shared/Containers/Info";
 import CommunityLink from "../shared/Links/Community";
 import DotSeparator from "../shared/Items/DotSeparator";
 import PostedBy from "../shared/Links/PostedBy";
-import Content from "../shared/Items/Content";
+import Content from "../shared/Items/Content/Content";
 import {faCommentAlt} from "@fortawesome/free-solid-svg-icons/faCommentAlt";
 import BottomLink from "../shared/Links/BottomLink";
 import BottomContainer from "../shared/Containers/Bottom";
@@ -29,9 +29,9 @@ const CardView = ({posts}) => {
                         <PostedBy author={author}/>
                     </InfoContainer>
                     <Title postId={id} title={title}/>
-                    <Content content={content} contentType={contentType}/>
+                    <Content content={content} contentType={contentType} postId={id}/>
                     <BottomContainer>
-                        <Scores upvotes={upvotes}/>
+                        <Scores upvotes={upvotes} hideOnBigSize={true}/>
                         <BottomLink icon={faCommentAlt} to={`e/${communityName}/comments/${id}`}>
                             500 comments
                         </BottomLink>

@@ -1,7 +1,6 @@
 /** @jsx jsx */
 /* eslint-disable no-unused-vars */
 import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 import {Scores} from "../shared/Scores/Scores";
 import {faFileAlt} from "@fortawesome/free-solid-svg-icons/faFileAlt";
 import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
@@ -19,7 +18,6 @@ import BottomLink from "../shared/Links/BottomLink";
 import {faCommentAlt} from "@fortawesome/free-solid-svg-icons/faCommentAlt";
 
 const CompactView = ({posts}) => {
-    const theme = useTheme();
     const postsList = posts.map(post => {
         const {id, author, title, communityName, communityImageUrl, upvotes, contentType} = post
         const textContent = contentType === "post";
@@ -33,14 +31,14 @@ const CompactView = ({posts}) => {
                     {linkContent && <Icon icon={faLink}/>}
                     {imageContent && <Image src={communityImageUrl}/>}
                     <div>
-                        <Title postId={id}/>
+                        <Title postId={id} title={title}/>
                         <InfoContainer>
                             <CommunityLink name={communityName}/>
                             <DotSeparator/>
                             <PostedBy author={author}/>
                         </InfoContainer>
                         <BottomContainer>
-                            <Scores upvotes={upvotes}/>
+                            <Scores upvotes={upvotes} hideOnBigSize={true}/>
                             <BottomLink icon={faCommentAlt} to={`e/${communityName}/comments/${id}`}>
                                 500 comments
                             </BottomLink>
@@ -52,13 +50,13 @@ const CompactView = ({posts}) => {
     })
 
     return (
-        <div css={container(theme)}>
+        <div css={container}>
             {postsList}
         </div>
     );
 };
 
-const container = theme => css`
+const container =  css`
   width: 100%;
 `
 const itemsContainer = css`
