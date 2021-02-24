@@ -3,15 +3,16 @@
 import React from "react";
 import {Link} from "@reach/router";
 import {jsx, css} from "@emotion/core";
-import {colors} from "../../../../../styles";
 import Image from "./Image";
+import {useTheme} from "emotion-theming";
 
 
 const Community = ({name, imageUrl}) => {
+    const theme = useTheme();
     return (
         <div css={container}>
             {imageUrl && <Image imageUrl={imageUrl} name={name}/>}
-            <Link css={linkStyle} to={`/e/${name}`}>e/{name}</Link>
+            <Link css={linkStyle(theme.post)} to={`/e/${name}`}>e/{name}</Link>
         </div>
     )
 }
@@ -21,14 +22,14 @@ const container = css`
   align-items: center;
 `
 
-const linkStyle = css`
+const linkStyle = theme => css`
   position: relative;
   z-index: 2;
   display: inline-block;
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
-  color: ${colors.textWhite};
+  color: ${theme.infoCommunityNameColor};
   &:hover {
     text-decoration: underline;
   }

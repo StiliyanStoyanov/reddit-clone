@@ -1,13 +1,12 @@
 /** @jsx jsx */
 import {css, jsx} from "@emotion/core";
 import {useTheme} from "emotion-theming";
-import {colors} from "../../../../../styles";
 import {Link} from "@reach/router";
 
 const Post = ({communityName, postId, children}) => {
     const theme = useTheme();
     return (
-        <div css={container(theme)}>
+        <div css={container(theme.post)}>
             {children}
             <Link css={linkStyle} to={`e/${communityName}/comments/${postId}`} tabIndex={-1}/>
         </div>
@@ -18,8 +17,8 @@ const container = theme => css`
   z-index: 1;
   margin: 10px auto;
   padding-left: 40px;
-  border: 1px solid ${colors.borderColor};
-  background-color: #1a1a1b;
+  border: 1px solid ${theme.borderColor};
+  background-color: ${theme.backgroundColor};
   border-radius: 4px;
   min-width: 380px;
   max-width: 700px;
@@ -27,7 +26,7 @@ const container = theme => css`
   width: 100%;
   cursor: pointer;
   &:hover, &:active {
-    border: 1px solid ${colors.borderHover};
+    border: 1px solid ${theme.borderHover};
   }
   @media (max-width: 420px) {
     padding-left: 0;

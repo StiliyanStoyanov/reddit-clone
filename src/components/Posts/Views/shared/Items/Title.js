@@ -2,18 +2,21 @@
 /** @jsx jsx */
 import React from "react";
 import {css, jsx} from "@emotion/core";
+import {useTheme} from "emotion-theming";
 
 export const Title = ({ title, postId }) => {
-    return <h3 css={titleContainer}>{postId}</h3>;
+    const theme = useTheme();
+    return <h3 css={titleContainer(theme.post)}>{postId}</h3>;
 }
 
 /* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const titleContainer = css`
+const titleContainer = theme => css`
   font-size: 16px;
   margin: 0 8px;
   font-weight: 600;
-  color: #d7dadc;
-  height: 20px;
+  color: ${theme.titleColor};
+  max-height: 40px;
+  word-break: break-all;
 `
 
 export default Title

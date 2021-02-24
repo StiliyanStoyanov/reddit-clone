@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 const BottomLink = ({icon, children, to}) => {
     const theme = useTheme();
     return (
-        <Link to={to} css={linkContainer(theme)}>
+        <Link to={to} css={linkContainer(theme.post)}>
             <FontAwesomeIcon css={iconStyle} icon={icon}/>
             <span css={spanStyle}>
                 {children}
@@ -33,7 +33,7 @@ const linkContainer = theme => css`
   vertical-align: baseline;
   &:hover, &:focus-visible {
     outline: 0;
-    background-color: rgb(215 218 220 / 10%);
+    background-color: ${theme.bottomHoverContainerBackground};
   }
 `
 

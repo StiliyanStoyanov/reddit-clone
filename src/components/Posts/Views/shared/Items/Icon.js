@@ -6,7 +6,7 @@ import {useTheme} from "emotion-theming";
 const Icon = ({icon}) => {
     const theme = useTheme();
     return (
-        <div css={container(theme)}>
+        <div css={container(theme.post)}>
             <FontAwesomeIcon css={iconStyle} icon={icon}/>
         </div>
     );
@@ -17,7 +17,7 @@ const container = theme => css`
   width: 80px;
   height: 60px;
   border-radius: 4px;
-  background-color: #202021;
+  background-color: ${theme.compactViewIconBackground};
 `
 const iconStyle = css`
   font-size: 20px;

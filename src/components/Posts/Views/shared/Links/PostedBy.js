@@ -2,21 +2,22 @@
 import React from "react";
 import {Link} from "@reach/router";
 import {css, jsx} from "@emotion/core";
-import {colors} from "../../../../../styles";
+import {useTheme} from "emotion-theming";
 
 const PostedBy = ({author}) => {
+    const theme = useTheme();
     return (
-        <div css={container}>
-            Posted By
+        <div css={container(theme.post)}>
+            <span>Posted By</span>
             <Link css={link} to={`/user/${author}`}>
                 u/{author}
             </Link>
         </div>
     )
 }
-const container = css`
+const container = theme => css`
   font-size: 12px;
-  color: ${colors.textColor};
+  color: ${theme.infoPostedByColor};
 `
 const link = css`
   position: relative;
@@ -24,7 +25,9 @@ const link = css`
   margin-left: 3px;
   display: inline-block;
   text-decoration: none;
-  color: ${colors.textColor};
+  span, a {
+    color: inherit;
+  }
   &:hover { 
     text-decoration: underline;
   }
