@@ -1,12 +1,11 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {useState} from "react";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 import {useUserDispatch} from "../../../../../store/UserStoreProvider";
 import {UserStoreActionTypes} from "../../../../../store/UserStoreProvider";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
-import DropdownItemContainer from "../../DropdownItems/DropdownItemContainer";
+import itemContainer from "../../DropdownItems/itemContainer";
 import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
 
 const ThemeSwitch = () => {
@@ -25,14 +24,13 @@ const ThemeSwitch = () => {
         }
     }
     return (
-        <DropdownItemContainer tabIndex={0} onMouseDown={changeTheme} onKeyDown={handleKeydown} role="button">
+        <div css={itemContainer(theme)} tabIndex={0} onMouseDown={changeTheme} onKeyDown={handleKeydown} role="button">
             <DropdownItemIcon icon={faMoon}/>
             <span css={itemTextStyle}>Night Mode</span>
             <input tabIndex={-1} css={themeCheckboxStyle} type="checkbox" checked={checked} readOnly/>
-        </DropdownItemContainer>
+        </div>
     )
 };
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
 const themeCheckboxStyle = css`
   margin-left: auto;
   position: relative;

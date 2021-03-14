@@ -1,17 +1,17 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import {useRef, useState} from "react";
-import {jsx, css} from "@emotion/core";
+import {css, useTheme} from "@emotion/react";
 import DropdownToggle from "./DropdownToggle";
 import FocusLock from "react-focus-lock";
 import {useClickOutside} from "../../../hooks/useClickOutside";
-import styled from "@emotion/styled";
 
 const Dropdown = ({icon, children}) => {
+    const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [isFocusLocked, setIsFocusLocked] = useState(false);
     const dropdownRef = useRef();
     const toggleDropdown = () => setOpen(prevState => !prevState);
-    const enableFocusLock = () =>  setIsFocusLocked(true)
+    const enableFocusLock = () =>  setIsFocusLocked(true);
     const disableFocusLock = () => setIsFocusLocked(false);
     const onClickOutside = () => {
         setOpen(false);
@@ -25,34 +25,36 @@ const Dropdown = ({icon, children}) => {
                 icon={icon}
                 {...propsToPass}
             />
-            <DropdownContentContainer open={open}>
+            <div css={dropdownContentContainer(theme, open)}>
                 <FocusLock disabled={!isFocusLocked} returnFocus={true}>
                     {children(propsToPass)}
                 </FocusLock>
-            </DropdownContentContainer>
+            </div>
         </div>
     );
 };
-/* STYLED COMPONENTS USED IN THIS FILE BELOW */
-const DropdownContentContainer = styled.div`
+
+const dropdownContentContainer = (theme, open) => css`
   position: absolute;
   padding: 8px;
   margin-top: 8px;
   z-index: 2;
-  background-color: ${({theme}) => theme.nav.backgroundColor};
+  background-color: ${theme.nav.backgroundColor};
   width: 360px;
   border-radius: 8px;
   top: 60px;
   right: 8px;
   overflow: auto;
-  border: 1px solid ${({theme}) => theme.borderColor};
-  display: ${props => props.open ? 'block' : 'none'};
+  border: 1px solid ${theme.borderColor};
+  display: ${open ? 'block' : 'none'};
+  label: dropdown-content-container
 `;
 
 const dropdownMenuContainer = css`
   z-index: 1;
   margin-right: 5px;
   border-radius: 50%;
+  label: dropdown-menu-container
 `
 export default Dropdown
 

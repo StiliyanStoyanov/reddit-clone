@@ -1,10 +1,8 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import React from 'react';
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import styled from "@emotion/styled";
-import {css, jsx} from "@emotion/core";
 
 const SelectedTopics = React.memo(({selectedTopics, removeTopic}) => {
     const handleKeyDown = eventTopic => event => {
@@ -25,7 +23,7 @@ const SelectedTopics = React.memo(({selectedTopics, removeTopic}) => {
     const selectedTopicsList = selectedTopics.map(topic => (
         <div css={divItemDefault} key={topic} onKeyDown={handleKeyDown(topic)} onMouseDown={handleMouseDown(topic)} tabIndex={0}>
             {topic}
-            <CrossIconSVG icon={faTimes}/>
+            <FontAwesomeIcon css={icon} icon={faTimes}/>
         </div>
     ));
     return (
@@ -53,7 +51,7 @@ const divItemDefault = css`
   }
 `
 
-const CrossIconSVG = styled(FontAwesomeIcon)`
+const icon = css`
   width: 12px;
   height: 12px;
   color: #818384;

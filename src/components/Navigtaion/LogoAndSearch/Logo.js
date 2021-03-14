@@ -1,24 +1,23 @@
-/** @jsx jsx */
-import {css, jsx} from '@emotion/core'
-import styled from "@emotion/styled";
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import logo from '../../../assets/logo.svg'
 import {Link} from "@reach/router";
 
 export const Logo = () => {
     return (
-        <Link css={linkStyle} to="/">
-            <LogoStyled src={logo}/>
+        <Link css={link} to="/">
+            <img css={img} src={logo} alt="not-found"/>
         </Link>
     )
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const LogoStyled = styled.img`
+const img = css`
   height: 64px;
   width: 64px;
   display: block;
+  label: logo
 `
 
-const linkStyle = css`
+const link = css`
   display: inline-block;
 `

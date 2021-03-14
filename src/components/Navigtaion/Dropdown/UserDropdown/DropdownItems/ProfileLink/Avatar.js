@@ -1,21 +1,21 @@
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import React from "react";
-import styled from "@emotion/styled";
 
 // TODO: Pass the user avatar
 export const Avatar = () => {
     return(
-        <AvatarContainer>
-            <UserAvatar/>
-        </AvatarContainer>
+        <div css={container}>
+            <img css={imgAvatar} alt=""/>
+        </div>
     )
 }
 
-/* STYLED COMPONENTS USED IN THIS FILE BELOW */
-const AvatarContainer = styled.div`
+const container = css`
   margin: 8px 8px 12px 0;
   border-radius: 50%;
 `
-const UserAvatar = styled.img`
+const imgAvatar = css`
   display: block;
   background-color: aqua;
   border-radius: 50%;

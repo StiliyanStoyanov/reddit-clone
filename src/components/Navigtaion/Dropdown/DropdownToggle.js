@@ -1,8 +1,6 @@
-/** @jsx jsx */
-import styled from "@emotion/styled";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 
 const DropdownToggle = ({icon, open, toggleDropdown, enableFocusLock}) => {
     const theme = useTheme();
@@ -23,7 +21,7 @@ const DropdownToggle = ({icon, open, toggleDropdown, enableFocusLock}) => {
     return (
         <div css={toggleFocusableContainerStyle(theme)} tabIndex={0} onKeyDown={handleKeyDown} onMouseDown={preventDefault}>
             <div css={toggleContainerStyle(theme, open)} tabIndex={-1} onMouseDown={handleMouseDown}>
-                <ToggleIcon open={open} icon={icon}/>
+                <FontAwesomeIcon css={iconCss(theme, open)} icon={icon}/>
                 <div css={overlayStyle(theme)}/>
             </div>
         </div>
@@ -50,10 +48,10 @@ const toggleContainerStyle = (theme, open) => css`
   cursor:pointer;
   border-radius: 50%;
 `
-const ToggleIcon = styled(FontAwesomeIcon)`
+const iconCss = (theme, open) => css`
   height: 20px;
   width: 20px;
-  color: ${({open, theme}) => open ? theme.nav.iconActiveColor : theme.nav.iconColor};
+  color: ${open ? theme.nav.iconActiveColor : theme.nav.iconColor};
 `;
 const overlayStyle = theme => css`
  border-radius: 50%;

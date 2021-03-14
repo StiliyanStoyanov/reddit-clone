@@ -1,10 +1,11 @@
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import styled from "@emotion/styled";
 
-const ContentTypeSelectorIcon = ({icon}) => <Icon icon={icon}/>
+const ContentTypeSelectorIcon = ({icon}) => <FontAwesomeIcon css={iconCss} icon={icon}/>
 
-const Icon = styled(FontAwesomeIcon)`
+const iconCss = css`
   height: 20px;
   min-width: 20px;
   margin-right: 4px;

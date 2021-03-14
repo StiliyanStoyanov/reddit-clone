@@ -1,40 +1,41 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
-import styled from "@emotion/styled";
+import {css, useTheme} from "@emotion/react";
 import LogoAndSearch from "./LogoAndSearch/LogoAndSearch";
 import AuthContainer from "./Auth/AuthContainer";
 import CreateDropdown from "./Dropdown/CreateDropdown/CreateDropdown";
 import UserDropdown from "./Dropdown/UserDropdown/UserDropdown";
 
 const Navigation = () => {
+    const theme = useTheme()
     return (
-        <header>
-            <NavigationBar>
-                <LogoAndSearch/>
-                <AuthContainer/>
-                <DropdownMenusContainer>
-                    <CreateDropdown/>
-                    <UserDropdown/>
-                </DropdownMenusContainer>
-            </NavigationBar>
-        </header>
-
+        <nav css={nav(theme)}>
+            <LogoAndSearch/>
+            <AuthContainer/>
+            <div css={[div]}>
+                <CreateDropdown/>
+                <UserDropdown/>
+            </div>
+        </nav>
     );
 }
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const NavigationBar = styled.nav`
+
+const nav = theme => css`
   position: sticky;
   top: 0;
   z-index: 90;
   display: flex;
   align-items: center;
-  background-color: ${({theme}) => theme.nav.backgroundColor};
-  border-bottom: 1px solid ${({theme}) => theme.borderColor};
+  background-color: ${theme.nav.backgroundColor};
+  border-bottom: 1px solid ${theme.borderColor};
   padding: 3px;
+  label: navigation-bar
 `
 
-const DropdownMenusContainer = styled.div`
+const div = css`
   margin-left: auto;
   display: flex;
+  label: dropdown-menu-container
 `
 
 export default Navigation

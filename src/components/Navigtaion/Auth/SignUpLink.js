@@ -1,19 +1,20 @@
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import React from "react";
-import styled from "@emotion/styled";
 import {Link} from "@reach/router";
 
 const SignUpLink = () => {
+    const theme = useTheme();
     return (
-        <SignUpContainer>
-            <SignUpLinkStyled to="register">
+        <div css={container}>
+            <Link css={link(theme)} to="register">
                 SIGN UP
-            </SignUpLinkStyled>
-        </SignUpContainer>
+            </Link>
+        </div>
     )
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const SignUpContainer = styled.div`
+const container = css`
   display: flex;
   box-shadow: inset 0 0 5px rgba(0,0,0, 0.2);
   background-color: white;
@@ -21,12 +22,12 @@ const SignUpContainer = styled.div`
   border: 1px solid white;
   color: black;
 `
-const SignUpLinkStyled= styled(Link)`
+const link = theme => css`
   text-decoration: none;
   font-size: 18px;
   padding: 10px;
   border-radius: 8px;
-  color: ${ ({theme}) => theme.theme === 'dark' ? theme.bodyBackgroundColor : theme.color}
+  color: ${theme.theme === 'dark' ? theme.backgroundColor : theme.color}
 `
 
 export default SignUpLink

@@ -1,15 +1,17 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
-import styled from "@emotion/styled";
+import {css, useTheme} from "@emotion/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const DropdownItemIcon = ({icon}) => {
+    const theme = useTheme();
     return (
-        <IconContainer>
-            <Icon icon={icon}/>
-        </IconContainer>
+        <div css={container(theme)}>
+            <FontAwesomeIcon css={iconCss} icon={icon}/>
+        </div>
     )
 }
-const IconContainer = styled.div`
+const container = theme => css`
   display: flex; 
   align-items: center; 
   justify-content: center; 
@@ -17,9 +19,9 @@ const IconContainer = styled.div`
   height: 36px;
   margin: 8px 8px 12px 0;
   border-radius: 50%;
-  background-color: ${ ({theme}) => theme.nav.iconContainerBackground };
+  background-color: ${theme.nav.iconContainerBackground};
 `
-const Icon = styled(FontAwesomeIcon)`
+const iconCss = css`
   font-size: 20px;
 `
 

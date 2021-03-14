@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import {css} from "@emotion/react";
 
-const DropdownItemContainer = styled.div`
+const itemContainer = theme => css`
   position: relative;
   display: flex;
   align-items: center;
@@ -10,8 +10,8 @@ const DropdownItemContainer = styled.div`
   cursor:pointer;
   user-select: none;
   &:hover, &:focus-visible {
-    background-color: ${ ({theme}) => theme.nav.hoverOverlay };
+    background-color: ${theme.nav.hoverOverlay };
   };
 `
 
-export default DropdownItemContainer
+export default itemContainer

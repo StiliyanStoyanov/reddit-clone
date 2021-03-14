@@ -1,12 +1,11 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {useRef} from "react";
-import {css, jsx} from "@emotion/core";
-import styled from "@emotion/styled";
 import {usePostDispatch, usePostStore} from "../../../../store/PostStoreProvider";
 import {validateImage} from "../../../../utils/validateImage";
 
 const ImageContent = () => {
+    const theme = useTheme();
     const fileInputRef = useRef(null);
     const {imageFile, imageDataUrl} = usePostStore();
     const postDispatch = usePostDispatch();
@@ -37,30 +36,12 @@ const ImageContent = () => {
     const allowDrop = (event) => {
         event.preventDefault();
     }
-    const span = css`
-      background-image: url("${imageDataUrl}");
-      display:block; position: relative;
-      background-size: cover;
-      background-position: 50%;
-      width: 84px; height: 84px;
-      border: 2px solid white;
-      border-radius: 4px;
-      &:hover button {
-        display: block
-      }
-    `
-    const button = css`
-      position: absolute; 
-      top: 0; 
-      right: 0;
-      display: none;
-    `
     return (
-        <ImageContentContainer onDrop={fileDropHandler} onDragOver={allowDrop}>
+        <div css={container(theme)} onDrop={fileDropHandler} onDragOver={allowDrop}>
             <input
                 ref={fileInputRef}
                 onChange={fileSelectHandler}
-                css={uploadInputCss}
+                css={uploadInput}
                 id="file-upload"
                 type="file"
                 accept="image/png,image/gif,image/jpeg"
@@ -71,25 +52,24 @@ const ImageContent = () => {
                 <button css={uploadButton} onClick={() => fileInputRef.current.click()}>Upload</button>
             </p>}
             {imageFile &&
-            <span css={span}>
+            <span css={span(imageDataUrl)}>
                 <button onClick={clearFileHandler} css={button}>X</button>
             </span>}
-        </ImageContentContainer>
+        </div>
     )
 }
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const ImageContentContainer = styled.div`
+
+const container = theme => css`
  position: relative;
  display: flex;
- border: 1px dashed ${({theme}) => theme.createPost.borderColor};
+ border: 1px dashed ${theme.createPost.borderColor};
  border-radius: 4px;
  justify-content: center;
  align-items: center;
  width: 100%;
  height: 168px;
 `
-
-const uploadInputCss = css`
+const uploadInput = css`
  width: 100%;
  height: 100%;
  display: none;
@@ -103,6 +83,24 @@ const uploadButton = css`
   &:focus {
     border-color: red;
   }
+`
+const span = (imageDataUrl) => css`
+  background-image: url("${imageDataUrl}");
+  display:block; position: relative;
+  background-size: cover;
+  background-position: 50%;
+  width: 84px; height: 84px;
+  border: 2px solid white;
+  border-radius: 4px;
+  &:hover button {
+    display: block
+  }
+`
+const button = css`
+  position: absolute; 
+  top: 0; 
+  right: 0;
+  display: none;
 `
 
 export default ImageContent

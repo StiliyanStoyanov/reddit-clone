@@ -1,5 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import React from "react";
-import styled from "@emotion/styled";
 import LoginLink from "./LoginLink";
 import SignUpLink from "./SignUpLink";
 import {useUserStore} from "../../../store/UserStoreProvider";
@@ -8,18 +9,16 @@ const AuthContainer = () => {
     const {user} = useUserStore();
     if (!user) {
         return (
-            <Container>
+            <div css={container}>
                 <LoginLink/>
                 <SignUpLink/>
-            </Container>
+            </div>
         )
     } else return null
 
 }
 
-
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const Container = styled.div`
+const container = css`
   display: flex;
   justify-content: center;
   align-items: center;

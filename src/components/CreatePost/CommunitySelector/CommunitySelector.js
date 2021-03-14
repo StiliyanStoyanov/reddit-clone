@@ -1,23 +1,20 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import React, {useEffect, useRef, useState} from "react";
 import firebase from "../../../firebase";
-import styled from "@emotion/styled";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons/faCaretDown";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {css, jsx} from "@emotion/core";
 import {usePostDispatch} from "../../../store/PostStoreProvider";
 import {useUserStore} from "../../../store/UserStoreProvider";
 import CommunityList from "./CommunityList";
 import YourProfileItem from "./YourProfileItem";
 import SearchIcon from "./SearchIcon";
-import { useTheme } from "emotion-theming";
 
 //TODO: More new code than refactoring done LOL - REFACTOR MORE!
 const CommunitySelector = () => {
     const theme = useTheme();
-    const {subscriptionsData, isLoading} = useUserStore();
+    const userStore = useUserStore();
+    const {subscriptionsData, isLoading, user} = userStore
     const postDispatch = usePostDispatch();
     const inputRef = useRef(null);
     const [open, setOpen] = useState(false);
@@ -38,7 +35,7 @@ const CommunitySelector = () => {
         const filterUserCommunities = subscriptionsData?.filter(community => community.name.startsWith(userInput));
         setUserCommunitiesFiltered(filterUserCommunities);
         setQueriedCommunitiesFiltered(filterQueriedCommunities);
-    },[queriedCommunities, subscriptionsData, userInput, isLoading]);
+    }, [queriedCommunities, subscriptionsData, userInput, isLoading]);
 
     const selectCommunity = (community) => () => {
         postDispatch({type: "SELECT_COMMUNITY", payload: community});
@@ -147,7 +144,7 @@ const CommunitySelector = () => {
             || event.key === "Enter") {
             event.preventDefault();
             // if no input add the user communities to the array, otherwise add the filtered result to the array
-            const allCommunitiesList = [...(userInput.length > 0 ? userCommunitiesFiltered : subscriptionsData), ...queriedCommunitiesFiltered];
+            const allCommunitiesList = [...(userInput.length > 0 ? userCommunitiesFiltered : subscriptionsData), ...queriedCommunitiesFiltered, /*{name: userStore.username}*/];
             if (allCommunitiesList.length > 0) {
                 switch (event.key) {
                     case "Down": // IE/Edge specific value
@@ -192,11 +189,11 @@ const CommunitySelector = () => {
         }
     }
     return (
-        <CommunitySelectorContainer>
-            <SearchCommunityContainer focused={focused} open={open}>
+        <div css={mainContainer}>
+            <div css={searchContainer(theme, focused, open)}>
                 <SearchIcon focused={focused} selectedCommunity={selectedCommunity}/>
                 <input
-                    css={searchInputStyle(theme)}
+                    css={searchInput(theme)}
                     ref={inputRef}
                     onKeyDown={handleKeyDown}
                     onChange={handleChange}
@@ -207,9 +204,10 @@ const CommunitySelector = () => {
                     placeholder="Choose a community"
                     spellCheck="false"
                 />
-                <CaretDown icon={faCaretDown} onMouseDown={handleCaretMouseDown}/>
-            </SearchCommunityContainer>
-            <SearchCommunityDropdownContent open={open}>
+                <FontAwesomeIcon css={caretDown} icon={faCaretDown} onMouseDown={handleCaretMouseDown}/>
+            </div>
+            <div css={searchDropdown(theme, focused, open)}>
+                {/*<YourProfileItem username={userStore.username} userInput={userInput} selectCommunity={selectCommunity} currentlySelectedCommunity={arrowsSelectedCommunity ? arrowsSelectedCommunity : userInput}/>*/}
                 <CommunityList
                     type={"My Communities"}
                     communityList={userInput.length > 0 ? userCommunitiesFiltered : subscriptionsData}
@@ -222,42 +220,49 @@ const CommunitySelector = () => {
                     selectCommunity={selectCommunity}
                     currentlySelectedCommunity={arrowsSelectedCommunity ? arrowsSelectedCommunity : userInput}
                 />
-            </SearchCommunityDropdownContent>
-        </CommunitySelectorContainer>
+            </div>
+        </div>
     );
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const CommunitySelectorContainer = styled.div`
+const mainContainer = css`
   position: relative;
   margin-bottom: 8px;
+  label: community-selector-container
 `
-const SearchCommunityContainer = styled.div`
-  position:relative;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  min-width: 300px;
-  width: 50%;
-  background-color: ${({theme}) => theme.createPost.backgroundColor};
-  border: 1px solid ${({theme}) => theme.borderColor};
-  ${({theme, focused}) => focused && `box-shadow 0 0 2px 1px ${theme.createCommunity.backgroundColor}`};
-  border-radius: 4px;
-  border-bottom-left-radius: ${props => props.open ? 0 : '4px'};
-  border-bottom-right-radius: ${props => props.open ? 0 : '4px'};
-  padding: 0 12px;
-  @media screen and (max-width: 560px) {
-    width: 100%;
-  }
-`
-const CaretDown = styled(FontAwesomeIcon)`
+const searchContainer = (theme, focused, open) => {
+    const boxShadow = focused ? `0 0 2px 1px ${theme.createCommunity.boxShadowColor}` : 0
+    return css`
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      min-width: 300px;
+      width: 50%;
+      background-color: ${theme.createPost.backgroundColor};
+      border: 1px solid ${theme.borderColor};
+      box-shadow: ${boxShadow};
+      border-radius: 4px;
+      border-bottom-left-radius: ${open ? 0 : '4px'};
+      border-bottom-right-radius: ${open ? 0 : '4px'};
+      padding: 0 12px;
+      @media screen and (max-width: 560px) {
+        width: 100%;
+      }
+      label: search-container
+    `
+}
+const caretDown = css`
   height: 20px;
   width: 20px;
+
   &:hover {
-    cursor:pointer;
+    cursor: pointer;
   }
+
+  label: caret-down
 `
-const searchInputStyle = theme => css`
+const searchInput = theme => css`
   color: ${theme.color};
   background-color: ${theme.createPost.backgroundColor};
   outline: none;
@@ -265,31 +270,38 @@ const searchInputStyle = theme => css`
   max-height: 26px;
   margin: 0 5px;
   width: 100%;
+
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
   &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration { 
+  &::-webkit-search-results-decoration {
     display: none
   }
+
+  label: search-input
 `
-const SearchCommunityDropdownContent = styled.div`
-  display: block;
-  position: absolute;
-  max-height: 300px;
-  padding: 3px;
-  visibility: ${props => props.open ? 'visible' : 'hidden'};
-  z-index: 3;
-  ${({theme, focused}) => focused && `box-shadow 0 0 2px 1px ${theme.createCommunity.backgroundColor}`};
-  background-color: ${({theme}) => theme.createCommunity.backgroundColor};
-  overflow: auto;
-  width: 50%;
-  border: 1px solid #343536;
-  border-top: 0;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  @media screen and (max-width: 560px) {
-    width: 100%;
-  }
-`
+const searchDropdown = (theme, focused, open) => {
+    const boxShadow = focused ? `0 0 2px 1px ${theme.createCommunity.boxShadowColor}` : 0
+    return css`
+      display: block;
+      position: absolute;
+      max-height: 300px;
+      padding: 3px;
+      visibility: ${open ? 'visible' : 'hidden'};
+      border: 1px solid ${theme.borderColor};
+      z-index: 3;
+      box-shadow: ${boxShadow};
+      background-color: ${theme.createCommunity.backgroundColor};
+      overflow: auto;
+      width: 50%;
+      border-top: 0;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      @media screen and (max-width: 560px) {
+        width: 100%;
+      }
+      label: search-dropdown
+    `
+}
 
 export default CommunitySelector

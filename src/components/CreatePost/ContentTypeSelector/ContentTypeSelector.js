@@ -1,13 +1,16 @@
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import React from "react";
 import ContentTypeSelectorIcon from "./ContentTypeSelectorIcon";
 import {faFileAlt} from "@fortawesome/free-solid-svg-icons/faFileAlt";
 import {faImage} from "@fortawesome/free-solid-svg-icons/faImage";
 import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
-import styled from "@emotion/styled";
 import {usePostDispatch, usePostStore} from "../../../store/PostStoreProvider";
 
 // TODO: Add Focus Lock At Some Point
+// TODO: Extract buttons into component
 const ContentTypeSelector = () => {
+    const theme = useTheme();
     const {selectedFormType} = usePostStore();
     const postDispatch = usePostDispatch();
     const isFormSelected = (currentFormButton, activeFormState) => {
@@ -17,44 +20,44 @@ const ContentTypeSelector = () => {
         postDispatch({type: "CHANGE_FORM_TYPE", payload: selectedType});
     }
     return (
-        <ContentTypeSelectorContainer>
-            <SelectButton onClick={changeFormType('post')} selected={isFormSelected('post', selectedFormType)}>
+        <div css={container}>
+            <button css={button(theme, isFormSelected('post', selectedFormType))} onClick={changeFormType('post')}>
                 <ContentTypeSelectorIcon icon={faFileAlt}/>
                 <div>Post</div>
-            </SelectButton>
+            </button>
 
-            <SelectButton onClick={changeFormType('image')} selected={isFormSelected('image', selectedFormType)}>
+            <button css={button(theme, isFormSelected('image', selectedFormType))} onClick={changeFormType('image')}>
                 <ContentTypeSelectorIcon icon={faImage}/>
                 <div>Image</div>
-            </SelectButton>
+            </button>
 
-            <SelectButton onClick={changeFormType('link')} selected={isFormSelected('link', selectedFormType)}>
+            <button css={button(theme, isFormSelected('link', selectedFormType))} onClick={changeFormType('link')}>
                 <ContentTypeSelectorIcon icon={faLink}/>
                 <div>Link</div>
-            </SelectButton>
-        </ContentTypeSelectorContainer>
+            </button>
+        </div>
     )
 }
 
-const ContentTypeSelectorContainer = styled.div`
+const container = css`
   display: flex;
   height: 55px;
   margin-bottom: 12px;
 `
-const SelectButton = styled.button`
+const button = (theme, selected) => css`
   display: flex;
   cursor: pointer;
-  color: ${({theme, selected}) => selected ? theme.createPost.activeColor : theme.createPost.color };
-  background-color: ${({theme}) => theme.createPost.backgroundColor};
+  color: ${selected ? theme.createPost.activeColor : theme.createPost.color };
+  background-color: ${theme.createPost.backgroundColor};
   justify-content: center;
   align-items: center;
   flex-grow: 1;
   border: 0;
-  border-right: 1px solid ${({theme}) => theme.createPost.borderColor};
-  border-bottom: 1px solid ${({selected, theme}) => selected ? theme.createPost.selectedBorderColor : theme.createPost.borderColor};
+  border-right: 1px solid ${theme.createPost.borderColor};
+  border-bottom: 1px solid ${selected ? theme.createPost.selectedBorderColor : theme.createPost.borderColor};
   &:hover, &:focus {
     outline: none;
-    background-color: ${({theme}) => theme.createPost.hoverOverlay}
+    background-color: ${theme.createPost.hoverOverlay}
   }
 `;
 

@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
+/** @jsxImportSource @emotion/react */
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css'
 import {Router} from "@reach/router";
-import styled from "@emotion/styled";
+import {css} from "@emotion/react";
 import Navigation from "./Navigtaion/Navigation";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -14,7 +14,9 @@ import CreatePost from "./CreatePost/CreatePost";
 import CreateCommunity from "./CreateCommunity/CreateCommunity";
 import UserSettings from "./UserSettings/UserSettings";
 import {ToastContainer} from "react-toastify";
-import {Test} from "./Test";
+import {Test} from "../testing/Test";
+import UserNav from "./User/UserNav";
+import BlankComponent from "../testing/BlankComponent";
 
 const App = () => {
     useSessionLogin();
@@ -24,9 +26,11 @@ const App = () => {
     return (
         <>
             <Navigation/>
-            <PageContainer>
-                <Router>
+            <div css={container}>
+                <Router id="page-container">
+                    <BlankComponent path="/loader"/>
                     <Posts path="/*"/>
+                    <UserNav path="/user/*"/>
                     <CreateCommunity path="/create-community"/>
                     <CreatePost path="/create-post"/>
                     <UserSettings path="/settings/*"/>
@@ -41,12 +45,11 @@ const App = () => {
                     pauseOnHover={false}
                 />
                 <Test/>
-            </PageContainer>
+            </div>
         </>
     );
 }
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const PageContainer = styled.div`
+const container = css`
   max-width: 100%;
   @media (max-width: 700px) {
     padding: 0

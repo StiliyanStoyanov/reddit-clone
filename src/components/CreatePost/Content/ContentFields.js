@@ -1,14 +1,12 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import React, {useEffect, useState} from "react";
 import firebase from "../../../firebase"
-import styled from "@emotion/styled";
 import Title from "./Title/Title";
 import ImageContent from "./ContentTypes/ImageContent";
 import PostContent from "./ContentTypes/PostContent";
 import LinkContent from "./ContentTypes/LinkContent";
 import {useUserStore} from "../../../store/UserStoreProvider";
-import {css, jsx} from "@emotion/core";
 import {usePostStore} from "../../../store/PostStoreProvider";
 import {selectSubmitContent} from "../../../utils/formHelpers";
 import {validateForm} from "../../../utils/formHelpers";
@@ -54,18 +52,17 @@ const ContentFields = () => {
         }
     };
     return (
-        <FieldsContainer>
+        <div css={container}>
             <Title/>
             {selectedFormType === 'post' && <PostContent/>}
             {selectedFormType === 'image' && <ImageContent/>}
             {selectedFormType === 'link' && <LinkContent/>}
             <button onClick={submitPost} disabled={!allowSubmit} css={submitButtonCSS}>Create</button>
-        </FieldsContainer>
+        </div>
     )
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const FieldsContainer = styled.div`
+const container = css`
   padding: 20px;
 `
 const submitButtonCSS = css`

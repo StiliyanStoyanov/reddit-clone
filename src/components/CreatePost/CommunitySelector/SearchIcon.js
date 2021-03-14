@@ -1,12 +1,11 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import {faSearch} from "@fortawesome/free-solid-svg-icons/faSearch";
-import {css, jsx} from "@emotion/core";
-import styled from "@emotion/styled";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const SearchIcon = ({focused, selectedCommunity}) => {
     if (focused) {
-        return <Icon icon={faSearch}/>;
+        return <FontAwesomeIcon css={icon} icon={faSearch}/>;
     } else if (selectedCommunity && selectedCommunity.imageUrl) {
         return <span css={css`
           ${iconStyle};
@@ -21,8 +20,7 @@ const SearchIcon = ({focused, selectedCommunity}) => {
     }
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const Icon = styled(FontAwesomeIcon)`
+const icon = css`
   height: 22px;
   width: 22px;
 `

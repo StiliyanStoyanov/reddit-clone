@@ -1,8 +1,6 @@
-/** @jsx jsx */
-/* eslint-disable no-unused-vars */
+/** @jsxImportSource @emotion/react */
 import React from "react";
-import styled from "@emotion/styled";
-import {jsx, css} from "@emotion/core";
+import {css} from "@emotion/react";
 import {useForm} from "react-hook-form";
 import {validateEmail} from "../utils/validateEmail";
 import {validateUsername} from "../utils/validateUsername";
@@ -19,7 +17,7 @@ const SignUp = () => {
         return null
     }
     return (
-        <SignUpForm onSubmit={handleSubmit(onSignUpSubmit)}>
+        <form css={form} onSubmit={handleSubmit(onSignUpSubmit)}>
             <label css={signUpLabelCss} htmlFor="username">
                 Username
                 <input
@@ -64,12 +62,11 @@ const SignUp = () => {
             {errors.password && errors.password.type === "minLength" && <div>Min Length is 6</div>}
             {errors.password && errors.password.type === "maxLength" && <div>Max Length is 128</div>}
             <button css={signUpButtonCss} type="submit" disabled={buttonDisabled}>Sign Up</button>
-        </SignUpForm>
+        </form>
     );
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const SignUpForm = styled.form`
+const form = css`
   display: flex;
   flex-direction: column;
   justify-content: center;

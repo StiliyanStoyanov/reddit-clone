@@ -1,34 +1,33 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "@emotion/styled";
-import {css, jsx} from "@emotion/core";
 
 export const Search = () => {
+    const theme = useTheme();
     return (
         <div css={css`padding: 0 5px`}>
-            <SearchIconContainer>
-                <SearchIcon icon={faSearch}/>
-            </SearchIconContainer>
+            <div css={container(theme)}>
+                <FontAwesomeIcon css={icon} icon={faSearch} />
+            </div>
         </div>
     )
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
-const SearchIconContainer = styled.div`
+const container = theme => css`
   display: flex; 
   align-items: center; 
   justify-content: center; 
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: ${({theme}) => theme.nav.iconContainerBackground};
+  background-color: ${theme.nav.iconContainerBackground};
   &:hover {
-    background-color: ${({theme}) => theme.nav.hoverBackgroundColor};
+    background-color: ${theme.nav.hoverBackground};
   }
   cursor: pointer;
 `
-const SearchIcon = styled(FontAwesomeIcon)`
+const icon = css`
   height: 20px;
   width: 20px;
   opacity: 0.8;

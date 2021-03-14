@@ -1,24 +1,26 @@
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import React from "react";
 import {PostStoreProvider} from "../../store/PostStoreProvider";
 import CommunitySelector from "./CommunitySelector/CommunitySelector";
 import ContentTypeSelector from "./ContentTypeSelector/ContentTypeSelector";
 import ContentFields from "./Content/ContentFields";
-import styled from "@emotion/styled";
 
 const CreatePostBody = () => {
+    const theme = useTheme();
     return (
         <PostStoreProvider>
             <CommunitySelector/>
-            <ContentBody>
+            <div css={contentBody(theme)}>
                 <ContentTypeSelector/>
                 <ContentFields/>
-            </ContentBody>
+            </div>
         </PostStoreProvider>
     )
 }
 
-const ContentBody = styled.div`
- background-color: ${({theme}) => theme.createPost.backgroundColor};
+const contentBody = theme => css`
+ background-color: ${theme.createPost.backgroundColor};
  border-radius: 4px;
  overflow: auto;
 `
