@@ -10,8 +10,11 @@ import EmailForm from "./EmailForm";
 const ChangeEmail = () => {
     const {user} = useUserStore();
     const [visible, setVisible] = useState(false);
-    const toggleForm = e =>  setVisible(prevState => !prevState)
-    const closeForm = e => setVisible(false);
+    const toggleForm = e =>  {
+        e.stopPropagation();
+        setVisible(prevState => !prevState)
+    }
+    const closeForm = e => {setVisible(false);}
     const handleKeyDown = event => {
         if (event.key === "Enter") {
             return toggleForm();

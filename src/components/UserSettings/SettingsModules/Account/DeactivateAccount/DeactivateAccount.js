@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import Label from "../../../SettingView/Items/Label";
-import {css, jsx} from "@emotion/core";
 import ToggleFormButton from "../../../SettingView/Items/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons/faTrashAlt";
@@ -9,7 +9,10 @@ import DeactivateForm from "./DeactivateForm";
 
 const DeactivateAccount = () => {
     const [visible, setVisible] = useState(false);
-    const toggleForm = e =>  setVisible(prevState => !prevState)
+    const toggleForm = e =>  {
+        e.stopPropagation();
+        setVisible(prevState => !prevState);
+    }
     const closeForm = e => setVisible(false);
     const handleKeyDown = event => {
         if (event.key === "Enter") {
