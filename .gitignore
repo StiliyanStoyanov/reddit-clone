@@ -1,8 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Temporary testing files
-test.js
-src/data.js
+src/testing
 
 # dependencies
 /node_modules
