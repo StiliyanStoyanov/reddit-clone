@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Header = ({headerIcon, headerText}) => {

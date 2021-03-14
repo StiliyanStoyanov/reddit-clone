@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {useEffect, useState} from "react";
 import {useWatch} from "react-hook-form";
 import {faEye} from "@fortawesome/free-solid-svg-icons/faEye";

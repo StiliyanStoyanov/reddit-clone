@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import React from "react";
-import {css, jsx} from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 
 export const Info = ({children, ...props}) => {
     return (

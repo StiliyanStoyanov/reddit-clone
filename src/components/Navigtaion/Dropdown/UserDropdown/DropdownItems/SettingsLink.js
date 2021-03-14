@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import {jsx} from "@emotion/core";
+/** @jsxImportSource @emotion/react */
 import {useUserStore} from "../../../../../store/UserStoreProvider";
 import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
 import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";

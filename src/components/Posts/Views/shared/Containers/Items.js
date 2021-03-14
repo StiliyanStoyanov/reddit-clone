@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 
 const Items = ({children, ...props}) => {
     const theme = useTheme();

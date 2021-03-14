@@ -1,8 +1,8 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import Label from "../../../SettingView/Items/Label";
 import ChangeEmail from "./ChangeEmail/ChangeEmail";
 import ChangePassword from "./ChangePassword/ChangePassword";
-import {css, jsx} from "@emotion/core";
 
 const AccountPreferences = () => {
     return (

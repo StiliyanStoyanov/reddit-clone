@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import React, {useState} from 'react';
-import {css, jsx} from "@emotion/core";
 import FieldDescription from "../FieldsExtras/FieldDescription";
 import ErrorMessage from "../../Error/ErrorMessage";
 import AdditionalTopicsSelect from "./AdditionalTopics/AdditionalTopicsSelect";

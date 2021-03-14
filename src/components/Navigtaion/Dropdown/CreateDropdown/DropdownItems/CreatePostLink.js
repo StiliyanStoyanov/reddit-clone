@@ -1,7 +1,7 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import {faEdit} from "@fortawesome/free-solid-svg-icons/faEdit";
 import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
-import {css, jsx} from "@emotion/core";
 import DropdownLinkItem from "../../DropdownItems/DropdownLinkItem";
 
 const CreatePostLink = (props) => {

@@ -1,15 +1,12 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from "react";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+import {css, useTheme} from "@emotion/react";
 
 export const Title = ({ title, postId }) => {
     const theme = useTheme();
     return <h3 css={titleContainer(theme.post)}>{postId}</h3>;
 }
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
 const titleContainer = theme => css`
   font-size: 16px;
   margin: 0 8px;

@@ -1,7 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {usePostDispatch, usePostStore} from "../../../../store/PostStoreProvider";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 
 const Title = () => {
     const theme = useTheme();

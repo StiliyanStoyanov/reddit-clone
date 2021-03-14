@@ -1,7 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 
 const Icon = ({icon}) => {
     const theme = useTheme();

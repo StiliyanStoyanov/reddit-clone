@@ -1,10 +1,7 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
+/** @jsxImportSource @emotion/react */
 import React from "react";
-import {css, jsx} from "@emotion/core";
+import {css, useTheme} from "@emotion/react";
 import {useForm} from "react-hook-form";
-import {useTheme} from "emotion-theming";
 import firebase from "../../firebase";
 import Banner from "./Banner/Banner";
 import Header from "./Header/Header";

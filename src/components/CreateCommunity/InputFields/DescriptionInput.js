@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react';
-import {css, jsx} from "@emotion/core";
+import {css, useTheme} from "@emotion/react";
 import {inputFieldBase} from "../../../styles/CreateCommunity/inputFieldBase";
 import FieldDescription from "./FieldsExtras/FieldDescription";
 import ErrorMessage from "../Error/ErrorMessage";
-import {useTheme} from "emotion-theming";
 
 const DescriptionInput = ({register, descriptionText, descriptionError}) => {
     const theme = useTheme();

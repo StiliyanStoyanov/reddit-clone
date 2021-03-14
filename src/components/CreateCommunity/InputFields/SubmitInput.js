@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 
 const SubmitInput = () => {
     const theme = useTheme();
@@ -14,7 +13,7 @@ const SubmitInput = () => {
               width: 100px;
               margin: 50px auto 0;
               border-radius: 4px;
-              background-color: ${theme.navIconActiveColor};
+              background-color: ${theme.iconActiveColor};
               box-shadow: 1px 1px 2px 0 ${theme.theme === 'dark' ? 'black' : 'gray'};
               &:focus {
                 outline: 0;

@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import Label from "../../../SettingView/Items/Label";
-import {css, jsx} from "@emotion/core";
 import DescriptionContainer from "../../../SettingView/Items/Field/DescriptionContainer";
 import Heading from "../../../SettingView/Items/Field/Heading";
 import Description from "../../../SettingView/Items/Field/Description";

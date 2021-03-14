@@ -1,7 +1,6 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {inputFieldBase} from "../../../../../styles/CreateCommunity/inputFieldBase";
-import {useTheme} from "emotion-theming";
 
 const PrimaryTopicSelect = ({register, topics, selectedPrimaryTopics}) => {
     const options = topics.map(topic => <option key={topic} value={topic}>{topic}</option>);

@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 const Image = ({src}) => {
     return (
         <img src={src} alt="NotFount" css={imageStyle}/>

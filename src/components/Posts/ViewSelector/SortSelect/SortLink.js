@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {Link} from "@reach/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 

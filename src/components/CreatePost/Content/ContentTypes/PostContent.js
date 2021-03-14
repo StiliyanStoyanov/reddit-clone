@@ -1,9 +1,10 @@
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import React from "react";
-import styled from "@emotion/styled";
 import {usePostDispatch, usePostStore} from "../../../../store/PostStoreProvider";
 
-
 const PostContent = () => {
+    const theme = useTheme();
     const postDispatch = usePostDispatch();
     const {postContent} = usePostStore();
     const changeContent = (event) => {
@@ -11,24 +12,24 @@ const PostContent = () => {
     }
 
     return (
-        <PostContentTextArea onChange={changeContent} value={postContent} name="postContent" id="postContent" rows="10" placeholder="Text (optional)"/>
+        <textarea css={textarea(theme)} onChange={changeContent} value={postContent} name="postContent" id="postContent" rows="10" placeholder="Text (optional)"/>
     )
 }
 
-const PostContentTextArea = styled.textarea`
+const textarea = theme => css`
  resize: vertical;
  width: 100%;
  outline: none;
- color: ${({theme}) => theme.color};
- border-color: ${({theme}) => theme.createPost.borderColor};
+ color: ${theme.color};
+ border-color: ${theme.createPost.borderColor};
  border-radius: 4px;
- background-color: ${({theme}) => theme.createPost.backgroundColor};
+ background-color: ${theme.createPost.backgroundColor};
  min-height: 33px;
  padding: 8px 16px;
  overflow-x: hidden;
  overflow-wrap: break-word;
  &:focus {
-    border-color: ${({theme}) => theme.createPost.borderColorOnFocus};
+    border-color: ${theme.createPost.borderColorOnFocus};
  }
 `
 

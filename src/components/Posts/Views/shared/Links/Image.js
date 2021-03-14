@@ -1,7 +1,6 @@
-/** @jsx jsx */
-import React from "react";
+/** @jsxImportSource @emotion/react */
 import {Link} from "@reach/router";
-import {jsx, css} from "@emotion/core";
+import {css} from "@emotion/react";
 
 const Image = ({imageUrl, name}) => {
     return (

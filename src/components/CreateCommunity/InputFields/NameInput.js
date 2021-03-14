@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
-/** @jsx jsx */
-import React, {useRef} from 'react';
-import {css, jsx} from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import React from 'react';
+import {css, useTheme} from "@emotion/react";
 import FieldDescription from "./FieldsExtras/FieldDescription";
 import {inputFieldBase} from "../../../styles/CreateCommunity/inputFieldBase";
 import ErrorMessage from "../Error/ErrorMessage";
 import {validateCommunityName} from "../../../utils/validateCommunityName";
-import {useTheme} from "emotion-theming";
 
 //<editor-fold desc="Long Tooltip Message Variable">
 const tooltipMessage = "Community name must be between 3 and 24 characters." +

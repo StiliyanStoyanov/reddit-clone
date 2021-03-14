@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import {jsx, css} from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 
 export const Name = ({username}) => {
     return(
@@ -9,7 +9,6 @@ export const Name = ({username}) => {
         </div>
     )
 }
-/* EMOTION STYLES USED IN THIS FILE BELOW */
 const nameContainer = css`
   display: flex;
   flex-flow: column;

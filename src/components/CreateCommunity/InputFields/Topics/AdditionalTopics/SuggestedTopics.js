@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from "react";
-import {css, jsx} from "@emotion/core";
+import {css} from "@emotion/react";
 
 const SuggestedTopics = React.memo(({suggestedTopics, addTopic, highlightedTopic, setHighlightedTopic}) => {
     const handleMouseDown = topic => event => {

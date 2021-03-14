@@ -1,9 +1,8 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import {useEffect, useRef, useState, useCallback} from 'react';
-import {css, jsx} from "@emotion/core";
+import {css, useTheme} from "@emotion/react";
 import SuggestedTopics from "./SuggestedTopics";
 import SelectedTopics from "./SelectedTopics";
-import {useTheme} from "emotion-theming";
 import {validateTopicsLimit} from "../../../../../utils/validateTopicsLimit";
 
 const AdditionalTopicsSelect = ({register, topics}) => {

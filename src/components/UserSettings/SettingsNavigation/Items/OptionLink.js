@@ -1,7 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import {Link} from "@reach/router";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+import {css, useTheme} from "@emotion/react";
 import {useEffect, useRef} from "react";
 
 const OptionLink = ({option, children, selectedOption, selectOption}) => {

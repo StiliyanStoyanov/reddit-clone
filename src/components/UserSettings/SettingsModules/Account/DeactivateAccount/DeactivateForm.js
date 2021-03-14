@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import {useState} from "react";
-import {css, jsx} from "@emotion/core";
+import {css} from "@emotion/react";
 import {faUserAltSlash} from "@fortawesome/free-solid-svg-icons/faUserAltSlash";
 import Header from "../../../Form/Items/Header";
 import Description from "../../../Form/Items/Description";

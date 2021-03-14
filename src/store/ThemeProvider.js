@@ -1,6 +1,6 @@
 import React from "react";
-import {ThemeProvider as Provider, useTheme} from "emotion-theming";
-import {css, Global} from "@emotion/core";
+import {ThemeProvider as Provider, useTheme} from "@emotion/react";
+import {css, Global} from "@emotion/react";
 import {useUserStore} from "./UserStoreProvider";
 import {darkTheme, lightTheme} from "../styles/themes";
 

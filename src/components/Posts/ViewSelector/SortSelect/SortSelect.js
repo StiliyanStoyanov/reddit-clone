@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import SortLink from "./SortLink";
 import {faRocket} from "@fortawesome/free-solid-svg-icons/faRocket";
 import {faFire} from "@fortawesome/free-solid-svg-icons/faFire";

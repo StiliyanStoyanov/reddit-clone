@@ -1,7 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {useNavigate} from "@reach/router";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 
 const DropdownLinkItem = (props) => {
     const {children, to, toggleDropdown, enableFocusLock} = props

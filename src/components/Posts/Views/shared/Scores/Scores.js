@@ -1,8 +1,6 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import { ScoresButton } from "./ScoresButton";
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
 
 export const Scores = ({ upvotes, hideOnSmallSize, hideOnBigSize }) => {
     const theme = useTheme();
@@ -21,7 +19,6 @@ export const Scores = ({ upvotes, hideOnSmallSize, hideOnBigSize }) => {
     )
 };
 
-/* STYLED COMPONENTS & STYLES USED IN THIS FILE BELOW */
 const hideBig = css`
   @media (min-width: 420px) {
     display: none;

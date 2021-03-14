@@ -1,16 +1,13 @@
-/** @jsx jsx */
-/** @jsxFrag React.Fragment */
+/** @jsxImportSource @emotion/react */
 import React from "react";
 import {Link} from "@reach/router";
-import {jsx, css} from "@emotion/core";
+import {css, useTheme} from "@emotion/react";
 import Image from "./Image";
-import {useTheme} from "emotion-theming";
-
 
 const Community = ({name, imageUrl}) => {
     const theme = useTheme();
     return (
-        <div css={container}>
+        <div css={[container]}>
             {imageUrl && <Image imageUrl={imageUrl} name={name}/>}
             <Link css={linkStyle(theme.post)} to={`/e/${name}`}>e/{name}</Link>
         </div>
@@ -20,6 +17,7 @@ const Community = ({name, imageUrl}) => {
 const container = css`
   display: flex;
   align-items: center;
+  label: link-container
 `
 
 const linkStyle = theme => css`
@@ -33,6 +31,7 @@ const linkStyle = theme => css`
   &:hover {
     text-decoration: underline;
   }
+  label: community-link
 `
 
 export default Community
