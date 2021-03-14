@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 function isElement(element) {
     return element instanceof Element || element instanceof HTMLDocument;
