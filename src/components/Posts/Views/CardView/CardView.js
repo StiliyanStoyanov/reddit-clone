@@ -1,7 +1,5 @@
-/** @jsx jsx */
-/* eslint-disable no-unused-vars */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import {Scores} from "../shared/Scores/Scores";
 import PostContainer from "../shared/Containers/Post";
 import ItemsContainer from "../shared/Containers/Items";
@@ -14,13 +12,14 @@ import Content from "../shared/Items/Content/Content";
 import {faCommentAlt} from "@fortawesome/free-solid-svg-icons/faCommentAlt";
 import BottomLink from "../shared/Links/BottomLink";
 import BottomContainer from "../shared/Containers/Bottom";
+import React from "react";
 
 const CardView = ({posts}) => {
-    const theme = useTheme();
     const postsList = posts.map(post => {
         const {id, author, title, content, contentType, communityName, communityImageUrl, upvotes} = post
+        const to = `/e/${communityName}/comments/${id}`;
         return (
-            <PostContainer key={id} communityName={communityName} postId={id}>
+            <PostContainer key={id} to={to} post={post}>
                 <ItemsContainer>
                     <Scores upvotes={upvotes} hideOnSmallSize={true}/>
                     <InfoContainer css={css`margin: 8px 0`}>
@@ -32,7 +31,7 @@ const CardView = ({posts}) => {
                     <Content content={content} contentType={contentType} postId={id}/>
                     <BottomContainer>
                         <Scores upvotes={upvotes} hideOnBigSize={true}/>
-                        <BottomLink icon={faCommentAlt} to={`e/${communityName}/comments/${id}`}>
+                        <BottomLink icon={faCommentAlt} to={to}>
                             500 comments
                         </BottomLink>
                     </BottomContainer>
@@ -42,13 +41,11 @@ const CardView = ({posts}) => {
     })
 
     return (
-        <div css={container(theme)}>
+        <div id="card-view">
             {postsList}
         </div>
     );
 };
-
-const container = theme => css``
 
 export default CardView
 

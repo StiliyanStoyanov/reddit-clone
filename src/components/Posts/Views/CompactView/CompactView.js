@@ -1,6 +1,5 @@
-/** @jsx jsx */
-/* eslint-disable no-unused-vars */
-import {css, jsx} from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import {css} from "@emotion/react";
 import {Scores} from "../shared/Scores/Scores";
 import {faFileAlt} from "@fortawesome/free-solid-svg-icons/faFileAlt";
 import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
@@ -19,12 +18,13 @@ import {faCommentAlt} from "@fortawesome/free-solid-svg-icons/faCommentAlt";
 
 const CompactView = ({posts}) => {
     const postsList = posts.map(post => {
-        const {id, author, title, communityName, communityImageUrl, upvotes, contentType} = post
+        const {id, author, title, contentType, communityName, communityImageUrl, upvotes} = post
         const textContent = contentType === "post";
         const imageContent = contentType === "image";
         const linkContent = contentType === "link";
+        const to = `/e/${communityName}/comments/${id}`;
         return (
-            <PostContainer key={id} communityName={communityName} postId={id}>
+            <PostContainer key={id} to={to} post={post}>
                 <Scores upvotes={upvotes} hideOnSmallSize={true}/>
                 <ItemsContainer css={itemsContainer}>
                     {textContent && <Icon icon={faFileAlt} id={id}/>}

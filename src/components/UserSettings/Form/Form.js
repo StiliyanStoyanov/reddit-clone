@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {useClickOutside} from "../../../hooks/useClickOutside";
 import {useRef} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -22,9 +21,10 @@ const Form = ({visible, closeForm, children, onSubmit, handleSubmit}) => {
             <form css={form(theme)} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
                 <FocusLock disabled={!visible} returnFocus={true}>
                     <button
-                        type="button" css={button(theme)}
+                        type="button" css={closeButton(theme)}
                         onMouseDown={closeForm}
-                        onKeyDown={handleCloseButtonKeyDown}>
+                        onKeyDown={handleCloseButtonKeyDown}
+                    >
                         <FontAwesomeIcon css={icon} icon={faTimes}/>
                     </button>
                     {children}
@@ -59,7 +59,7 @@ const form = theme => css`
   width: 100%;
 `
 
-const button = theme => css`
+const closeButton = theme => css`
   position: absolute;
   cursor: pointer;
   color: ${theme.settings.color};

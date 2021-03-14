@@ -1,8 +1,7 @@
-/** @jsx jsx */
+import React from "react";
 import {Name} from "./Name";
 import {Avatar} from "./Avatar";
 import {useUserStore} from "../../../../../../store/UserStoreProvider";
-import {jsx} from "@emotion/core";
 import DropdownLinkItem from "../../../DropdownItems/DropdownLinkItem";
 
 export const ProfileLink = (props) => {

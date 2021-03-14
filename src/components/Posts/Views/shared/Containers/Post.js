@@ -1,17 +1,24 @@
-/** @jsx jsx */
-import {css, jsx} from "@emotion/core";
-import {useTheme} from "emotion-theming";
+/** @jsxImportSource @emotion/react */
+import {css, useTheme} from "@emotion/react";
 import {Link} from "@reach/router";
 
-const Post = ({communityName, postId, children}) => {
+const Post = ({children, to, post}) => {
     const theme = useTheme();
+    const {docSnapshot, ...postDataWithoutSnapshot} = post;
+
     return (
         <div css={container(theme.post)}>
             {children}
-            <Link css={linkStyle} to={`e/${communityName}/comments/${postId}`} tabIndex={-1}/>
+            <Link
+                css={linkStyle}
+                to={to}
+                state={postDataWithoutSnapshot}
+                tabIndex={-1}
+            />
         </div>
     );
-};
+}
+
 const container = theme => css`
   position: relative;
   z-index: 1;
@@ -34,7 +41,9 @@ const container = theme => css`
 `
 const linkStyle = css`
   width: 100%;
-  height: 100%; 
+  height: 100%;
+  background-color: transparent;
+  border: 0;
   position: absolute;
   top: 0;
   left: 0;
