@@ -5,14 +5,17 @@ import {Link} from "@reach/router";
 const Post = ({children, to, post}) => {
     const theme = useTheme();
     const {docSnapshot, ...postDataWithoutSnapshot} = post;
-
+    const locationState = {
+        ...postDataWithoutSnapshot,
+        fromFeed: true
+    }
     return (
         <div css={container(theme.post)}>
             {children}
             <Link
                 css={linkStyle}
                 to={to}
-                state={postDataWithoutSnapshot}
+                state={locationState}
                 tabIndex={-1}
             />
         </div>

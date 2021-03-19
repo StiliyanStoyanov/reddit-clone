@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {css, useTheme} from "@emotion/react";
-import { ReactComponent as ArrowSvg } from "../../../../../assets/arrow.svg"
+import { ReactComponent as ArrowSvg } from "../../../../assets/arrow.svg"
 
 // TODO: Implement up and down votes functionality
 export const ScoresButton = ({ direction }) => {

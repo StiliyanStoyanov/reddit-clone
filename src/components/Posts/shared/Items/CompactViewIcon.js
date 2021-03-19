@@ -2,7 +2,7 @@
 import {css, useTheme} from "@emotion/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const Icon = ({icon}) => {
+const CompactViewIcon = ({icon}) => {
     const theme = useTheme();
     return (
         <div css={container(theme.post)}>
@@ -24,4 +24,4 @@ const iconStyle = css`
   margin: auto;
 `
 
-export default Icon;
+export default CompactViewIcon;

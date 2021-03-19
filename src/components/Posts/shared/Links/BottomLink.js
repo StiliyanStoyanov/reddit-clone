@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const BottomLink = ({icon, children, to}) => {
     const theme = useTheme();
+
     return (
         <Link to={to} css={linkContainer(theme.post)}>
             <FontAwesomeIcon css={iconStyle} icon={icon}/>

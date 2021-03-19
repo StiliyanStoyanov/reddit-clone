@@ -2,6 +2,7 @@
 import React from "react";
 import {css, useTheme} from "@emotion/react";
 
+// TODO: replace with title
 export const Title = ({ title, postId }) => {
     const theme = useTheme();
     return <h3 css={titleContainer(theme.post)}>{postId}</h3>;

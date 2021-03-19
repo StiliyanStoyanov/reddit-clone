@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import {css, useTheme} from "@emotion/react";
 import {useRef} from "react";
-import useOverflow from "../../../../../../hooks/useOverflow";
+import useOverflow from "../../../../../hooks/useOverflow";
 
 const PostContent = ({content}) => {
     const theme = useTheme();
