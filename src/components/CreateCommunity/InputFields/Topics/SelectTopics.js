@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import React, {useState} from 'react';
+import React from 'react';
 import FieldDescription from "../FieldsExtras/FieldDescription";
 import ErrorMessage from "../../Error/ErrorMessage";
-import AdditionalTopicsSelect from "./AdditionalTopics/AdditionalTopicsSelect";
 import {useWatch} from "react-hook-form";
 import PrimaryTopicSelect from "./PrimaryTopicSelect/PrimaryTopicSelect";
+import CustomSelect from "../../../shared/CustomSelect/CustomSelect";
 
 const topics = [
         'Animals and Pets', 'Anime', 'Art', 'Business, Economics and Finance',
@@ -38,7 +38,7 @@ const SelectTopics = ({register, control, descriptionText, topicsError}) => {
             <label htmlFor="primaryTopic" css={css`display: block; margin-top: 40px`}>Topics *</label>
             <FieldDescription descriptionText={descriptionText} tooltipMessage={tooltipMessage}/>
             <PrimaryTopicSelect register={register} topics={topics} selectedPrimaryTopics={selectedPrimaryTopic}/>
-            {selectedPrimaryTopic && <AdditionalTopicsSelect register={register} topics={topicsListWithExclusions}/>}
+            {selectedPrimaryTopic && <CustomSelect register={register} list={topicsListWithExclusions}/>}
             <ErrorMessage error={topicsError}/>
         </div>
     );
