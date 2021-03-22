@@ -38,7 +38,7 @@ const SelectTopics = ({register, control, descriptionText, topicsError}) => {
             <label htmlFor="primaryTopic" css={css`display: block; margin-top: 40px`}>Topics *</label>
             <FieldDescription descriptionText={descriptionText} tooltipMessage={tooltipMessage}/>
             <PrimaryTopicSelect register={register} topics={topics} selectedPrimaryTopics={selectedPrimaryTopic}/>
-            {selectedPrimaryTopic && <CustomSelect register={register} list={topicsListWithExclusions}/>}
+            {selectedPrimaryTopic && <CustomSelect register={register} optionsDefault={topicsListWithExclusions}/>}
             <ErrorMessage error={topicsError}/>
         </div>
     );
