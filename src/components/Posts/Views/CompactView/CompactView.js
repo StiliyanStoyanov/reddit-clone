@@ -1,19 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import {Scores} from "../shared/Scores/Scores";
+import {Scores} from "../../shared/Scores/Scores";
 import {faFileAlt} from "@fortawesome/free-solid-svg-icons/faFileAlt";
 import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
-import Icon from "../shared/Items/Icon";
-import Image from "../shared/Items/Image";
-import Title from "../shared/Items/Title";
-import PostContainer from "../shared/Containers/Post";
-import ItemsContainer from "../shared/Containers/Items";
-import InfoContainer from "../shared/Containers/Info"
-import CommunityLink from "../shared/Links/Community";
-import PostedBy from "../shared/Links/PostedBy";
-import DotSeparator from "../shared/Items/DotSeparator";
-import BottomContainer from "../shared/Containers/Bottom";
-import BottomLink from "../shared/Links/BottomLink";
+import CompactViewIcon from "../../shared/Items/CompactViewIcon";
+import Image from "../../shared/Items/Image";
+import Title from "../../shared/Items/Title";
+import PostContainer from "../../shared/Containers/Post";
+import ItemsContainer from "../../shared/Containers/Items";
+import InfoContainer from "../../shared/Containers/Info"
+import CommunityLink from "../../shared/Links/Community";
+import PostedBy from "../../shared/Links/PostedBy";
+import DotSeparator from "../../shared/Items/DotSeparator";
+import BottomContainer from "../../shared/Containers/Bottom";
+import BottomLink from "../../shared/Links/BottomLink";
 import {faCommentAlt} from "@fortawesome/free-solid-svg-icons/faCommentAlt";
 
 const CompactView = ({posts}) => {
@@ -27,8 +27,8 @@ const CompactView = ({posts}) => {
             <PostContainer key={id} to={to} post={post}>
                 <Scores upvotes={upvotes} hideOnSmallSize={true}/>
                 <ItemsContainer css={itemsContainer}>
-                    {textContent && <Icon icon={faFileAlt} id={id}/>}
-                    {linkContent && <Icon icon={faLink}/>}
+                    {textContent && <CompactViewIcon icon={faFileAlt} id={id}/>}
+                    {linkContent && <CompactViewIcon icon={faLink}/>}
                     {imageContent && <Image src={communityImageUrl}/>}
                     <div>
                         <Title postId={id} title={title}/>
