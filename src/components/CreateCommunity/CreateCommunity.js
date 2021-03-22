@@ -50,7 +50,7 @@ const CreateCommunity = () => {
     };
 
     if (!user) {
-        navigate('login');
+        navigate('/login');
         return null;
     }
     return (
@@ -60,13 +60,23 @@ const CreateCommunity = () => {
                 <div css={contentContainer}>
                     <Header/>
                     <form css={form} onSubmit={handleSubmit(onSubmit)}>
-                        <NameInput register={register} descriptionText={descriptions.name}
-                                   nameError={errors.communityName}/>
-                        <SelectTopics register={register} control={control}
-                                      topicsError={errors.primaryTopic || errors.additionalTopics}
-                                      descriptionText={descriptions.topics}/>
-                        <DescriptionInput register={register} descriptionText={descriptions.descriptionText}
-                                          descriptionError={errors.descriptionText}/>
+                        <NameInput
+                            register={register}
+                            descriptionText={descriptions.name}
+                            nameError={errors.communityName}
+                        />
+                        <SelectTopics
+                            register={register}
+                            control={control}
+                            setError={setError}
+                            topicsError={errors.primaryTopic || errors.selectedOptions}
+                            descriptionText={descriptions.topics}
+                        />
+                        <DescriptionInput
+                            register={register}
+                            descriptionText={descriptions.descriptionText}
+                            descriptionError={errors.descriptionText}
+                        />
                         <SubmitInput/>
                     </form>
                 </div>
