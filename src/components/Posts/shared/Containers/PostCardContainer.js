@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import {css, useTheme} from "@emotion/react";
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 
-const Post = ({children, to, post}) => {
+const PostCardContainer = ({children, to, post}) => {
     const theme = useTheme();
     const {docSnapshot, ...postDataWithoutSnapshot} = post;
     const locationState = {
@@ -52,4 +52,4 @@ const linkStyle = css`
   left: 0;
 `
 
-export default Post;
+export default PostCardContainer;
