@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {auth, functions} from "../firebase";
 import {useReducer} from "react";
-import {useNavigate} from "@reach/router";
+import {useNavigate} from "react-router";
 import {authSubmitStatusReducer, authSubmitStatusReducerTypes} from "../reducers/shared/authSubmitStatusReducer";
 import {toast} from "react-toastify";
 const {ERROR, DISABLE_BUTTON} = authSubmitStatusReducerTypes;

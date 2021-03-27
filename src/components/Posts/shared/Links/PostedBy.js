@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 import {css, useTheme} from "@emotion/react";
 
 const PostedBy = ({author}) => {

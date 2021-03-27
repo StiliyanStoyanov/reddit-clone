@@ -2,7 +2,7 @@
 import React from "react";
 import {css} from '@emotion/react';
 import {useState} from 'react';
-import {Router, useMatch} from "@reach/router";
+import {Routes, useMatch} from "react-router";
 import SinglePostPage from "./SinglePostPage/SinglePostPage";
 import PostListingsWrapper from "./PostsListing/PostListingsWrapper";
 
@@ -23,10 +23,10 @@ export const Posts = () => {
     }
     return (
         <div id="posts-container">
-            <PostListingsWrapper view={view} setView={setView} sort={sort} setSort={setSort}/>
-            <Router primary={false} id="single-post-view">
+            <PostListingsWrapper setView={setView} sort={sort} setSort={setSort}/>
+            <Routes>
                 <SinglePostPage path="/e/:communityId/comments/:postId"/>
-            </Router>
+            </Routes>
         </div>
 
     );

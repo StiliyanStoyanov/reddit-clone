@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {css, useTheme} from "@emotion/react";
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 
 const CommentFormDescription = ({user}) => {
     const {singlePost} = useTheme();

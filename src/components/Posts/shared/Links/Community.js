@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 import {css, useTheme} from "@emotion/react";
 import Image from "./Image";
 

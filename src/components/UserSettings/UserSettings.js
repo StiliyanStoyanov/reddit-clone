@@ -1,30 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import {Router, useNavigate} from "@reach/router";
+import {Routes, useNavigate} from "react-router";
 import SettingsNavigation from "./SettingsNavigation/SettingsNavigation";
 import {useUserStore} from "../../store/UserStoreProvider";
-import {useTheme} from "@emotion/react";
 import AccountView from "./SettingsModules/Account/AccountView";
 import ProfileView from "./SettingsModules/Profile/ProfileView";
+import {useEffect} from "react";
 
 const UserSettings = () => {
     const {user} = useUserStore();
-    const theme = useTheme();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [])
     if (!user) {
-        navigate('/login')
         return null
     }
     return (
-        <div css={pageContainer}>
-            <div css={[itemsContainer(theme)]}>
+        <div css={[pageContainer]}>
+            <div css={[itemsContainer]}>
                 <SettingsNavigation/>
-                <Router primary={false} id="settings-content">
-                    <AccountView path="/"/>
+                <Routes>
                     <AccountView path="account"/>
                     <ProfileView path="profile"/>
-                </Router>
+                </Routes>
             </div>
         </div>
     );
@@ -35,6 +37,7 @@ const pageContainer = css`
   @media screen and (max-width: 1000px) {
     padding: 0 4px;
   }
+  label: settings-page-container
 `
 const itemsContainer = theme => css`
   padding: 1em;

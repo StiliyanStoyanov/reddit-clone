@@ -1,13 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
-import React from "react";
-import {Link} from "@reach/router";
+import {css} from "@emotion/react";
+import {Link} from "react-router-dom";
 
 const SignUpLink = () => {
-    const theme = useTheme();
     return (
-        <div css={container}>
-            <Link css={link(theme)} to="register">
+        <div css={[container]}>
+            <Link css={[link]} to="/register">
                 SIGN UP
             </Link>
         </div>
@@ -21,6 +19,7 @@ const container = css`
   border-radius: 8px;
   border: 1px solid white;
   color: black;
+  label: signup-link-container
 `
 const link = theme => css`
   text-decoration: none;
@@ -28,6 +27,7 @@ const link = theme => css`
   padding: 10px;
   border-radius: 8px;
   color: ${theme.theme === 'dark' ? theme.backgroundColor : theme.color}
+  label: singup-link
 `
 
 export default SignUpLink

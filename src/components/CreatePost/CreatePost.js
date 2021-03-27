@@ -1,17 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import React from "react";
+import React, {useEffect} from "react";
 import CreatePostBody from "./CreatePostBody";
 import {useUserStore} from "../../store/UserStoreProvider";
-import {useNavigate} from "@reach/router";
+import {useNavigate} from "react-router";
 
 const CreatePost = () => {
     const {user} = useUserStore();
     const navigate = useNavigate();
-    if (!user) {
-        navigate('/login');
-        return null;
-    }
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [])
+    if (!user) return null;
     return (
         <div css={container}>
             <h2 css={header}>Create Post</h2>

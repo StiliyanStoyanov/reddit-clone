@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {css, useTheme} from "@emotion/react";
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const BottomLink = ({icon, children, to}) => {

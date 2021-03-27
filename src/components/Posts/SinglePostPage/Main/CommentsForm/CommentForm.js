@@ -2,14 +2,14 @@
 import {css, useTheme} from "@emotion/react";
 import {useForm, useWatch} from "react-hook-form";
 import {firestore} from "../../../../../firebase";
-import {useMatch} from "@reach/router";
+import {useParams} from "react-router";
 import {useUserStore} from "../../../../../store/UserStoreProvider";
 
 const CommentForm = () => {
     const {user} = useUserStore();
     const {createPost, singlePost} = useTheme();
     const {register, control, handleSubmit} = useForm();
-    const {communityId, postId} = useMatch("/e/:communityId/comments/:postId");
+    const {communityId, postId} = useParams();
     const comment = useWatch({
         control,
         name: 'comment',

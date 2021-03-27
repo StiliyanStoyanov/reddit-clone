@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 import {css} from "@emotion/react";
 
 const Image = ({imageUrl, name}) => {
@@ -9,7 +9,6 @@ const Image = ({imageUrl, name}) => {
         </Link>
     )
 }
-
 
 const imgLink = css`
   position: relative;

@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {useUserDispatch} from "../store/UserStoreProvider";
 import {auth, firestore} from "../firebase";
-import {useNavigate} from "@reach/router";
+import {useNavigate} from "react-router";
 
 export function useSessionLogin() {
     const navigate = useNavigate();

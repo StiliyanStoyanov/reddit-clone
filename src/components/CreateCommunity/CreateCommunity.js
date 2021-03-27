@@ -9,7 +9,7 @@ import NameInput from "./InputFields/NameInput";
 import SelectTopics from "./InputFields/Topics/SelectTopics";
 import DescriptionInput from "./InputFields/DescriptionInput";
 import SubmitInput from "./InputFields/SubmitInput";
-import {useNavigate} from "@reach/router";
+import {useNavigate} from "react-router";
 import {useUserDispatch, useUserStore} from "../../store/UserStoreProvider";
 
 const descriptions = {

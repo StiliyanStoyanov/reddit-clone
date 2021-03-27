@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {css, useTheme} from "@emotion/react";
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 
 //TODO: Replace placeholder values
 const LinkContent = ({content}) => {

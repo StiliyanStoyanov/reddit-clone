@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useEffect, useState} from "react";
-import {useMatch} from "@reach/router";
+import {useMatch} from "react-router";
 
 export const useBaseLocation = () => {
     const [{baseLocation, communityId}, setLocation] = useState({
@@ -15,10 +15,10 @@ export const useBaseLocation = () => {
                 baseLocation: "/",
                 communityId: null
             });
-        } else if (communityMatch && communityMatch.id !== communityId) {
+        } else if (communityMatch && communityMatch.params.id !== communityId) {
             setLocation({
                 baseLocation: communityMatch.path,
-                communityId: communityMatch.id
+                communityId: communityMatch.params.id
             });
         }
     }, [communityMatch, baseMatch]);
