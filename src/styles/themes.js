@@ -7,8 +7,12 @@ export const darkTheme = {
     itemActive: '#d7dadc',
     itemActiveBackground: '#272729',
     backgroundColor: '#030303',
-    borderColor:  '#343536',
+    borderColor: '#343536',
     activeBorderColor: '#d7dadc',
+    loaders: {
+        containerBackground: '#272729',
+        animationBackground: 'linear-gradient(90deg, #272729, #343536, #272729)',
+    },
     nav: {
         backgroundColor: '#1a1a1b',
         hoverOverlay: 'rgb(255, 255, 255, 0.1)',
@@ -84,6 +88,10 @@ export const lightTheme = {
     backgroundColor: '#f0f2f5',
     borderColor: '#dedede',
     activeBorderColor: '#1a1a1b',
+    loaders: {
+        containerBackground: 'rgba(255, 255, 255, 0.8)',
+        animationBackground: 'linear-gradient(90deg, #f6f7f8, #edeff1, #f6f7f8)',
+    },
     nav: {
         backgroundColor: '#ffffff',
         hoverOverlay: 'rgb(0, 0, 0, 0.05)',
