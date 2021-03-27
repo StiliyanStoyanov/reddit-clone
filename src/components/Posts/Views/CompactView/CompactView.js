@@ -6,7 +6,7 @@ import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
 import CompactViewIcon from "../../shared/Items/CompactViewIcon";
 import Image from "../../shared/Items/Image";
 import Title from "../../shared/Items/Title";
-import PostContainer from "../../shared/Containers/Post";
+import PostContainer from "../../shared/Containers/PostCardContainer";
 import ItemsContainer from "../../shared/Containers/Items";
 import InfoContainer from "../../shared/Containers/Info"
 import CommunityLink from "../../shared/Links/Community";
