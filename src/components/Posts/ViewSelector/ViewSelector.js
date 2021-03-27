@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import React from "react";
+import {css} from "@emotion/react";
 import SortSelect from "./SortSelect/SortSelect";
 import ViewSelect from "./ViewSelect/ViewSelect";
 
-const ViewSelector = ({view, setView, sort, setSort}) => {
-    const theme = useTheme();
+const ViewSelector = React.memo(({view, setView, sort, setSort}) => {
     return (
-        <div css={container(theme)}>
+        <div css={container}>
             <SortSelect sort={sort} setSort={setSort}/>
-            <ViewSelect viewType={view} setView={setView}/>
+            <ViewSelect view={view} setView={setView}/>
         </div>
     );
-};
+});
 
 const container = theme => css`
   display: flex;

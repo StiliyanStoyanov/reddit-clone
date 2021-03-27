@@ -9,7 +9,7 @@ import {ReactComponent as CardSvg} from "../../../../assets/card.svg";
 import {ReactComponent as CompactSvg} from "../../../../assets/compact.svg";
 import Svg from "./Items/SvgIcon";
 
-const ViewSelect = ({viewType, setView}) => {
+const ViewSelect = ({view, setView}) => {
     const theme = useTheme();
     const [visible, setVisible] = useState(false);
     const viewDropdownContainerRef = useRef();
@@ -24,8 +24,8 @@ const ViewSelect = ({viewType, setView}) => {
         <div css={container} ref={viewDropdownContainerRef}>
             <div>
                 <button css={dropdownToggleStyle} onClick={() => setVisible(prevState => !prevState)}>
-                    {viewType === 'card' && <Svg Svg={CardSvg}/>}
-                    {viewType === 'compact' && <Svg Svg={CompactSvg}/>}
+                    {view === 'card' && <Svg Svg={CardSvg}/>}
+                    {view === 'compact' && <Svg Svg={CompactSvg}/>}
                     <FontAwesomeIcon css={css`color: ${theme.itemActive}; margin-left: 2px`} icon={faCaretDown}/>
                 </button>
             </div>

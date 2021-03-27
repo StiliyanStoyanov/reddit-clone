@@ -23,7 +23,7 @@ export const Posts = () => {
     }
     return (
         <div id="posts-container">
-            <PostListingsWrapper setView={setView} sort={sort} setSort={setSort}/>
+            <PostListingsWrapper view={view} setView={setView} sort={sort} setSort={setSort}/>
             <Routes>
                 <SinglePostPage path="/e/:communityId/comments/:postId"/>
             </Routes>
