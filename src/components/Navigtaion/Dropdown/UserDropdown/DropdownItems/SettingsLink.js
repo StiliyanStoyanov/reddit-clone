@@ -9,7 +9,7 @@ const SettingsLink = (props) => {
     const {user} = useUserStore();
     if (user) {
         return (
-            <DropdownLinkItem to={'/settings'} {...props}>
+            <DropdownLinkItem to={'/settings/account'} {...props}>
                 <DropdownItemIcon icon={faCog}/>
                 <span css={itemTextStyle}>Settings</span>
             </DropdownLinkItem>
