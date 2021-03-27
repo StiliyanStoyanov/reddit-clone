@@ -4,12 +4,12 @@ import {css, Global} from "@emotion/react";
 import {useUserStore} from "./UserStoreProvider";
 import {darkTheme, lightTheme} from "../styles/themes";
 
-export const ThemeProvider = (props) => {
+export const ThemeProvider = ({children}) => {
     const {theme} = useUserStore();
     return (
         <Provider theme={theme === 'dark' ? darkTheme : lightTheme}>
             <GlobalStyles/>
-            {props.children}
+            {children}
         </Provider>
     )
 }

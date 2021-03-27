@@ -4,10 +4,11 @@ import {customSelectReducer, init} from "./customSelectReducer";
 export function useCustomSelect(optionsDefault) {
     const [state, dispatch] = useReducer(customSelectReducer, {optionsDefault: optionsDefault}, init);
     const optionsRefs = useRef([]);
+    const {options} = state
 
     useEffect(() => {
-        optionsRefs.current = optionsRefs.current.slice(0, state.options.length);
-    }, [state.options.length]);
+        optionsRefs.current = optionsRefs.current.slice(0, options.length);
+    }, [options]);
 
     const dispatchWithOptionsRefs = useCallback((dispatchContext) => {
         const type = dispatchContext.type;
@@ -19,7 +20,7 @@ export function useCustomSelect(optionsDefault) {
                 optionsRefs: optionsRefs.current
             }
         })
-    }, [optionsRefs]);
+    }, [options]);
 
     return [state, dispatch, dispatchWithOptionsRefs, optionsRefs]
 }

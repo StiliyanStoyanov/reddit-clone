@@ -25,7 +25,7 @@ const Form = ({visible, closeForm, children, onSubmit, handleSubmit}) => {
                         onMouseDown={closeForm}
                         onKeyDown={handleCloseButtonKeyDown}
                     >
-                        <FontAwesomeIcon css={icon} icon={faTimes}/>
+                        <FontAwesomeIcon css={iconCss} icon={faTimes}/>
                     </button>
                     {children}
                 </FocusLock>
@@ -69,7 +69,7 @@ const closeButton = theme => css`
   border: 0;
 `
 
-const icon = css`
+const iconCss = css`
   font-size: 20px;
 `
 
