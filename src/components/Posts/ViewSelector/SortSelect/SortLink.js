@@ -1,46 +1,64 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
-import {Link} from "@reach/router";
+import React from "react";
+import {css} from "@emotion/react";
+import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const SortLink = ({to, icon, sort, setSort}) => {
-    const theme = useTheme();
     const isSelected = sort === to;
     const handleSelect = event => {
         event.preventDefault();
         setSort(to);
     }
+
     return (
-        <Link css={link(theme, isSelected)} to={to} onClick={handleSelect}>
-            <FontAwesomeIcon css={iconStyle(theme, isSelected)} icon={icon}/>
+        <Link css={[link, isSelected && linkActive]} to={to} onClick={handleSelect}>
+            <FontAwesomeIcon css={[iconStyle]} icon={icon}/>
             {to}
         </Link>
     );
 };
 
-const link = (theme, isSelected) => css`
+const link = theme => css`
   display: flex;
+  position: relative;
   font-size: 16px;
   justify-content: center;
-  color: ${isSelected ? theme.itemActive : theme.itemDefault};
-  ${isSelected && `background-color: ${theme.itemHighlightBackground}`};
+  color: ${theme.itemDefault};
   align-items: center;
   height: 32px;
   margin-right: 8px;
   border-radius: 20px;
   padding: 0 8px;
   &:hover, &:focus-visible {
-    color: ${isSelected ? theme.itemActive : theme.itemHighlight};
+    color: ${theme.itemHighlight};
     background-color: ${theme.itemHighlightBackground};
-    & svg {
-      color: ${isSelected ? theme.itemActive : theme.itemHighlight};
-    }
   }
   text-transform: capitalize;
 `
+const linkActive = theme => css`
+  color: ${theme.itemActive};
+  background-color: ${theme.itemHighlightBackground};
+  &:hover, &:focus-visible {
+    color: ${theme.itemActive};
+    &::before {
+      opacity: 0.1;
+    }
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: ${theme.itemHighlight};
+  }
+`;
 
-const iconStyle = (theme, isSelected) => css`
- color: ${isSelected ? theme.itemActive : theme.itemDefault};
+const iconStyle = css`
  margin-right: 4px;
  margin-top: 2px;
  font-size: 20px;

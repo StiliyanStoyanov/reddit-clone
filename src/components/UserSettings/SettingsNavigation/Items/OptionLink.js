@@ -1,53 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import {Link} from "@reach/router";
-import {css, useTheme} from "@emotion/react";
-import {useEffect, useRef} from "react";
+import {css} from "@emotion/react";
+import {Link} from "react-router-dom";
+import {useParams} from "react-router";
 
-const OptionLink = ({option, children, selectedOption, selectOption}) => {
-    const inputRef = useRef();
-    const theme = useTheme();
-    const selected = selectedOption === option;
+const OptionLink = ({to, children}) => {
+    let {['*']: paramOption} = useParams();
+    const isSelected = paramOption === to;
 
-    useEffect(() => {
-        inputRef.current && selected && inputRef.current.focus();
-    }, [selected]);
-
-    const handleMouseDown = () => {
-        selectOption(option);
-    }
-    const handleKeyDown = event => {
-        if (event.key === "Enter" || event.key === "Escape") {
-            switch (event.key) {
-                case "Enter":
-                    selectOption(option);
-                    break;
-                case "Escape": {
-                    event.target.blur();
-                    break;
-                }
-                default:
-                    return;
-            }
-        }
-    }
     return (
-        <Link
-            ref={inputRef}
-            autoFocus={selected}
-            css={settingOptionLinkStyle(selected, theme)}
-            to={option}
-            aria-selected={selected}
-            onMouseDown={handleMouseDown}
-            onKeyDown={handleKeyDown}
-        >
+        <Link css={[link, isSelected && linkActive]} to={to}>
             {children}
         </Link>
     );
 };
 
-const settingOptionLinkStyle = (selected, theme) => css`
+const link = theme => css`
   cursor: pointer;
-  color: ${selected ? theme.settings.selectedOptionColor : theme.settings.optionColor};
+  color: ${theme.settings.optionColor};
   margin-right: 8px;
   white-space: nowrap;
   font: inherit;
@@ -57,10 +26,16 @@ const settingOptionLinkStyle = (selected, theme) => css`
   display: inline-block;
   line-height: unset;
   padding: 15px 12px 12px;
-  border-bottom: ${selected ? `3px solid ${theme.settings.selectedOptionBorder}` : 0};
+  label: option-link
+`
+
+const linkActive = theme => css`
+  color: ${theme.settings.selectedOptionColor};
+  border-bottom: 3px solid ${theme.settings.selectedOptionBorder};
   &:hover, &:focus {
-   color: ${theme.settings.optionHover}
+    color: ${theme.settings.optionHover}
   }
+  label: --active
 `
 
 export default OptionLink;
