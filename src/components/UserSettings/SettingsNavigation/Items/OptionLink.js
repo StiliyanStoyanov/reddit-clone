@@ -23,6 +23,9 @@ const link = theme => css`
   text-decoration: inherit;
   font-size: 14px;
   font-weight: 700;
+  &:hover, &:focus-visible {
+    color: ${theme.settings.optionHover}
+  }
   display: inline-block;
   line-height: unset;
   padding: 15px 12px 12px;
@@ -32,9 +35,6 @@ const link = theme => css`
 const linkActive = theme => css`
   color: ${theme.settings.selectedOptionColor};
   border-bottom: 3px solid ${theme.settings.selectedOptionBorder};
-  &:hover, &:focus {
-    color: ${theme.settings.optionHover}
-  }
   label: --active
 `
 
