@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
 
-const SettingView = ({children}) => {
+const SettingsContainer = ({children}) => {
     return (
-        <div css={container}>
+        <div css={[container]}>
             {children}
         </div>
     );
@@ -11,6 +11,7 @@ const SettingView = ({children}) => {
 
 const container = css`
   max-width: 688px;
+  label: settings-container
 `
 
-export default SettingView;
+export default SettingsContainer;

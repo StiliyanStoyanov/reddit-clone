@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 
 const Description = ({children}) => {
-    const theme = useTheme();
     return (
-        <p css={container(theme)}>
+        <p css={[container]}>
             {children}
         </p>
     );
@@ -16,6 +15,7 @@ const container = theme => css`
   color: ${theme.settings.metaText};
   font-size: 12px;
   line-height: 16px;
+  label: description
 `
 
 export default Description;

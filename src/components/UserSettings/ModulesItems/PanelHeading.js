@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 
-const Heading = ({children}) => {
-    const theme = useTheme()
+const PanelHeading = ({children}) => {
     return (
-        <h2 css={heading(theme)}>
+        <h2 css={[heading]}>
             {children}
         </h2>
     );
@@ -17,6 +16,7 @@ const heading = theme => css`
   margin: 0;
   font-weight: 600;
   padding: 40px 0;
+  label: panel-heading
 `
 
-export default Heading;
+export default PanelHeading;
