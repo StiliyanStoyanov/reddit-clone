@@ -1,15 +1,15 @@
-import SettingView from "../../SettingView/SettingView";
-import Heading from "../../SettingView/Items/Heading";
+import SettingsContainer from "../../ModulesItems/SettingsContainer";
+import PanelHeading from "../../ModulesItems/PanelHeading";
 import ProfileInformation from "./ProfileInformation/ProfileInformation";
 import Avatar from "./Avatar/Avatar";
 
 const ProfileView = () => {
     return (
-        <SettingView>
-            <Heading>Customize Profile</Heading>
+        <SettingsContainer>
+            <PanelHeading>Customize Profile</PanelHeading>
             <ProfileInformation/>
             <Avatar/>
-        </SettingView>
+        </SettingsContainer>
     );
 };
 

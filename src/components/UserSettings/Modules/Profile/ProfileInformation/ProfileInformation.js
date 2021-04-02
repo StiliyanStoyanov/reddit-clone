@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import Label from "../../../SettingView/Items/Label";
-import DescriptionContainer from "../../../SettingView/Items/Field/DescriptionContainer";
-import Heading from "../../../SettingView/Items/Field/Heading";
-import Description from "../../../SettingView/Items/Field/Description";
+import SubPanelHeading from "../../../ModulesItems/SubPanelHeading";
+import DescriptionContainer from "../../../ModulesItems/Field/DescriptionContainer";
+import DescriptionHeading from "../../../ModulesItems/Field/DescriptionHeading";
+import Description from "../../../ModulesItems/Field/Description";
 import {firestore} from "../../../../../firebase";
 import {useUserStore} from "../../../../../store/UserStoreProvider";
 import {toast} from "react-toastify";
@@ -22,9 +22,9 @@ const ProfileInformation = () => {
     }
     return (
         <div css={css`display: block;`}>
-            <Label>Profile information</Label>
+            <SubPanelHeading>Profile information</SubPanelHeading>
             <DescriptionContainer>
-                <Heading>About</Heading>
+                <DescriptionHeading>About</DescriptionHeading>
                 <Description>A brief description of yourself shown on your profile.</Description>
             </DescriptionContainer>
             <div css={css`margin-top: 8px;`}>

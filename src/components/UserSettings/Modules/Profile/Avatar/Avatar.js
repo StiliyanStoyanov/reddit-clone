@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import Label from "../../../SettingView/Items/Label";
-import DescriptionContainer from "../../../SettingView/Items/Field/DescriptionContainer";
-import Heading from "../../../SettingView/Items/Field/Heading";
-import Description from "../../../SettingView/Items/Field/Description";
+import SubPanelHeading from "../../../ModulesItems/SubPanelHeading";
+import DescriptionContainer from "../../../ModulesItems/Field/DescriptionContainer";
+import DescriptionHeading from "../../../ModulesItems/Field/DescriptionHeading";
+import Description from "../../../ModulesItems/Field/Description";
 
 const Avatar = () => {
     return (
         <div css={css`display: block;`}>
-            <Label>Avatar</Label>
+            <SubPanelHeading>Avatar</SubPanelHeading>
             <DescriptionContainer>
-                <Heading>Choose your avatar</Heading>
+                <DescriptionHeading>Choose your avatar</DescriptionHeading>
                 <Description>Choose an avatar you like to be shown on your profile.</Description>
             </DescriptionContainer>
             <div css={css`margin-top: 8px;`}>
