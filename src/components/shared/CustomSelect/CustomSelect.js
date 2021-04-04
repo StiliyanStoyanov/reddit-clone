@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {useCallback, useRef} from 'react';
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {useCustomSelect} from "../../../hooks/useCustomSelect/useCustomSelect";
 import {customSelectActions} from "../../../hooks/useCustomSelect/customSelectReducer";
 import SelectedOptions from "./SelectedOptions/SelectedOptions";
@@ -18,7 +18,6 @@ const {
 } = customSelectActions
 
 const CustomSelect = ({register, optionsDefault}) => {
-    const theme = useTheme();
     const [state, dispatch, dispatchWithOptionsRefs, optionsRefs] = useCustomSelect(optionsDefault);
     const {userInput, focused, highlight, options, selectedOptions} = state
     const inputRef = useRef();
@@ -96,7 +95,7 @@ const CustomSelect = ({register, optionsDefault}) => {
                 value={userInput}
                 autoComplete="off"
             />
-            <input ref={register} name="selectedOptions" type="hidden" value={JSON.stringify(selectedOptions)}/>
+            <input {...register("selectedOptions")} type="hidden" value={JSON.stringify(selectedOptions)}/>
             <Options
                 css={focused && css`visibility: visible`}
                 optionsRefs={optionsRefs}
@@ -121,7 +120,7 @@ const div = focused => css`
 `
 
 const input = theme => css`
-  color: ${theme.color};
+  color: ${theme.color1};
   background-color: transparent;
   border: none;
   outline: none;
@@ -129,7 +128,5 @@ const input = theme => css`
   margin: 2px 8px 10px 0;
   label: select-search-inuput
 `
-
-
 
 export default CustomSelect;

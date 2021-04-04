@@ -2,15 +2,8 @@
 import {css} from "@emotion/react";
 import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons/faExclamationTriangle";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useEffect} from "react";
 
 const ErrorMessage = ({error}) => {
-    useEffect(() => {
-        if (error && error.type.startsWith('create-community') && document.activeElement !== error.ref) {
-            error.ref.focus();
-        }
-    }, [error]);
-
     if (error) {
         return (
             <div css={errorField}>

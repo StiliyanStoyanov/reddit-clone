@@ -8,12 +8,12 @@ const SubmitInput = () => {
             css={css`
               display: block;
               border: 0;
-              color: ${theme.color};
+              color: ${theme.color1};
               height: 40px;
               width: 100px;
               margin: 50px auto 0;
               border-radius: 4px;
-              background-color: ${theme.iconActiveColor};
+              background-color: ${theme.colorBlue};
               box-shadow: 1px 1px 2px 0 ${theme.theme === 'dark' ? 'black' : 'gray'};
               &:focus {
                 outline: 0;

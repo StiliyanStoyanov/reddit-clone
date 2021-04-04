@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import FieldDescription from "./FieldsExtras/FieldDescription";
 import {inputFieldBase} from "../../../styles/CreateCommunity/inputFieldBase";
 import ErrorMessage from "../Error/ErrorMessage";
@@ -13,7 +13,7 @@ const tooltipMessage = "Community name must be between 3 and 24 characters." +
     " as well as multiple underscores one after another are not allowed."
 // </editor-fold>
 const NameInput = ({register, descriptionText, nameError}) => {
-    const theme = useTheme();
+
     return (
         <div>
             <label htmlFor="communityName" css={css`display: block`}>Name *</label>
@@ -22,12 +22,9 @@ const NameInput = ({register, descriptionText, nameError}) => {
                 tooltipMessage={tooltipMessage}
             />
             <input
-                css={css(
-                    inputFieldBase(theme)
-                )}
+                css={inputFieldBase}
                 type="text"
-                name="communityName"
-                ref={register({
+                {...register("communityName",{
                     required: {value: true, message: "Community name is required"},
                     minLength: {value: 3, message: "Community name must be at least 3 characters long"},
                     maxLength: {value: 24, message: "Community name cannot exceed 24 characters"},

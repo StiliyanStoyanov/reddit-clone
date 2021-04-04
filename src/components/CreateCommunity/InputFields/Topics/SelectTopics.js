@@ -30,8 +30,7 @@ const SelectTopics = ({register, control, descriptionText, topicsError}) => {
         name: 'primaryTopic',
         defaultValue: ""
     });
-    // Topics list filtered from the primary selected topic and none of those additionalTopics options
-    // since the additional additionalTopics component doesn't need to see those values;
+    // Topics list filtered from the primary selected topic and none of those topics options
     const topicsListWithExclusions = topics.filter(topic => topic !== selectedPrimaryTopic && topic !== "None of those Topics");
     return (
         <div css={css`position: relative; z-index: 1`}>

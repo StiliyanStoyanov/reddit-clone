@@ -69,7 +69,7 @@ const ul = theme => css`
   box-shadow: 0 2px 4px 0 rgba(215, 218, 220, 0.2);
   max-height: 300px;
   overflow: auto;
-  background-color: ${theme.createCommunity.backgroundColor};
+  background-color: ${theme.background1};
   label: options-ul;
 `
 const liSuggested = css`

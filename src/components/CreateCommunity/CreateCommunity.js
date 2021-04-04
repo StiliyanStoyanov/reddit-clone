@@ -24,12 +24,13 @@ const CreateCommunity = () => {
     const {user} = useUserStore();
     const userDispatch = useUserDispatch();
     const createCommunity = firebase.functions().httpsCallable('createCommunity');
-    const {register, control, handleSubmit, setError, errors} = useForm();
+    const {register, control, handleSubmit, setError, formState} = useForm();
+    const {errors, isDirty} = formState
 
     const onSubmit = data => {
         createCommunity(data)
-            .then(r => {
-                const {data} = r;
+            .then(res => {
+                const {data} = res;
                 userDispatch({type: "UPDATE_SUBSCRIPTIONS_DATA", payload: data});
                 navigate(`e/${data.name}`);
             })
@@ -38,14 +39,14 @@ const CreateCommunity = () => {
                     setError("communityName", {
                         type: 'create-community/server-error',
                         message: 'Something went wrong please try again later'
-                    });
+                    }, {shouldFocus: true});
                     return;
                 }
                 const {code, message} = e.details;
                 setError("communityName", {
                     type: code,
                     message: message
-                });
+                }, {shouldFocus: true});
             });
     };
 
@@ -88,7 +89,7 @@ const CreateCommunity = () => {
 
 const pageContainer = theme => css`
   height: 100%;
-  background-color: ${theme.createCommunity.backgroundColor};
+  background-color: ${theme.background1};
   min-height: calc(100vh - 71px);
   display: flex;
 `
