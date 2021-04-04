@@ -1,21 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import LogoAndSearch from "./LogoAndSearch/LogoAndSearch";
 import AuthContainer from "./Auth/AuthContainer";
 import CreateDropdown from "./Dropdown/CreateDropdown/CreateDropdown";
 import UserDropdown from "./Dropdown/UserDropdown/UserDropdown";
+import DropdownMenus from "./Dropdown/DropdownItems/DropdownMenus";
 
 const Navigation = () => {
-    const theme = useTheme()
     return (
-        <nav css={nav(theme)}>
+        <nav css={[nav]}>
             <LogoAndSearch/>
             <AuthContainer/>
-            <div css={[div]}>
+            <DropdownMenus>
                 <CreateDropdown/>
                 <UserDropdown/>
-            </div>
+            </DropdownMenus>
         </nav>
     );
 }
@@ -26,16 +25,11 @@ const nav = theme => css`
   z-index: 90;
   display: flex;
   align-items: center;
-  background-color: ${theme.nav.backgroundColor};
-  border-bottom: 1px solid ${theme.borderColor};
+  background-color: ${theme.background1};
+  border-bottom: 1px solid ${theme.border1};
   padding: 3px;
-  label: navigation-bar
+  label: navigation
 `
 
-const div = css`
-  margin-left: auto;
-  display: flex;
-  label: dropdown-menu-container
-`
 
 export default Navigation
