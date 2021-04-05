@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {useForm} from "react-hook-form";
 import firebase from "../../firebase";
 import Banner from "./Banner/Banner";
@@ -19,7 +19,6 @@ const descriptions = {
 }
 
 const CreateCommunity = () => {
-    const theme = useTheme();
     const navigate = useNavigate();
     const {user} = useUserStore();
     const userDispatch = useUserDispatch();
@@ -56,7 +55,7 @@ const CreateCommunity = () => {
     }
     return (
         <>
-            <div css={pageContainer(theme)}>
+            <div css={pageContainer}>
                 <Banner/>
                 <div css={contentContainer}>
                     <Header/>

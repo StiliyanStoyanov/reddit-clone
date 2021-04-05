@@ -11,15 +11,10 @@ const DescriptionInput = ({register, descriptionText, descriptionError}) => {
             <label htmlFor="descriptionText" css={css`display: block; margin-top: 40px`}>Description *</label>
             <FieldDescription descriptionText={descriptionText}/>
             <textarea
-                css={css(
+                css={[
                     inputFieldBase,
-                    {
-                        resize: "vertical",
-                        maxHeight: "400px",
-                        minHeight: "40px",
-                        paddingTop: "6px"
-                    }
-                )}
+                    textarea
+                ]}
                 {...register("descriptionText", {
                     required: {value: true, message: "Description is required"}
                 })}
@@ -29,5 +24,11 @@ const DescriptionInput = ({register, descriptionText, descriptionError}) => {
         </div>
     );
 };
+const textarea = css`
+  resize: vertical;
+  max-height: 400px;
+  min-height: 40px;
+  padding-top: 6px;
+`
 
 export default DescriptionInput;

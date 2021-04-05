@@ -7,7 +7,7 @@ const PrimaryTopicSelect = ({register, topics, selectedPrimaryTopics}) => {
     return (
         <div css={css`display: flex`}>
             <select
-                css={css([inputFieldBase, selectedPrimaryTopics && css`border: 0; &:focus {border: 1px solid #999797;}`])}
+                css={[inputFieldBase, selectedPrimaryTopics && isSelected]}
                 defaultValue={""}
                 {...register("primaryTopic", {
                     required: {value: true, message: "A primary topic is required please select one"}
@@ -21,5 +21,12 @@ const PrimaryTopicSelect = ({register, topics, selectedPrimaryTopics}) => {
         </div>
     );
 };
+
+const isSelected = css` 
+  border: 0; 
+  &:focus {
+    border: 1px solid #999797
+  };
+`
 
 export default PrimaryTopicSelect;
