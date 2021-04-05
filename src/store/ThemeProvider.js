@@ -25,8 +25,8 @@ const GlobalStyles = () => {
                 margin: '0',
                 padding: '0',
                 fontFamily: 'Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;',
-                backgroundColor: `${theme.backgroundColor}`,
-                color: `${theme.color}`,
+                backgroundColor: `${theme.backgroundGlobal}`,
+                color: `${theme.colorGlobal}`,
                 minWidth: '375px'
             },
             '*, *::before, *::after': {
