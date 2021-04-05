@@ -18,7 +18,7 @@ export const darkTheme = {
     hover2: 'rgb(255, 255, 255, 0.1)',
     hover3: 'rgb(255, 255, 255, 0.3)',
     backgroundLoaders: '#272729',
-    animationLoaders: 'linear-gradient(90deg, #272729, #343536, #272729)',
+    animationBackground: 'linear-gradient(90deg, #272729, #343536, #272729)',
 }
 
 export const lightTheme = {
@@ -41,5 +41,5 @@ export const lightTheme = {
     hover2: 'rgb(0, 121, 211, 0.05)',
     hover3: 'rgb(0, 0, 0, 0.3)',
     backgroundLoader: 'rgba(255, 255, 255, 0.8)',
-    animationLoaders: 'linear-gradient(90deg, #f6f7f8, #edeff1, #f6f7f8)'
+    animationBackground: 'linear-gradient(90deg, #f6f7f8, #edeff1, #f6f7f8)'
 }
