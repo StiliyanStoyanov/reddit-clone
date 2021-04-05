@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {animation} from "./loadersAnimation";
 
 const InfoLoader = () => {
-    const {loaders} = useTheme();
     return (
-        <div css={css([animation(loaders), infoBox])}/>
+        <div css={css([animation, infoBox])}/>
     );
 };
 

@@ -1,31 +1,30 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {animation} from "./loadersAnimation";
 
 const AboutLoader = () => {
-    const {loaders} = useTheme();
     return (
-        <div css={[mainContainer(loaders)]}>
-            <div css={css([animation(loaders), headerBox])}/>
-            <div css={[imagePlusTitleContainer]}>
-                <div css={css([animation(loaders), imageBox])}/>
-                <div css={css([animation(loaders), titleBox])}/>
+        <div css={[mainContainer]}>
+            <div css={css([animation, headerBox])}/>
+            <div css={[imageTitleContainer]}>
+                <div css={css([animation, imageBox])}/>
+                <div css={css([animation, titleBox])}/>
             </div>
-            <div css={css([animation(loaders), aboutBox])}/>
-            <div css={css([animation(loaders), bottomBox])}/>
-            <div css={css([animation(loaders), bottomButtonBox])}/>
+            <div css={css([animation, aboutBox])}/>
+            <div css={css([animation, bottomBox])}/>
+            <div css={css([animation, bottomButtonBox])}/>
         </div>
     );
 }
 const mainContainer = theme => css`
-  background-color: ${theme.containerBackground};
+  background-color: ${theme.backgroundLoader};
   padding: 12px;
   max-width: 300px;
   width: 100%;
   border-radius: 4px;
   label: loader-container
 `
-const imagePlusTitleContainer = css`
+const imageTitleContainer = css`
   display: flex;
   margin-bottom: 8px;
   align-items: center;

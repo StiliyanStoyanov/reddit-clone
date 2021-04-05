@@ -1,21 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {animation} from "./loadersAnimation";
 
 const CardViewLoader = () => {
-    const {loaders} = useTheme();
     return (
-        <div css={mainContainer(loaders)}>
-            <div css={css([animation(loaders), infoBox])}/>
-            <div css={css([animation(loaders), titleBox])}/>
-            <div css={css([animation(loaders), contentBox])}/>
-            <div css={css([animation(loaders), bottomBox])}/>
+        <div css={mainContainer}>
+            <div css={css([animation, infoBox])}/>
+            <div css={css([animation, titleBox])}/>
+            <div css={css([animation, contentBox])}/>
+            <div css={css([animation, bottomBox])}/>
         </div>
     );
 }
 
 const mainContainer = theme => css`
-  background-color: ${theme.containerBackground};
+  background-color: ${theme.backgroundLoader};
   margin: 10px auto;
   max-width: 700px;
   width: 100%;
