@@ -1,16 +1,16 @@
 import React from 'react';
-import SettingView from "../../SettingView/SettingView";
-import Heading from "../../SettingView/Items/Heading";
+import SettingsContainer from "../../ModulesItems/SettingsContainer";
+import PanelHeading from "../../ModulesItems/PanelHeading";
 import AccountPreferences from "./AccountPreferences/AccountPreferences";
 import DeactivateAccount from "./DeactivateAccount/DeactivateAccount";
 
 const AccountView = () => {
     return (
-        <SettingView>
-            <Heading>Account Settings</Heading>
+        <SettingsContainer>
+            <PanelHeading>Account Settings</PanelHeading>
             <AccountPreferences/>
             <DeactivateAccount/>
-        </SettingView>
+        </SettingsContainer>
     );
 };
 
