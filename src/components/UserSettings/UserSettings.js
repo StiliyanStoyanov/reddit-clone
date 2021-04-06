@@ -1,21 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import {Routes, useNavigate} from "react-router";
+import {Routes} from "react-router";
 import SettingsNavigation from "./SettingsNavigation/SettingsNavigation";
 import {useUserStore} from "../../store/UserStoreProvider";
-import AccountView from "./SettingsModules/Account/AccountView";
-import ProfileView from "./SettingsModules/Profile/ProfileView";
-import {useEffect} from "react";
+import AccountView from "./Modules/Account/AccountView";
+import ProfileView from "./Modules/Profile/ProfileView";
 
 const UserSettings = () => {
     const {user} = useUserStore();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!user) {
-            navigate('/login')
-        }
-    }, [])
     if (!user) {
         return null
     }
@@ -41,11 +33,11 @@ const pageContainer = css`
 `
 const itemsContainer = theme => css`
   padding: 1em;
-  background-color: ${theme.settings.backgroundColor};
+  background-color: ${theme.background1};
   max-width: 1000px;
   min-width: 380px;
   margin: 8px auto;
-  label: settings-container
+  label: settings-main-container
 `
 
 export default UserSettings;

@@ -3,7 +3,7 @@ import {css} from "@emotion/react";
 
 const Description = ({children}) => {
     return (
-        <p css={p}>{children}</p>
+        <p css={[p]}>{children}</p>
     );
 };
 
@@ -13,5 +13,6 @@ const p = css`
   margin-bottom: 0;
   line-height: 20px;
   font-weight: 400;
+  label: form-description
 `
 export default Description;

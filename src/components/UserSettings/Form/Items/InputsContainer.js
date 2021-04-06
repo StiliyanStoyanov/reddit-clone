@@ -3,14 +3,15 @@ import {css} from "@emotion/react";
 
 const InputsContainer = ({children}) => {
     return (
-        <div css={container}>
+        <div css={[container]}>
             {children}
         </div>
     );
 };
 
-const container =  css`
- margin-top: 20px;
+const container = css`
+  margin-top: 20px;
+  label: inputs-container;
 `
 
 export default InputsContainer;

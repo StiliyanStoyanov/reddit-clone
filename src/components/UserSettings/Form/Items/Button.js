@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 
 const Button = ({children, disabled, ...props}) => {
-    const theme = useTheme();
     return (
-        <div css={container}>
-            <button css={button(theme)} disabled={disabled} {...props}>
+        <div css={[container]}>
+            <button css={[button]} disabled={disabled} {...props}>
                 {children}
             </button>
         </div>
@@ -19,16 +18,13 @@ const container = css`
   flex-flow: row nowrap;
 `
 const button = theme => css`
-  background-color: ${theme.settings.formButtonBackground};
-  color: ${theme.settings.formButtonColor};
+  color: ${theme.color1};
   border: 1px solid transparent;
   border-radius: 2px;
-  &:hover, &:focus-visible {
-    background-color: ${theme.settings.formButtonHover};
-  }
   &:active {
     background-color: #acaeb0;
   }
+  label: form-button
 `
 
 export default Button;

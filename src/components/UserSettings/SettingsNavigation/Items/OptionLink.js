@@ -16,26 +16,22 @@ const OptionLink = ({to, children}) => {
 
 const link = theme => css`
   cursor: pointer;
-  color: ${theme.settings.optionColor};
+  color: ${theme.color2};
   margin-right: 8px;
   white-space: nowrap;
-  font: inherit;
-  text-decoration: inherit;
   font-size: 14px;
   font-weight: 700;
   &:hover, &:focus-visible {
-    color: ${theme.settings.optionHover}
+    color: ${theme.colorHighlight1};
   }
-  display: inline-block;
-  line-height: unset;
   padding: 15px 12px 12px;
   label: option-link
 `
 
 const linkActive = theme => css`
-  color: ${theme.settings.selectedOptionColor};
-  border-bottom: 3px solid ${theme.settings.selectedOptionBorder};
-  label: --active
+  color: ${theme.colorHighlight1};
+  border-bottom: 3px solid ${theme.colorHighlight2};
+  label: active
 `
 
 export default OptionLink;

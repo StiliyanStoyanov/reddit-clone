@@ -19,7 +19,7 @@ const heading = theme => css`
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  color: ${theme.settings.color};
+  color: ${theme.color1};
   display: flex;
   margin: 0 0 4px;
   label: description-heading

@@ -37,7 +37,7 @@ const button = css`
 
 const icon = theme => css`
   font-size: 20px;
-  color: ${theme.color};
+  color: ${theme.colorGlobal};
 `
 
 export default ShowHidePasswordButton;

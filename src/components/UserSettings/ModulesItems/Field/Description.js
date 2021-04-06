@@ -12,7 +12,7 @@ const Description = ({children}) => {
 const container = theme => css`
   margin: 0;
   font-weight: 400;
-  color: ${theme.settings.metaText};
+  color: ${theme.color2};
   font-size: 12px;
   line-height: 16px;
   label: description

@@ -17,8 +17,8 @@ const heading = theme => css`
   letter-spacing: .5px;
   line-height: 12px;
   text-transform: uppercase;
-  border-bottom: 2px solid ${theme.settings.borderColor};
-  color: ${theme.settings.metaText};
+  border-bottom: 2px solid ${theme.border1};
+  color: ${theme.color2};
   label: sub-panel-heading
 `
 

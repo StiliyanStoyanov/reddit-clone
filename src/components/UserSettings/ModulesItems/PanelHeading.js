@@ -10,7 +10,7 @@ const PanelHeading = ({children}) => {
 };
 
 const heading = theme => css`
-  color: ${theme.settings.color};
+  color: ${theme.color1};
   font-size: 20px;
   line-height: 24px;
   margin: 0;

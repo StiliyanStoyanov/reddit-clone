@@ -30,7 +30,7 @@ const ProfileInformation = () => {
             <div css={css`margin-top: 8px;`}>
                 <textarea
                     placeholder="About (optional)"
-                    css={textArea}
+                    css={textarea}
                     name="about" id="about" cols="30" rows="10"
                 />
                 <button css={css`margin-bottom: 64px;`} type="button" onClick={handleAboutSubmit}>update</button>
@@ -38,12 +38,17 @@ const ProfileInformation = () => {
         </div>
     );
 };
-const textArea = css`
+const textarea = theme => css`
   width: 100%;
   background-color: transparent;
   padding: 8px;
   margin-bottom: 8px;
-  color: white;
+  color: ${theme.colorGlobal};
+  border-color: ${theme.border1};
+  &:focus-visible {
+    outline: 0;
+    border-color: ${theme.colorHighlight1};
+  }
   border-radius: 4px;
   resize: vertical;
   min-height: 22px

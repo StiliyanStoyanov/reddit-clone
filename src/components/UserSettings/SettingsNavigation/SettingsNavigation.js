@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import Options from "./Items/Options";
 import Heading from "./Items/Heading";
 
 const SettingsNavigation = () => {
-    const theme = useTheme();
     return (
-        <div css={[container(theme)]}>
+        <div css={[container]}>
             <Heading/>
             <Options/>
         </div>
@@ -16,7 +15,7 @@ const container = theme => css`
   max-width: 1000px;
   min-width: 380px;
   margin: 0 auto;
-  border-bottom: 1px solid ${theme.borderColor};
+  border-bottom: 1px solid ${theme.border1};
   label: settings-navigation
 `
 

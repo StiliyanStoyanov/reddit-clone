@@ -18,7 +18,7 @@ const container = css`
 `
 const header = theme => css`
   font-size: 22px;
-  color: ${theme.settings.color};
+  color: ${theme.color1};
   font-weight: 700;
   margin: 0;
   padding: 0;

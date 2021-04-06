@@ -8,9 +8,9 @@ import ErrorMessage from "./ErrorMessage";
 const Input = memo(({visible, register, rules, error, isDirty, name, type, placeholder}) => {
     const [inputType, setInputType] = useState(type);
 
-    const showHidePassword = useCallback(() => {
-        inputType !== "password" ? setInputType("password") : setInputType(type);
-    }, [inputType]);
+    const showHidePassword = useCallback((event) => {
+        inputType !== "password" ? setInputType(type) : setInputType("text");
+    }, [type, inputType]);
 
     return (
         <div css={[container]}>
@@ -45,7 +45,7 @@ const container = css`
 `
 const labelTransform = css`
   transform: translate3d(0, -12px, 0) scale(0.65);
-  label: -transformed
+  label: transformed
 `
 const labelTransition = css`
   transition: all 0.2s ease-in-out;
@@ -74,13 +74,13 @@ const input = theme => css`
   width: 100%;
   background: transparent;
   outline: 0;
-  border: 1px solid ${theme.settings.borderColor};
+  border: 1px solid ${theme.border1};
   &:focus-visible {
-    border: 1px solid ${theme.settings.formFocusBorderColor}
+    border: 1px solid ${theme.colorHighlight1}
   }
   border-radius: 4px;
   box-sizing: border-box;
-  color: ${theme.settings.color};
+  color: ${theme.color1};
   height: 52px;
   padding: 20px 12px 12px;
   &:hover + label, &:focus-visible + label {
@@ -92,8 +92,8 @@ const input = theme => css`
   label: input
 `
 const inputError = theme => css`
-  border: 1px solid ${theme.settings.formErrorBorderColor};
-  label: -error
+  border: 1px solid ${theme.colorDanger1};
+  label: error
 `
 
 export default Input;

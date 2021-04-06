@@ -5,7 +5,7 @@ import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
 
 const Heading = () => {
     return (
-        <h3 css={heading}>
+        <h3 css={[heading]}>
             <FontAwesomeIcon css={icon} icon={faCog}/>
             User Settings
         </h3>
@@ -17,10 +17,12 @@ const heading = css`
   margin-top: 0;
   font-size: 18px;
   align-items: center;
+  label: settings-navigation-heading;
 `
 const icon = css`
   font-size: 20px;
-  margin-right: 8px
+  margin-right: 8px;
+  label: setting-navigation-icon;
 `
 
 export default Heading;
