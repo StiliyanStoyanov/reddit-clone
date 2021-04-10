@@ -1,20 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
 import React from "react";
-import LoginLink from "./LoginLink";
-import SignUpLink from "./SignUpLink";
+import LoginModalButton from "./LoginModalButton";
+import SignUpModalButton from "./SignUpModalButton";
 import {useUserStore} from "../../../store/UserStoreProvider";
 
 const AuthContainer = () => {
     const {user} = useUserStore();
-    if (!user) {
-        return (
-            <div css={container}>
-                <LoginLink/>
-                <SignUpLink/>
-            </div>
-        )
-    } else return null
+    if (user) {
+        return null;
+    }
+    return (
+        <div css={[container]}>
+            <LoginModalButton/>
+            <SignUpModalButton/>
+        </div>
+    );
 
 }
 
@@ -25,6 +26,7 @@ const container = css`
   margin-left: auto;
   margin-right: 5px;
   white-space: nowrap;
+  label: auth-buttons-container
 `
 
 export default AuthContainer
