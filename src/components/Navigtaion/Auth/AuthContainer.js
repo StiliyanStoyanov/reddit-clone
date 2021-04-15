@@ -6,8 +6,8 @@ import SignUpModalButton from "./SignUpModalButton";
 import {useUserStore} from "../../../store/UserStoreProvider";
 
 const AuthContainer = () => {
-    const {user} = useUserStore();
-    if (user) {
+    const {user, isLoading} = useUserStore();
+    if (isLoading || user) {
         return null;
     }
     return (
