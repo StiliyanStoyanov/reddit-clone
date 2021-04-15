@@ -1,38 +1,26 @@
 import makeStore from "../hooks/makeStore";
-import firebase from "../firebase";
 
 const userStoreDefault = {
     theme: localStorage.getItem('theme') || 'dark',
     user: null,
     username: '',
-    communitiesOwned: [],
-    subscriptions: [],
-    subscriptionsData: [],
-    moderatorIn: [],
-    preferredViewType: 'card',
-    preferredSortType: 'top',
     isLoading: true
 }
 
-const UserStoreActionTypes = {
-    CHANGE_THEME: "CHANGE_THEME",
-    SESSION_LOGIN: "SESSION_LOGIN",
-    UPDATE_SUBSCRIPTIONS_DATA: "UPDATE_SUBSCRIPTIONS_DATA",
-    LOGOUT: "LOGOUT",
-    SET_LOADING: "SET_LOADING"
+const userStoreActionTypes = {
+    changeTheme: "CHANGE_THEME",
+    sessionLogin: "SESSION_LOGIN",
+    logout: "LOGOUT",
 }
 const {
-    CHANGE_THEME,
-    SESSION_LOGIN,
-    UPDATE_SUBSCRIPTIONS_DATA,
-    LOGOUT,
-    SET_LOADING
-} = UserStoreActionTypes
+    changeTheme,
+    sessionLogin,
+    logout
+} = userStoreActionTypes
 
 const reducer = (state, action) => {
-    const {payload} = action
     switch (action.type) {
-        case CHANGE_THEME: {
+        case changeTheme: {
             const theme = state.theme === 'dark' ? 'light': 'dark'
             localStorage.setItem('theme', theme);
             return {
@@ -40,44 +28,25 @@ const reducer = (state, action) => {
                 theme: theme
             };
         }
-        case UPDATE_SUBSCRIPTIONS_DATA: {
-            return {
-                ...state,
-                subscriptions: [
-                    ...state.subscriptions,
-                    firebase.firestore().collection('communities').doc(payload.name)
-                ],
-                subscriptionsData: [
-                    ...state.subscriptionsData,
-                    {...action.payload}
-                ]
+        case sessionLogin: {
+            const {user} = action.payload;
 
-            }
-        }
-        case SESSION_LOGIN: {
             return {
                 ...state,
-                ...payload.userData,
-                subscriptionsData: payload.subscriptionsData,
-                user: action.payload.user,
-                username: action.payload.user.displayName,
+                user: user,
+                username: user.displayName,
                 isLoading: false
-            }
+            };
         }
-        case SET_LOADING: {
-            return {
-                ...state,
-                isLoading: action.payload
-            }
-        }
-        case LOGOUT: {
+        case logout: {
+            if (state.user === null) return state;
             return {
                 ...userStoreDefault,
-                isLoading: false,
-            }
+                isLoading: false
+            };
         }
         default: {
-            console.error("Invalid Action Type");
+            console.error("Invalid user store action type");
             return state
         }
     }
@@ -89,4 +58,4 @@ const [
     useUserDispatch
 ] = makeStore(reducer, userStoreDefault);
 
-export {UserStoreProvider, useUserStore, useUserDispatch, UserStoreActionTypes}
+export {UserStoreProvider, useUserStore, useUserDispatch, userStoreActionTypes}
