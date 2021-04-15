@@ -1,44 +1,108 @@
 import makeStore from "../hooks/makeStore";
+export const postStoreActionTypes = {
+    setCommunity: "SET_COMMUNITY",
+    clearCommunity: "CLEAR_COMMUNITY",
+    changeForm: "CHANGE_FORM",
+    updateTitle: "UPDATED_TITLE",
+    updatePostContent: "UPDATE_POST_CONTENT",
+    updateImageContent: "UPDATED_IMAGE_CONTENT",
+    updateLinkContent: "UPDATE_LINK_CONTENT",
+    clearImageContent: "CLEAR_IMAGE_CONTENT",
+}
+const {
+    setCommunity,
+    clearCommunity,
+    changeForm,
+    updateTitle,
+    updatePostContent,
+    updateImageContent,
+    updateLinkContent,
+    clearImageContent
+} = postStoreActionTypes
 
-const storeDefault = {
-    selectedFormType: 'post',
-    selectedCommunity: null,
+const postStoreDefault = {
+    community: null,
+    activeForm: 'post',
     title: '',
     postContent: '',
     imageFile: null,
     imageDataUrl: null,
     linkContent: '',
-    queriedCommunities: [],
 }
 
-const reducer = (state, action) => {
+const postStoreReducer = (state, action) => {
     switch (action.type) {
-        case "CHANGE_FORM_TYPE": {
-            return {...state, selectedFormType: action.payload}
+        case changeForm: {
+            const {activeForm} = state;
+            const {switchTo} = action.payload;
+            if (switchTo === activeForm) return state
+            return {
+                ...state,
+                activeForm: switchTo
+            };
         }
-        case "CHANGE_TITLE": {
-            return {...state, title: action.payload}
+        case updateTitle: {
+            const {title} = state
+            const {userInput} = action.payload;
+            if (title === userInput) return state;
+
+            return {
+                ...state,
+                title: userInput
+            };
         }
-        case "CHANGE_POST_CONTENT": {
-            return {...state, postContent: action.payload}
+        case updatePostContent: {
+            const {postContent} = state;
+            const {userInput} = action.payload
+            if (postContent === userInput) return state;
+            return {
+                ...state,
+                postContent: userInput
+            };
         }
-        case "CHANGE_IMAGE_CONTENT": {
-            return {...state, imageFile: action.payload.file, imageDataUrl: action.payload.imageDataUrl}
+        case updateLinkContent: {
+            const {linkContent} = state;
+            const {userInput} = action.payload;
+            if (linkContent === userInput) return state;
+            return {
+                ...state,
+                linkContent: userInput
+            };
         }
-        case "CLEAR_IMAGE_CONTENT": {
-            return {...state, imageFile: null, imageDataUrl: null}
+        case updateImageContent: {
+            const {imageFile, imageDataUrl} = action.payload;
+            console.log(imageDataUrl, imageFile);
+            if (!imageFile || !imageDataUrl) return state;
+            return {
+                ...state,
+                imageFile: imageFile,
+                imageDataUrl: imageDataUrl
+            };
         }
-        case "CHANGE_LINK_CONTENT": {
-            return {...state, linkContent: action.payload}
+        case clearImageContent: {
+            const {imageFile, imageDataUrl} = state;
+            if (!imageFile || !imageDataUrl) return state;
+            return {
+                ...state,
+                imageFile: null,
+                imageDataUrl: null
+            };
         }
-        case "SELECT_COMMUNITY": {
-            return {...state, selectedCommunity: action.payload}
+        case setCommunity: {
+            const {selectedCommunity} = state;
+            const {community} = action.payload
+            if (selectedCommunity === community) return state;
+            return {
+                ...state,
+                community: community
+            };
+
         }
-        case "CLEAR_COMMUNITY": {
-            return {...state, selectedCommunity: null}
+        case clearCommunity: {
+            return {...state, community: null}
         }
         default: {
-            console.error("Invalid Reducer Case");
+            console.error("Invalid Reducer Case!!");
             return state
         }
     }
@@ -48,6 +112,6 @@ const [
     PostStoreProvider,
     usePostStore,
     usePostDispatch
-] = makeStore(reducer, storeDefault);
+] = makeStore(postStoreReducer, postStoreDefault);
 
 export {PostStoreProvider, usePostStore, usePostDispatch}
