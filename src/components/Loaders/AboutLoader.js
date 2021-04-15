@@ -5,14 +5,14 @@ import {animation} from "./loadersAnimation";
 const AboutLoader = () => {
     return (
         <div css={[mainContainer]}>
-            <div css={css([animation, headerBox])}/>
+            <div css={[animation, headerBox]}/>
             <div css={[imageTitleContainer]}>
-                <div css={css([animation, imageBox])}/>
-                <div css={css([animation, titleBox])}/>
+                <div css={[animation, imageBox]}/>
+                <div css={[animation, titleBox]}/>
             </div>
-            <div css={css([animation, aboutBox])}/>
-            <div css={css([animation, bottomBox])}/>
-            <div css={css([animation, bottomButtonBox])}/>
+            <div css={[animation, aboutBox]}/>
+            <div css={[animation, bottomBox]}/>
+            <div css={[animation, bottomButtonBox]}/>
         </div>
     );
 }

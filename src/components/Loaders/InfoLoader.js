@@ -4,7 +4,7 @@ import {animation} from "./loadersAnimation";
 
 const InfoLoader = () => {
     return (
-        <div css={css([animation, infoBox])}/>
+        <div css={[animation, infoBox]}/>
     );
 };
 

@@ -4,11 +4,11 @@ import {animation} from "./loadersAnimation";
 
 const CardViewLoader = () => {
     return (
-        <div css={mainContainer}>
-            <div css={css([animation, infoBox])}/>
-            <div css={css([animation, titleBox])}/>
-            <div css={css([animation, contentBox])}/>
-            <div css={css([animation, bottomBox])}/>
+        <div css={[mainContainer]}>
+            <div css={[animation, infoBox]}/>
+            <div css={[animation, titleBox]}/>
+            <div css={[animation, contentBox]}/>
+            <div css={[animation, bottomBox]}/>
         </div>
     );
 }
