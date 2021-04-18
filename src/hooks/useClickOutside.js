@@ -1,11 +1,11 @@
-import React from "react";
+import {useRef, useEffect} from "react";
 
 export const useClickOutside = (elementRef, callback, open) => {
-    const callbackRef = React.useRef();
+    const callbackRef = useRef();
     callbackRef.current = callback;
 
-    React.useEffect(() => {
-        if (!elementRef.current || !elementRef.current instanceof HTMLElement || typeof callback != "function" || !open) return;
+    useEffect(() => {
+        if (!elementRef.current || !elementRef.current instanceof HTMLElement || typeof callbackRef.current != "function" || !open) return;
 
         const handleClickOutside = event => {
             // Check if the referenced element doesn't contain the clicked element (e.target)
