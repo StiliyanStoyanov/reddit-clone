@@ -1,22 +1,22 @@
 /** @jsxImportSource @emotion/react */
 import {useUserStore} from "../../../../../store/UserStoreProvider";
-import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
+import DropdownIcon from "../../DropdownItems/DropdownIcon";
 import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
-import DropdownLinkItem from "../../DropdownItems/DropdownLinkItem";
-import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
+import DropdownLink from "../../DropdownItems/DropdownLink";
+import DropdownSpan from "../../DropdownItems/DropdownSpan";
 
-const SettingsLink = (props) => {
+const SettingsLink = () => {
     const {user} = useUserStore();
-    if (user) {
-        return (
-            <DropdownLinkItem to={'/settings/account'} {...props}>
-                <DropdownItemIcon icon={faCog}/>
-                <span css={itemTextStyle}>Settings</span>
-            </DropdownLinkItem>
-        );
-    } else {
+    if (!user) {
         return null;
+
     }
+    return (
+        <DropdownLink to={'/settings/account'}>
+            <DropdownIcon icon={faCog}/>
+            <DropdownSpan>Settings</DropdownSpan>
+        </DropdownLink>
+    );
 
 }
 export default SettingsLink

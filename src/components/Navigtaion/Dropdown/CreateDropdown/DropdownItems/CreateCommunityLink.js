@@ -1,23 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import {css} from "@emotion/react";
 import {faUsers} from "@fortawesome/free-solid-svg-icons/faUsers";
-import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
-import DropdownLinkItem from "../../DropdownItems/DropdownLinkItem";
+import DropdownIcon from "../../DropdownItems/DropdownIcon";
+import DropdownLink from "../../DropdownItems/DropdownLink";
+import DropdownSpan from "../../DropdownItems/DropdownSpan";
 
-const CreateCommunityLink = (props) => {
+const CreateCommunityLink = () => {
     return (
-        <DropdownLinkItem
-            to={"/create-community"}
-            {...props}
-        >
-            <DropdownItemIcon icon={faUsers}/>
-            <span css={span}>Create Community</span>
-        </DropdownLinkItem>
+        <DropdownLink to={"/create-community"}>
+            <DropdownIcon icon={faUsers}/>
+            <DropdownSpan>Create Community</DropdownSpan>
+        </DropdownLink>
     )
 }
-const span = css`
-  font-size: 0.9rem;
-  padding: 10px 0;
-`
 
 export default CreateCommunityLink

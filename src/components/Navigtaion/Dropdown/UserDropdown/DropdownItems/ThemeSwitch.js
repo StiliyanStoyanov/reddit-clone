@@ -1,37 +1,28 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
-import {useState} from "react";
-import {useUserDispatch} from "../../../../../store/UserStoreProvider";
-import {UserStoreActionTypes} from "../../../../../store/UserStoreProvider";
+import {css} from "@emotion/react";
+import {useUserDispatch, useUserStore} from "../../../../../store/UserStoreProvider";
+import {userStoreActionTypes} from "../../../../../store/UserStoreProvider";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
-import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
-import itemContainer from "../../DropdownItems/itemContainer";
-import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
+import DropdownIcon from "../../DropdownItems/DropdownIcon";
+import {dropdown_item_button} from "../../../../../styles/dropdown_styles";
+import DropdownSpan from "../../DropdownItems/DropdownSpan";
+const {changeTheme} = userStoreActionTypes
 
 const ThemeSwitch = () => {
-    const theme = useTheme();
-    const checkbox = theme.theme === 'dark';
-    const [checked, setChecked] = useState(checkbox);
+    const {theme} = useUserStore();
     const dispatch = useUserDispatch();
-    const changeTheme = () => {
-        dispatch({type: UserStoreActionTypes.CHANGE_THEME});
-        setChecked(!checked);
-    }
-    const handleKeydown = event => {
-        if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            changeTheme();
-        }
-    }
+    const checked = theme === 'dark';
+    const handleChangeThemeButton = event => dispatch({type: changeTheme});
+
     return (
-        <div css={itemContainer(theme)} tabIndex={0} onMouseDown={changeTheme} onKeyDown={handleKeydown} role="button">
-            <DropdownItemIcon icon={faMoon}/>
-            <span css={itemTextStyle}>Night Mode</span>
-            <input tabIndex={-1} css={themeCheckboxStyle} type="checkbox" checked={checked} readOnly/>
-        </div>
+        <button css={dropdown_item_button} tabIndex={0} onClick={handleChangeThemeButton}>
+            <DropdownIcon icon={faMoon}/>
+            <DropdownSpan>Night Mode</DropdownSpan>
+            <input tabIndex={-1} css={[checkbox]} type="checkbox" checked={checked} readOnly/>
+        </button>
     )
 };
-const themeCheckboxStyle = css`
+const checkbox = css`
   margin-left: auto;
   position: relative;
   cursor:pointer;
@@ -61,6 +52,7 @@ const themeCheckboxStyle = css`
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     transition: .5s;
   }
+  label: theme-checkbox
 `
 
 export default ThemeSwitch

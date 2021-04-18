@@ -1,25 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import {css} from "@emotion/react";
 import {faEdit} from "@fortawesome/free-solid-svg-icons/faEdit";
-import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
-import DropdownLinkItem from "../../DropdownItems/DropdownLinkItem";
+import DropdownIcon from "../../DropdownItems/DropdownIcon";
+import DropdownLink from "../../DropdownItems/DropdownLink";
+import DropdownSpan from "../../DropdownItems/DropdownSpan";
 
-const CreatePostLink = (props) => {
+const CreatePostLink = () => {
     return (
-        <DropdownLinkItem
-            to={"/create-post"}
-            {...props}
-        >
-            <DropdownItemIcon icon={faEdit}/>
-            <span css={descriptionSpan}>Create Post</span>
-        </DropdownLinkItem>
+        <DropdownLink to={"/create-post"}>
+            <DropdownIcon icon={faEdit}/>
+            <DropdownSpan>Create Post</DropdownSpan>
+        </DropdownLink>
     );
 }
-
-const descriptionSpan = css`
-  font-size: 0.9rem;
-  padding: 10px 0;
-`
-
 
 export default CreatePostLink

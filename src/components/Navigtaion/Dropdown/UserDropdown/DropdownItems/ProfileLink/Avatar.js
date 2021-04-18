@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import React from "react";
 
 // TODO: Pass the user avatar
 export const Avatar = () => {

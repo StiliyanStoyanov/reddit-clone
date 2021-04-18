@@ -1,23 +1,19 @@
 import React from "react";
-import {Name} from "./Name";
+import {Username} from "./Username";
 import {Avatar} from "./Avatar";
 import {useUserStore} from "../../../../../../store/UserStoreProvider";
-import DropdownLinkItem from "../../../DropdownItems/DropdownLinkItem";
+import DropdownLink from "../../../DropdownItems/DropdownLink";
 
-export const ProfileLink = (props) => {
-    const {user, username} = useUserStore();
-    if (user) {
-        return (
-            <DropdownLinkItem
-                to={`/user/${username}`}
-                {...props}
-            >
-                <Avatar/>
-                <Name username={username}/>
-            </DropdownLinkItem>
-        );
-    } else {
+export const ProfileLink = () => {
+    const {user} = useUserStore();
+    if (!user) {
         return null
     }
+    return (
+        <DropdownLink to={`/user/${user.displayName}`}>
+            <Avatar/>
+            <Username username={user.displayName}/>
+        </DropdownLink>
+    );
 }
 export default ProfileLink

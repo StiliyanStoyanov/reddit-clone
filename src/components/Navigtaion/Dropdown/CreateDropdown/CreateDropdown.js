@@ -7,12 +7,8 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons/faPlus";
 const CreateDropdown = () => {
     return (
         <Dropdown icon={faPlus}>
-            {props => (
-                <>
-                    <CreatePostLink {...props}/>
-                    <CreateCommunityLink {...props}/>
-                </>
-            )}
+            <CreatePostLink/>
+            <CreateCommunityLink/>
         </Dropdown>
     );
 };

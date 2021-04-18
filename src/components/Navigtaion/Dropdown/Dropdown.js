@@ -1,60 +1,46 @@
 /** @jsxImportSource @emotion/react */
-import {useRef, useState} from "react";
-import {css, useTheme} from "@emotion/react";
+import {createContext, useCallback, useContext, useMemo, useRef, useState} from "react";
 import DropdownToggle from "./DropdownToggle";
-import FocusLock from "react-focus-lock";
+import ReactFocusLock from "react-focus-lock";
 import {useClickOutside} from "../../../hooks/useClickOutside";
+import {dropdown, dropdown_content, dropdown_content_visible} from "../../../styles/dropdown_styles";
 
+const DropdownStore = createContext({});
+const DropdownMethods = createContext({});
 const Dropdown = ({icon, children}) => {
-    const theme = useTheme();
-    const [open, setOpen] = useState(false);
-    const [isFocusLocked, setIsFocusLocked] = useState(false);
     const dropdownRef = useRef();
-    const toggleDropdown = () => setOpen(prevState => !prevState);
-    const enableFocusLock = () =>  setIsFocusLocked(true);
-    const disableFocusLock = () => setIsFocusLocked(false);
-    const onClickOutside = () => {
-        setOpen(false);
-        setIsFocusLocked(false);
-    };
-    const propsToPass = {open, toggleDropdown, enableFocusLock, disableFocusLock}
-    useClickOutside(dropdownRef, onClickOutside, open);
+    const [open, setOpen] = useState(false);
+    const toggleDropdown = useCallback(event => setOpen(prevState => !prevState), []);
+    const closeDropdown = useCallback(event => {setOpen(false);}, []);
+    const openDropdown = useCallback(event => setOpen(true), []);
+    const dropdownMethods = useMemo(() => {
+        return {toggleDropdown, closeDropdown, openDropdown}
+    }, [closeDropdown, openDropdown, toggleDropdown]);
+    useClickOutside(dropdownRef, closeDropdown, open);
     return (
-        <div css={dropdownMenuContainer} ref={dropdownRef}>
+        <div css={[dropdown]} ref={dropdownRef}>
             <DropdownToggle
+                open={open}
                 icon={icon}
-                {...propsToPass}
+                toggleDropdown={toggleDropdown}
             />
-            <div css={dropdownContentContainer(theme, open)}>
-                <FocusLock disabled={!isFocusLocked} returnFocus={true}>
-                    {children(propsToPass)}
-                </FocusLock>
+            <div css={[dropdown_content, open && dropdown_content_visible]}>
+                <ReactFocusLock disabled={!open} returnFocus={true}>
+                    <DropdownStore.Provider value={open}>
+                        <DropdownMethods.Provider value={dropdownMethods}>
+                            {children}
+                        </DropdownMethods.Provider>
+                    </DropdownStore.Provider>
+                </ReactFocusLock>
             </div>
         </div>
     );
 };
-
-const dropdownContentContainer = (theme, open) => css`
-  position: absolute;
-  padding: 8px;
-  margin-top: 8px;
-  z-index: 2;
-  background-color: ${theme.nav.backgroundColor};
-  width: 360px;
-  border-radius: 8px;
-  top: 60px;
-  right: 8px;
-  overflow: auto;
-  border: 1px solid ${theme.borderColor};
-  display: ${open ? 'block' : 'none'};
-  label: dropdown-content-container
-`;
-
-const dropdownMenuContainer = css`
-  z-index: 1;
-  margin-right: 5px;
-  border-radius: 50%;
-  label: dropdown-menu-container
-`
+export const useDropdownStore = () => {
+    return useContext(DropdownStore);
+}
+export const useDropdownMethods = () => {
+    return useContext(DropdownMethods);
+}
 export default Dropdown
 

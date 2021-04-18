@@ -1,35 +1,30 @@
 /** @jsxImportSource @emotion/react */
-import {useTheme} from "@emotion/react";
 import React from "react";
-import firebase from "../../../../../firebase";
+import {auth} from "../../../../../firebase";
 import {useUserStore} from "../../../../../store/UserStoreProvider";
-import DropdownItemIcon from "../../DropdownItems/DropdownItemIcon";
+import DropdownIcon from "../../DropdownItems/DropdownIcon";
 import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
-import {itemTextStyle} from "../../../../../styles/Navigation/dropdownItemsStyles";
-import itemContainer from "../../DropdownItems/itemContainer";
+import {dropdown_item_button} from "../../../../../styles/dropdown_styles";
+import DropdownSpan from "../../DropdownItems/DropdownSpan";
+import {useDropdownMethods} from "../../Dropdown";
 
-const Logout = ({toggleDropdown}) => {
-    const theme = useTheme();
+const Logout = () => {
     const {user} = useUserStore();
-
-    const logout = () => {
-        firebase.auth().signOut().then(() => {
-            toggleDropdown();
-        }).catch(err => {
-            console.error('LOGOUT ERROR: ', err);
-        });
+    const {closeDropdown} = useDropdownMethods();
+    const handleLogoutButtonClick = async (event) => {
+        auth.signOut().catch(err => console.error(err));
+        closeDropdown(event);
     }
 
-    if (user) {
-        return (
-            <div css={itemContainer(theme)} tabIndex={0} onClick={logout} role="button">
-                <DropdownItemIcon icon={faSignOutAlt}/>
-                <span css={itemTextStyle}>Logout</span>
-            </div>
-        );
-    } else {
-        return null;
+    if (!user) {
+      return null;
     }
+    return (
+        <button css={[dropdown_item_button]} tabIndex={0} onClick={handleLogoutButtonClick}>
+            <DropdownIcon icon={faSignOutAlt}/>
+            <DropdownSpan>Logout</DropdownSpan>
+        </button>
+    );
 }
 
 export default Logout
