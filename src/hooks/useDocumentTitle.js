@@ -9,10 +9,12 @@ export const useDocumentTitle = (title, retainOnUnmount = false) => {
     }, [title]);
 
     useEffect(() => {
+        // https://github.com/facebook/react/issues/15841
+        const memoTitle = defaultTitle.current
         return () => {
             if (!retainOnUnmount) {
-                document.title = defaultTitle.current;
+                document.title = memoTitle;
             }
         };
-    }, []);
+    }, [retainOnUnmount]);
 }
