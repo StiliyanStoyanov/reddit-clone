@@ -9,7 +9,7 @@ export default function makeStore (reducer, initialState) {
 
         return (
             <dispatchContext.Provider value={dispatch}>
-                <storeContext.Provider reducer={reducer} value={store}>
+                <storeContext.Provider value={store}>
                     {children}
                 </storeContext.Provider>
             </dispatchContext.Provider>
