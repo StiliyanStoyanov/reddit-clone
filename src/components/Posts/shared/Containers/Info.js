@@ -14,6 +14,7 @@ const infoContainer = css`
   width: 100%;
   align-items: center;
   padding-left: 8px;
+  label: card-info
 `
 
 export default Info

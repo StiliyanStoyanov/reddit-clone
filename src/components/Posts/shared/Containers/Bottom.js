@@ -1,19 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 
 const BottomContainer = ({children}) => {
-    const theme = useTheme();
     return (
-        <div css={container(theme)}>
+        <div css={[container]}>
             {children}
         </div>
     );
 };
 
-const container = theme => css`
+const container = css`
   display: flex;
-  height: 32px;
   padding: 4px;
+  label: card-bottom
 `
 
 export default BottomContainer;
