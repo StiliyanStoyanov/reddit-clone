@@ -64,7 +64,7 @@ export const dropdown_toggle_button = theme => css`
   label: dropdown-toggle
 `
 export const dropdown_toggle_button_active = theme => css`
-  background: ${theme.colorHighlight4};
+  background: ${theme.colorHighlight3};
   label: active
 `
 export const dropdown_toggle_icon = theme => css`
