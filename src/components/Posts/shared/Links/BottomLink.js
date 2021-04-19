@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {overlay} from "../../../../styles/general_styles";
 
 const BottomLink = ({icon, children, to}) => {
-    const theme = useTheme();
+
 
     return (
-        <Link to={to} css={linkContainer(theme.post)}>
+        <Link to={to} css={linkContainer}>
             <FontAwesomeIcon css={iconStyle} icon={icon}/>
             <span css={spanStyle}>
                 {children}
@@ -19,6 +20,7 @@ const BottomLink = ({icon, children, to}) => {
 const linkContainer = theme => css`
   display: flex;
   position: relative;
+  ${overlay(theme.hover1, 0.7)}
   z-index: 2;
   align-items: center;
   white-space: nowrap;

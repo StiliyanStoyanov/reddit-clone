@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const CompactViewIcon = ({icon}) => {
-    const theme = useTheme();
     return (
-        <div css={container(theme.post)}>
+        <div css={container}>
             <FontAwesomeIcon css={iconStyle} icon={icon}/>
         </div>
     );
@@ -16,8 +15,11 @@ const container = theme => css`
   width: 80px;
   height: 60px;
   border-radius: 4px;
-  background-color: ${theme.compactViewIconBackground};
+  background-color: ${theme.colorHighlight4}
 `
+
+// Dark: compactViewIconBackground: '#202021'
+// Light:  compactViewIconBackground: 'rgba(28, 28, 28, 0.03)'
 const iconStyle = css`
   font-size: 20px;
   color: #818384;

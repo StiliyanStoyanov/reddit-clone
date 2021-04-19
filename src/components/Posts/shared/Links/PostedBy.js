@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import {Link} from "react-router-dom";
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 
 const PostedBy = ({author}) => {
-    const theme = useTheme();
     return (
-        <div css={container(theme.post)}>
+        <div css={container}>
             <span>Posted By</span>
             <Link css={link} to={`/user/${author}`}>
                 u/{author}
@@ -15,7 +14,7 @@ const PostedBy = ({author}) => {
 }
 const container = theme => css`
   font-size: 12px;
-  color: ${theme.infoPostedByColor};
+  color: ${theme.color2};
 `
 const link = css`
   position: relative;

@@ -1,15 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import {Link} from "react-router-dom";
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import Image from "./Image";
 
 const Community = ({name, imageUrl}) => {
-    const theme = useTheme();
     return (
         <div css={[container]}>
             {imageUrl && <Image imageUrl={imageUrl} name={name}/>}
-            <Link css={linkStyle(theme.post)} to={`/e/${name}`}>e/{name}</Link>
+            <Link css={linkStyle} to={`/e/${name}`}>e/{name}</Link>
         </div>
     )
 }
@@ -27,7 +26,7 @@ const linkStyle = theme => css`
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
-  color: ${theme.infoCommunityNameColor};
+  color: ${theme.colorHighlight1};
   &:hover {
     text-decoration: underline;
   }
