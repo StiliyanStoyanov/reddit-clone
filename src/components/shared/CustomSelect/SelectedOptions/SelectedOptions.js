@@ -30,21 +30,21 @@ const SelectedOptions = React.memo(({selectedOptions, dispatch}) => {
                         {selectedOption, index}, event
                     ))} tabIndex={0}
                 >
-                    {selectedOption}
+                    <span>{selectedOption}</span>
                     <FontAwesomeIcon css={icon} icon={faTimes}/>
                 </div>
             ))}
         </>
     )
 });
-const div = css`
+const div = theme => css`
   cursor: pointer;
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
-  color: #d7dadc;
-  background-color: #272729;
+  color: ${theme.colorHighlight2};
+  background-color: ${theme.background3};
   border: 1px solid transparent;
   border-radius: 2px;
   padding: 2px 8px;
@@ -53,9 +53,15 @@ const div = css`
   margin-bottom: 8px;
   &:focus, &:active, &:hover {
     outline: none;
-    color: #1a1a1b;
-    background-color: #0079d3;
+    color: ${theme.backgroundGlobal};
+    background-color: ${theme.colorDarkerBlue};
+    svg {
+      outline: none;
+      color: ${theme.backgroundGlobal};
+      background-color: ${theme.colorDarkerBlue};
+    }
   }
+  
 `
 
 const icon = css`

@@ -66,7 +66,7 @@ const ul = theme => css`
   left: -16px;
   width: calc(100% + 32px);
   border-color: #343536;
-  box-shadow: 0 2px 4px 0 rgba(215, 218, 220, 0.2);
+  box-shadow: 0 2px 4px 0 ${theme.boxShadow1};
   max-height: 300px;
   overflow: auto;
   background-color: ${theme.background1};
