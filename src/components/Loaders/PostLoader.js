@@ -2,12 +2,12 @@
 import {css} from "@emotion/react";
 import {animation} from "./loadersAnimation";
 
-const CardViewLoader = () => {
+const PostLoader = ({contentHeight}) => {
     return (
         <div css={[mainContainer]}>
             <div css={[animation, infoBox]}/>
             <div css={[animation, titleBox]}/>
-            <div css={[animation, contentBox]}/>
+            <div css={[animation, contentBox, contentHeight && {height: contentHeight+'px'}]}/>
             <div css={[animation, bottomBox]}/>
         </div>
     );
@@ -36,8 +36,8 @@ const titleBox = css`
   label: title-box;
 `
 const contentBox = css`
-  height: 400px;
   width: 100%;
+  height: 400px;
   margin-bottom: 8px;
   label: content-box;
 `
@@ -50,4 +50,4 @@ const bottomBox = css`
   label: bottom-box;
 `
 
-export default CardViewLoader;
+export default PostLoader;

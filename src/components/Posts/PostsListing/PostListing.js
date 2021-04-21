@@ -1,14 +1,14 @@
 import React from "react";
 import ViewsWrapper from "../Views/ViewsWrapper";
-import CardViewLoader from "../../Loaders/CardViewLoader";
+import PostLoader from "../../Loaders/PostLoader";
 
-const PostsListing = ({view, sort, ...otherProps}) => {
-    const {data, isLoading, isFetching, isLastIndex, communityNotFound, updateQuery} = otherProps;
+const PostsListing = ({view, sort, ...postsDataAndStatus}) => {
+    const {data, isLoading, isFetching, isLastIndex, communityNotFound, updateQuery} = postsDataAndStatus;
     if (isLoading) {
         return (
             <div>
-                <CardViewLoader/>
-                <CardViewLoader/>
+                <PostLoader/>
+                <PostLoader/>
             </div>
         )
     }
@@ -16,7 +16,7 @@ const PostsListing = ({view, sort, ...otherProps}) => {
     return (
         <div id="posts-listing-container">
             <ViewsWrapper data={data} view={view}/>
-            {isFetching && <CardViewLoader/>}
+            {isFetching && <PostLoader/>}
             <button
                 onClick={updateQuery}
                 disabled={isFetching || communityNotFound || isLastIndex}

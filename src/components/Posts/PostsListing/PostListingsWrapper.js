@@ -10,7 +10,7 @@ import CommunityBar from "../CommunityBar/CommunityBar";
 const PostListingsWrapper = (props) => {
     const {view, setView, sort, setSort} = props
     const [baseLocation, communityId] = useBaseLocation();
-    const postsStatus = useFetchPosts(sort, baseLocation, communityId);
+    const postDataAndStatus = useFetchPosts(sort, baseLocation, communityId);
     const {
         data,
         startAfterIndex,
@@ -22,8 +22,7 @@ const PostListingsWrapper = (props) => {
         community,
         query,
         updateQuery
-    } = postsStatus
-
+    } = postDataAndStatus
     if (!baseLocation) {
         return null;
     }
@@ -33,14 +32,14 @@ const PostListingsWrapper = (props) => {
     return (
         <>
             {community && <CommunityBar community={community}/>}
-            <div css={container}>
+            <div css={[container]}>
                 <ViewSelector
                     view={view}
                     setView={setView}
                     sort={sort}
                     setSort={setSort}
                 />
-                <PostsListing view={view} sort={sort} {...postsStatus}/>
+                <PostsListing view={view} sort={sort} {...postDataAndStatus}/>
             </div>
         </>
 
@@ -51,6 +50,7 @@ const container = css`
   max-width: 700px;
   min-width: 380px;
   margin: 0 auto;
+  label: post-listings-wrapper
 `
 
 export default PostListingsWrapper;
