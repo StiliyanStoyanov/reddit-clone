@@ -1,21 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
-import SortLink from "./SortLink";
+import {css} from "@emotion/react";
+import SortButton from "./SortButton";
 import {faRocket} from "@fortawesome/free-solid-svg-icons/faRocket";
 import {faFire} from "@fortawesome/free-solid-svg-icons/faFire";
 
 const SortSelect = ({sort, setSort}) => {
-    const theme = useTheme();
     return (
-        <div css={container(theme)}>
-            <SortLink
-                to={"top"}
+        <div css={[container]}>
+            <SortButton
+                forSort={"top"}
                 icon={faFire}
                 sort={sort}
                 setSort={setSort}
             />
-            <SortLink
-                to={"new"}
+            <SortButton
+                forSort={"new"}
                 icon={faRocket}
                 sort={sort}
                 setSort={setSort}
@@ -24,9 +23,10 @@ const SortSelect = ({sort, setSort}) => {
     );
 };
 
-const container = theme => css`
+const container = css`
   display: flex;
   align-items: center;
+  label: sort-select
 `
 
 export default SortSelect;
