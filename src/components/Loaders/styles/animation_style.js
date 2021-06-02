@@ -11,6 +11,5 @@ const move = keyframes`
 export const animation = theme => css`
   background: ${theme.animationBackground};
   background-size: 200%;
-  border-radius: 4px;
   animation: ${move} 1500ms ease 0ms infinite normal none running
 `
