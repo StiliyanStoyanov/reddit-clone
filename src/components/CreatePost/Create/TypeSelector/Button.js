@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import React from "react";
-import {usePostDispatch, usePostStore, postStoreActionTypes} from "../../../../../store/PostStoreProvider";
-import {overlay} from "../../../../../styles/general_styles";
-const {changeForm} = postStoreActionTypes
+import {usePostDispatch, usePostStore, createPostStoreActions} from "../../../../store/CreatePostStoreProvider";
+import {overlay} from "../../../../styles/general_styles";
+const {changeForm} = createPostStoreActions
 
 const Button = ({forForm, icon, children}) => {
     const {activeForm} = usePostStore();

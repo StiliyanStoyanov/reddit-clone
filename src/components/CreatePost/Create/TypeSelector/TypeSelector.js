@@ -3,7 +3,7 @@ import {css} from "@emotion/react";
 import {faFileAlt} from "@fortawesome/free-solid-svg-icons/faFileAlt";
 import {faImage} from "@fortawesome/free-solid-svg-icons/faImage";
 import {faLink} from "@fortawesome/free-solid-svg-icons/faLink";
-import Button from "./Button/Button";
+import Button from "./Button";
 
 const TypeSelector = () => {
     return (

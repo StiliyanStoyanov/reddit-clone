@@ -5,9 +5,9 @@ import SearchCaretDown from "./SearchCaretDown";
 import {useDebouncedCallback} from "use-debounce";
 import {useCommunitySelectorDispatch, useCommunitySelectorStore} from "../../CommunitySelector";
 import {communitySelectorActions} from "../../../../../../hooks/useCommunitySelector/communitySelectorReducer";
-import {postStoreActionTypes, usePostDispatch} from "../../../../../../store/PostStoreProvider";
+import {createPostStoreActions, usePostDispatch} from "../../../../../../store/CreatePostStoreProvider";
 const {updateInput, openDropdown, closeDropdown} = communitySelectorActions
-const {setCommunity} = postStoreActionTypes
+const {setCommunity} = createPostStoreActions
 
 const SearchInput = () => {
     const inputRef = useRef(null);

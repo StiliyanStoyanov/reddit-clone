@@ -1,5 +1,5 @@
 import makeStore from "../hooks/makeStore";
-export const postStoreActionTypes = {
+export const createPostStoreActions = {
     setCommunity: "SET_COMMUNITY",
     clearCommunity: "CLEAR_COMMUNITY",
     changeForm: "CHANGE_FORM",
@@ -18,7 +18,7 @@ const {
     updateImageContent,
     updateLinkContent,
     clearImageContent
-} = postStoreActionTypes
+} = createPostStoreActions
 
 const postStoreDefault = {
     community: null,
@@ -71,7 +71,6 @@ const postStoreReducer = (state, action) => {
         }
         case updateImageContent: {
             const {imageFile, imageDataUrl} = action.payload;
-            console.log(imageDataUrl, imageFile);
             if (!imageFile || !imageDataUrl) return state;
             return {
                 ...state,
@@ -109,9 +108,9 @@ const postStoreReducer = (state, action) => {
 }
 
 const [
-    PostStoreProvider,
+    CreatePostStoreProvider,
     usePostStore,
     usePostDispatch
 ] = makeStore(postStoreReducer, postStoreDefault);
 
-export {PostStoreProvider, usePostStore, usePostDispatch}
+export {CreatePostStoreProvider, usePostStore, usePostDispatch}
