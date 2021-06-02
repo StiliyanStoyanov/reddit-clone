@@ -1,18 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
 import {useUserDispatch, useUserStore} from "../../../../../store/UserStoreProvider";
-import {userStoreActionTypes} from "../../../../../store/UserStoreProvider";
+import {userStoreActions} from "../../../../../store/UserStoreProvider";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 import DropdownIcon from "../../DropdownItems/DropdownIcon";
 import {dropdown_item_button} from "../../../../../styles/dropdown_styles";
 import DropdownSpan from "../../DropdownItems/DropdownSpan";
-const {changeTheme} = userStoreActionTypes
+const {changeTheme} = userStoreActions
 
 const ThemeSwitch = () => {
     const {theme} = useUserStore();
     const dispatch = useUserDispatch();
     const checked = theme === 'dark';
-    const handleChangeThemeButton = event => dispatch({type: changeTheme});
+    const handleChangeThemeButton = () => dispatch({type: changeTheme});
 
     return (
         <button css={dropdown_item_button} tabIndex={0} onClick={handleChangeThemeButton}>

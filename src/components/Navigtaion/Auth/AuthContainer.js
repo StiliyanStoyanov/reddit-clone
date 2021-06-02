@@ -7,9 +7,7 @@ import {useUserStore} from "../../../store/UserStoreProvider";
 
 const AuthContainer = () => {
     const {user, isLoading} = useUserStore();
-    if (isLoading || user) {
-        return null;
-    }
+    if (isLoading || user) return null;
     return (
         <div css={[container]}>
             <LoginModalButton/>
@@ -21,7 +19,6 @@ const AuthContainer = () => {
 
 const container = css`
   display: flex;
-  justify-content: center;
   align-items: center;
   margin-left: auto;
   margin-right: 5px;
