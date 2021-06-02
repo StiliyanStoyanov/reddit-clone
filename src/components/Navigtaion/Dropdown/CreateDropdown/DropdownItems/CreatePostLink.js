@@ -6,7 +6,7 @@ import DropdownSpan from "../../DropdownItems/DropdownSpan";
 
 const CreatePostLink = () => {
     return (
-        <DropdownLink to={"/create-post"}>
+        <DropdownLink to={"/submit"}>
             <DropdownIcon icon={faEdit}/>
             <DropdownSpan>Create Post</DropdownSpan>
         </DropdownLink>

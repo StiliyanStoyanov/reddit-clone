@@ -6,7 +6,7 @@ import DropdownSpan from "../../DropdownItems/DropdownSpan";
 
 const CreateCommunityLink = () => {
     return (
-        <DropdownLink to={"/create-community"}>
+        <DropdownLink to={"/community/create"}>
             <DropdownIcon icon={faUsers}/>
             <DropdownSpan>Create Community</DropdownSpan>
         </DropdownLink>
