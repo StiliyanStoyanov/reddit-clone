@@ -4,18 +4,17 @@ import "firebase/auth";
 import "firebase/firestore"
 import "firebase/functions"
 import "firebase/storage"
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
+export const firestore = app.firestore();
+export const auth = app.auth();
+export const storage = app.storage();
+export const functions = app.functions('europe-west3')
 if (window.location.hostname === 'localhost') {
     console.log("testing locally -- hitting local functions and firestore emulators");
-    firebase.functions().useEmulator('localhost', 5001)
-    firebase.firestore().settings({
-        host: 'localhost:8080',
-        ssl: false
-    });
-    firebase.auth().useEmulator('http://localhost:9099/');
+    firestore.settings({host: 'localhost:8080', ssl: false})
+    firestore.useEmulator('localhost', 8080);
+    storage.useEmulator("localhost", 9199);
+    auth.useEmulator('http://localhost:9099/');
+    functions.useEmulator('localhost', 5001);
 }
-export const firestore = firebase.firestore();
-export const auth = firebase.auth();
-export const storage = firebase.storage();
-export const functions = firebase.functions();
 export default firebase;
