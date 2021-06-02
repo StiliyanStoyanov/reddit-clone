@@ -4,16 +4,13 @@ import {faExclamationTriangle} from "@fortawesome/free-solid-svg-icons/faExclama
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const ErrorMessage = ({error}) => {
-    if (error) {
-        return (
-            <div css={errorField}>
-                <FontAwesomeIcon css={errorIcon} icon={faExclamationTriangle}/>
-                <div css={errorMessage}>{error.message}</div>
-            </div>
-        );
-    } else {
-        return null
-    }
+    if (!error) return null;
+    return (
+        <div css={errorField}>
+            <FontAwesomeIcon css={errorIcon} icon={faExclamationTriangle}/>
+            <div css={errorMessage}>{error.message}</div>
+        </div>
+    );
 };
 
 const errorField = css`
