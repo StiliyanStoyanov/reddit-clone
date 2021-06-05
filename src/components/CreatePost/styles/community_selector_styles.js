@@ -1,8 +1,8 @@
 import {css} from "@emotion/react";
-import {ulReset} from "../../../styles/general_styles";
+import {overlay_before, overlay_custom_attribute, ul_reset} from "../../../styles/general_styles";
 
-const search_box_shadow = css`
-  box-shadow: 0 0 2px 1px #343536;
+const search_box_shadow = theme => css`
+  box-shadow: 0 0 2px 1px ${theme.boxShadow2};
   label: box-shadow
 `
 const search_base = theme => css`
@@ -43,21 +43,21 @@ export const search_dropdown_container = theme => css`
   label: search-dropdown-container
 `
 
-export const search_input_active = css`
-  ${search_box_shadow};
+export const search_input_active = theme => css`
+  ${search_box_shadow(theme)};
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   label: active
 `
-export const search_dropdown_active = css`
-  ${search_box_shadow};
+export const search_dropdown_active = theme => css`
+  ${search_box_shadow(theme)};
   visibility: visible;
   z-index: 3;
   label: active
 `
 
 export const ul = css`
-  ${ulReset};
+  ${ul_reset};
   overflow: auto;
   label: community-selector-ul
 `
@@ -69,28 +69,17 @@ export const list_heading = theme => css`
   margin: 0;
   label: community-selector-heading
 `
-export const li = theme => css`
+export const item_base = css`
   display: flex;
   position: relative;
   border-radius: 4px;
   align-items: center;
   padding: 4px 8px;
-  &::before {
-    content: '';
-    position: absolute;
-    border-radius: inherit;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    background-color: ${theme.hover1};
-  }
-  &[data-selected=true]{
-    &::before {
-      opacity: 0.8;
-    }
-  };
+`
+export const li = theme => css`
+  ${item_base};
+  ${overlay_before(theme.hover1)}
+  ${overlay_custom_attribute(0.8)}
   label: community-selector-li
 `
 export const li_image = css`

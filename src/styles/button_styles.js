@@ -1,4 +1,5 @@
 import {css} from "@emotion/react";
+import {overlay} from "./general_styles";
 
 export const button_primary =  css`
   cursor: pointer;
@@ -22,4 +23,21 @@ export const button_primary =  css`
     outline-offset: 1px;
   }
   label: button-primary;
+`
+
+export const button_secondary = theme => css`
+  ${overlay(theme.hover2, 1)};
+  border: 1px solid ${theme.colorHighlight2};
+  color: ${theme.colorHighlight2};
+  outline-offset: 3px;
+  background-color: transparent;
+  padding: 4px 16px;
+  border-radius: 16px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  line-height: 24px;
+  label: toggle-form-button
 `

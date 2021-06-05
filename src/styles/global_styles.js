@@ -1,11 +1,12 @@
 import {css} from "@emotion/react";
+import {button_reset} from "./general_styles";
 
 export const global_styles = theme => css`
   body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
+    font-family: "Segoe UI Historic", "Segoe UI", "Arial", sans-serif;
     background-color: ${theme.backgroundGlobal};
     color: ${theme.colorGlobal};
   }
@@ -14,6 +15,9 @@ export const global_styles = theme => css`
   }
   &:focus-visible:not(:focus-visible) {
     outline: 0;
+  }
+  button {
+    ${button_reset};
   }
   a {
     text-decoration: none;
@@ -29,9 +33,4 @@ export const global_styles = theme => css`
     margin: 1.5em 10px;
     padding: 0.5em 10px;
   }
-  //p, h1, h2, h3, h4, h5, h6 {
-  //  &:first-of-type, &:last-of-type {
-  //    margin: 0;
-  //  }
-  //}
 `

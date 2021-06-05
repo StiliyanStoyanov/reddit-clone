@@ -5,13 +5,11 @@ export const card_container = theme => css`
   position: relative;
   z-index: 1;
   margin: 10px auto;
-  display: flex;
   padding-left: 36px;
   border: 1px solid ${theme.border1};
   background-color: ${theme.background1};
   border-radius: 4px;
   min-height: 88px;
-  max-height: 500px;
   width: 100%;
   cursor: pointer;
   &:hover, &:active {

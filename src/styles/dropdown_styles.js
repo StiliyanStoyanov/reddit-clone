@@ -1,5 +1,5 @@
 import {css} from "@emotion/react";
-import {button_reset, overlay} from "./general_styles";
+import {overlay} from "./general_styles";
 
 export const dropdown = css`
   z-index: 1;
@@ -12,10 +12,11 @@ export const dropdown_content = theme => css`
   padding: 8px;
   margin-top: 8px;
   z-index: 2;
+  text-align: center;
+  max-height: 500px;
   background-color: ${theme.background1};
   width: 360px;
   border-radius: 8px;
-  top: 60px;
   right: 8px;
   overflow: auto;
   border: 1px solid ${theme.border1};
@@ -29,6 +30,7 @@ export const dropdown_content_visible = css`
 export const dropdown_item = theme => css`
   position: relative;
   display: flex;
+  color: ${theme.color1};
   align-items: center;
   min-height: 44px;
   padding: 0 8px;
@@ -37,8 +39,8 @@ export const dropdown_item = theme => css`
   user-select: none;
   &:hover, &:focus-visible {
     background-color: ${theme.hover1};
+    text-decoration: none;
   }
-;
   label: dropdown-item
 `
 export const dropdown_item_button = theme => css`
@@ -51,7 +53,6 @@ export const dropdown_item_button = theme => css`
 `
 
 export const dropdown_toggle_button = theme => css`
-  ${button_reset};
   ${overlay(theme.hover1, 1)};
   background-color: ${theme.background3};
   cursor: pointer;

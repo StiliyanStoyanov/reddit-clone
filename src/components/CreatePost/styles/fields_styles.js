@@ -15,25 +15,53 @@ const text_area_base = theme => css`
   border: 1px solid ${theme.border1};
   border-radius: 4px;
   background-color: ${theme.background1};
+
   &:focus {
     border-color: ${theme.colorHighlight1};
   }
 `
-export const post_text_area = theme => css`
-  ${text_area_base(theme)};
+const areas_padding = css`
   padding: 8px 16px;
+`
+export const post_textarea_container = theme => css`
+  border: 1px solid ${theme.border1};
+  border-radius: 4px;
+  overflow: hidden;
+`;
+export const post_textarea_container_active = theme => css`
+  border-color: ${theme.colorHighlight1};
+`
+export const markdown_description_container = theme => css`
+  ${areas_padding};
+  background-color: ${theme.background2};
+
+`
+export const markdown_description_span = css`
+  font-size: 14px;
+  font-weight: 500;
+`
+export const post_textarea = theme => css`
+  border: 0;
+  width: 100%;
+  outline: none;
+  color: ${theme.colorGlobal};
+  background-color: ${theme.background1};
+  border-radius: 0;
+  border-top: 1px solid ${theme.border1};
+  ${areas_padding};
   resize: vertical;
   overflow-x: hidden;
   overflow-wrap: break-word;
-`
-export const link_text_area = theme => css`
+`;
+export const link_textarea = theme => css`
   ${text_area_base(theme)};
-  padding: 8px 16px;
+  white-space: nowrap;
+  ${areas_padding};
   resize: none;
   overflow-x: hidden;
   overflow-wrap: break-word;
 `
-export const title_text_area = theme => css`
+export const title_textarea = theme => css`
   ${text_area_base(theme)};
   height: 32px;
   resize: none;

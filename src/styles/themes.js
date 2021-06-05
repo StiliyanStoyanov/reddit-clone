@@ -17,6 +17,7 @@ export const darkTheme = {
     colorHighlight6: '#4fbcff',
     scoresRed: '#cc3700',
     scoresBlue: '#5a75cc',
+    dialogBlue: '#3f51b5',
     colorBlue: '#2e89ff',
     colorDarkerBlue: '#0079d3',
     colorDanger: '#ea0027',
@@ -25,6 +26,7 @@ export const darkTheme = {
     hover2: 'rgb(255, 255, 255, 0.1)',
     hover3: 'rgb(255, 255, 255, 0.3)',
     boxShadow1: 'rgba(215, 218, 220, 0.2)',
+    boxShadow2: '#343536',
     backgroundLoader: '#272729',
     animationBackground: 'linear-gradient(90deg, #272729, #343536, #272729)',
 }
@@ -48,6 +50,7 @@ export const lightTheme = {
     colorHighlight6: '#014980',
     scoresRed: '#cc3700',
     scoresBlue: '#5a75cc',
+    dialogBlue: '#3f51b5',
     colorBlue: '#2e89ff',
     colorDarkerBlue: '#0079d3',
     colorDanger1: '#ea0027',
@@ -56,6 +59,7 @@ export const lightTheme = {
     hover2: 'rgb(0, 121, 211, 0.05)',
     hover3: 'rgb(0, 0, 0, 0.3)',
     boxShadow1: 'rgb(28, 28, 28, 0.2)',
+    boxShadow2: 'rgb(28, 28, 28, 0.1)',
     backgroundLoader: 'rgba(255, 255, 255, 0.8)',
     animationBackground: 'linear-gradient(90deg, #f6f7f8, #edeff1, #f6f7f8)'
 }
