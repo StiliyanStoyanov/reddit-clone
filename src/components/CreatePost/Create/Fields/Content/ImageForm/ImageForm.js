@@ -2,16 +2,18 @@
 import {css} from "@emotion/react";
 import {useRef, useState} from "react";
 import {validateImage} from "../../../../../../utils/validateImage";
-import {postStoreActionTypes, usePostDispatch, usePostStore} from "../../../../../../store/PostStoreProvider";
+import {createPostStoreActions, usePostDispatch, usePostStore} from "../../../../../../store/CreatePostStoreProvider";
 import FileSelect from "./FileSelect";
 import FilePreview from "./FilePreview";
 
-const {updateImageContent, clearImageContent} = postStoreActionTypes
+const {updateImageContent, clearImageContent} = createPostStoreActions
 
-const ImageContent = () => {
+const ImageForm = () => {
     const fileInputRef = useRef(null);
     const {imageDataUrl} = usePostStore();
-    const [fileDragIn, setFileDragIn] = useState(false);
+    // TODO: Check it more in-depth
+    // https://stackoverflow.com/questions/7110353/html5-dragleave-fired-when-hovering-a-child-element
+    const [dragInCounter, setDragInCounter] = useState(0);
     const postDispatch = usePostDispatch();
 
     const fileSelectHandler = async (event) => {
@@ -27,45 +29,46 @@ const ImageContent = () => {
         event.preventDefault();
         const file = event.dataTransfer?.files[0];
         const {isImage, imageDataUrl} = await validateImage(file).catch(err => console.error(err)) || {isImage:false, imageDataUrl: null};
+        setDragInCounter(0);
         if (!isImage) {
             // TODO: Implement error message for users
-            return false;
+            return;
         }
         postDispatch({type: updateImageContent, payload: {imageFile: file, imageDataUrl}});
+
     };
     const clearFileHandler = (event) => {
-        setFileDragIn(false);
         postDispatch({type: clearImageContent});
     }
     const handleDragOver = (event) => {
+        console.log('dragging')
         // To allow drop
         // preventing the default behaviour of the browser opening a new window with the dropped file
         event.preventDefault();
     }
     return (
         <div
-            css={[dragContainer, fileDragIn && dragInside]}
+            css={[drag_container, dragInCounter && drag_inside]}
             onDrop={fileDropHandler}
             onDragOver={handleDragOver}
-            onDragEnter={() => setFileDragIn(true)}
-            onDragLeave={() => setFileDragIn(false)}
+            onDragEnter={() => setDragInCounter(prevState => prevState + 1)}
+            onDragLeave={() => setDragInCounter(prevState => prevState - 1)}
         >
-            <input
+            {!imageDataUrl && <input
                 ref={fileInputRef}
                 onChange={fileSelectHandler}
                 css={fileInput}
                 id="file-upload"
                 type="file"
                 accept="image/png,image/gif,image/jpeg"
-            />
-            {!imageDataUrl && !fileDragIn && <FileSelect fileInputRef={fileInputRef}/>}
+            />}
+            {!imageDataUrl && !dragInCounter && <FileSelect fileInputRef={fileInputRef}/>}
             {imageDataUrl && <FilePreview imageDataUrl={imageDataUrl} clearFileHandler={clearFileHandler}/>}
         </div>
     )
 }
 
-const dragContainer = theme => css`
-  position: relative;
+const drag_container = theme => css`
   display: flex;
   border: 1px dashed ${theme.border1};
   border-radius: 4px;
@@ -75,7 +78,7 @@ const dragContainer = theme => css`
   min-height: 280px;
   max-height: 700px;
 `
-const dragInside = theme => css`
+const drag_inside = theme => css`
   border: 1px dashed ${theme.colorGlobal};
 `
 const fileInput = css`
@@ -84,4 +87,4 @@ const fileInput = css`
 
 
 
-export default ImageContent
+export default ImageForm

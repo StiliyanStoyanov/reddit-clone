@@ -6,7 +6,7 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 const FilePreview = ({imageDataUrl, clearFileHandler}) => {
     return (
         <div css={div}>
-            <img css={img} src={imageDataUrl} alt="Whoops"/>
+            <img draggable={false} css={img} src={imageDataUrl} alt="Whoops"/>
             <button onClick={clearFileHandler} css={clearButton}>
                 <FontAwesomeIcon icon={faTimes}/>
             </button>
@@ -16,6 +16,8 @@ const FilePreview = ({imageDataUrl, clearFileHandler}) => {
 
 const div = css`
   position: relative;
+  pointer-events: none;
+  user-select: none;
 `
 const img = css`
   display: block;
@@ -36,6 +38,7 @@ const clearButton = theme => css`
   border: 0;
   top: 4px;
   right: 4px;
+  pointer-events: auto;
   svg {
     font-size: 12px;
     color: ${theme.color1};
