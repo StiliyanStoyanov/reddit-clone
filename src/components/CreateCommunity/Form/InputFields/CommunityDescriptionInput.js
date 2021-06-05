@@ -5,6 +5,7 @@ import {input_field_base} from "../../styles/input_styles";
 import FieldDescription from "./FieldsExtras/FieldDescription";
 import ErrorMessage from "../Error/ErrorMessage";
 import {descriptions, rules} from "./utils/utils";
+import TextareaAutosize from "react-textarea-autosize";
 
 const CommunityDescriptionInput = ({register, error}) => {
     return (
@@ -13,7 +14,7 @@ const CommunityDescriptionInput = ({register, error}) => {
                 Description *
             </label>
             <FieldDescription description={descriptions.communityDescription}/>
-            <textarea
+            <TextareaAutosize
                 css={[
                     input_field_base,
                     textarea
@@ -25,13 +26,10 @@ const CommunityDescriptionInput = ({register, error}) => {
         </div>
     );
 };
-const container = css`position: relative
-`
+const container = css`position: relative`
 const textarea = css`
+  overflow: hidden;
   resize: vertical;
-  max-height: 400px;
-  min-height: 40px;
-  padding-top: 6px;
 `
 
 export default CommunityDescriptionInput;
