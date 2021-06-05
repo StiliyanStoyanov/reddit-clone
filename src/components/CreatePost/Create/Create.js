@@ -1,22 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import {PostStoreProvider} from "../../../store/PostStoreProvider";
+import {CreatePostStoreProvider} from "../../../store/CreatePostStoreProvider";
 import CommunitySelector from "./CommunitySelector/CommunitySelector";
 import React from "react";
 import Fields from "./Fields/Fields";
 import TypeSelector from "./TypeSelector/TypeSelector";
-import CreatePostButton from "./CreatePostButton";
+import CreatePostSubmit from "./CreatePostSubmit";
 import Container from "./Container";
 
 const Create = () => {
     return (
-        <PostStoreProvider>
+        <CreatePostStoreProvider>
             <CommunitySelector/>
             <Container>
                 <TypeSelector/>
                 <Fields/>
-                <CreatePostButton/>
+                <CreatePostSubmit/>
             </Container>
-        </PostStoreProvider>
+        </CreatePostStoreProvider>
     );
 };
 
