@@ -4,7 +4,7 @@ import React from 'react';
 import FieldDescription from "../FieldsExtras/FieldDescription";
 import ErrorMessage from "../../Error/ErrorMessage";
 import {useWatch} from "react-hook-form";
-import PrimaryTopicSelect from "./PrimaryTopicSelect/PrimaryTopicSelect";
+import PrimaryTopicSelect from "./PrimaryTopicSelect";
 import CustomSelect from "../../../../shared/CustomSelect/CustomSelect";
 import {categories} from "../../../../../utils/categories";
 import {descriptions, tooltips} from "../utils/utils";
