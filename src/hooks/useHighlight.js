@@ -1,13 +1,25 @@
-import {useRef} from "react";
+import {useCallback, useRef} from "react";
 
 // https://www.youtube.com/watch?v=wXLf18DsV-I&t=764s
 // https://stackoverflow.com/questions/14388291/how-to-get-the-previous-and-next-elements-of-an-array-loop-in-javascript/14388333?fbclid=IwAR0EiYe3syZNvU6qd2FWSKC4S7iTpFkiJ2BxAMiiJ5VXSeXkvex_PXYqPnE#14388333
-const useHighlight = (refs) => {
+const useHighlight = () => {
     const highlight = useRef({
         content: null,
         ref: null,
         index: -1
     });
+    const refs = useRef([]);
+    refs.current = [];
+    const addToRefs = useCallback((el, content) => {
+        if (el) {
+            refs.current.push({
+                ref: el,
+                content,
+                index: refs.current.length
+            });
+        }
+    }, []);
+
     const moveNext = event => {
         if (refs.current.length === 0) return;
         const currentIndex = highlight.current.index;
@@ -70,7 +82,7 @@ const useHighlight = (refs) => {
         }
     }
 
-    return {highlight, moveNext, movePrevious, setHighlight, clearHighlight}
+    return {highlight, moveNext, movePrevious, setHighlight, clearHighlight, addToRefs}
 };
 
 export default useHighlight;

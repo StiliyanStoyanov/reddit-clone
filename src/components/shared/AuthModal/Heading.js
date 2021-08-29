@@ -2,7 +2,7 @@
 import {css} from "@emotion/react";
 import Logo from "../Logo/Logo";
 import React from "react";
-import {useAuthModalStore} from "../../../store/AuthModalStoreProvider";
+import {useAuthModalStore} from "../../../store/AuthModal/AuthModalProvider";
 
 const Heading = () => {
     const {activeForm} = useAuthModalStore();
@@ -28,6 +28,7 @@ const container = css`
 `
 const heading = css`
   font-size: 24px;
+  padding-bottom: 4px;
   margin: 0;
   label: auth-modal-heading
 `

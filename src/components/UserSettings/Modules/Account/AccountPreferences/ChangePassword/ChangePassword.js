@@ -27,7 +27,7 @@ const ChangePassword = () => {
             >
                 CHANGE
             </ToggleFormButton>
-            <PasswordForm visible={visible} closeForm={closeForm}/>
+            {visible && <PasswordForm visible={visible} closeForm={closeForm}/>}
         </div>
     );
 };

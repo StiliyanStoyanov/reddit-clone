@@ -1,13 +1,19 @@
 /** @jsxImportSource @emotion/react */
-import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {auth_form, auth_form_submit_button} from "./styles/auth-modal-styles";
-import {validateEmail} from "../../../utils/validateEmail";
+import {auth_form} from "./styles/auth-modal-styles";
 import Input from "./Input";
 import {auth} from "../../../firebase";
-import {useAuthModalDispatch, authModalActions} from "../../../store/AuthModalStoreProvider";
-const {closeModal} = authModalActions
+import {useAuthModalDispatch} from "../../../store/AuthModal/AuthModalProvider";
+import {closeModal} from "../../../store/AuthModal/authModalActions";
+import {useLocation, useNavigate} from "react-router";
+import {rules} from "../../../utils/rules";
+import FormButton from "./FormButton";
+import {getFormError} from "./getFormError";
 
+// https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands
+// https://stackoverflow.com/questions/15738259/disabling-chrome-autofill
+// https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags
+// https://stackoverflow.com/questions/27988418/login-form-changed-username-to-email-autocomplete-keeps-entering-in-saved-emai
 const LoginForm = () => {
     const [email, password] = ["email", "password"];
     const formMethods = useForm({
@@ -15,78 +21,53 @@ const LoginForm = () => {
             [email]: "",
             [password]: "",
         },
+        mode: "onChange"
     });
+    const navigate = useNavigate();
+    const location = useLocation();
     const authModalDispatch = useAuthModalDispatch();
     const {register, setError, handleSubmit, formState} = formMethods
-    const {isSubmitting, errors, dirtyFields} = formState
-    const [rules] = useState(() => {
-        return {
-            email: {
-                required: {value: true, message: "Field is required"},
-                validate: validateEmail,
-            },
-            password: {
-                required: {value: true, message: "Field is required"},
-                minLength: {value: 6, message: "Password must be at least 6 characters"},
-                maxLength: {value: 254, message: "Password cannot exceed 254 characters"}
-            }
-        }
-    })
+    const {isSubmitting, isValid, errors, dirtyFields} = formState
+
     const onSubmit = async (data) => {
-        auth.signInWithEmailAndPassword(data.email, data.password).then(() => {
-            authModalDispatch({type: closeModal});
-        }).catch(error => {
-            if (error.code) {
-                if (error.code?.includes("user")) {
-                    setError("email", {
-                        type: error.code,
-                        message: "There is no user corresponding to this email"
-                    }, {shouldFocus: true});
-                } else if (error.code?.includes("password")) {
-                    setError("password", {
-                        type: error.code,
-                        message: "The password is invalid"
-                    }, {shouldFocus: true});
-                } else if (error.code?.includes("email")) {
-                    setError("email", {
-                        type: error.code,
-                        message: error.message
-                    }, {shouldFocus: true});
-                } else {
-                    // TODO: Add notification something went wrong
-                }
-            }
+        await auth.signInWithEmailAndPassword(data.email, data.password).then(() => {
+            authModalDispatch(closeModal());
+            navigate(location.pathname, {replace: true})
+        }).catch(err => {
+            const errorCode = err?.code
+            const errorMessage = err?.message
+            const {name, error} = getFormError(errorCode, errorMessage)
+            setError(name, error, {shouldFocus: true})
         });
     }
 
     return (
         <form css={[auth_form]} onSubmit={handleSubmit(onSubmit)} noValidate={true}>
+            <input {...register('username')} type={'hidden'} autoComplete="username"/>
             <Input
                 register={register}
                 rules={rules.email}
                 error={errors.email || null}
                 isDirty={dirtyFields.email || false}
                 name={email}
+                autoComplete="email"
                 type={"email"}
                 labelText={"Email"}
             />
-
             <Input
                 register={register}
                 rules={rules.password}
                 error={errors.password|| null}
                 isDirty={dirtyFields.password || false}
                 name={password}
+                autoComplete="current-password"
                 type={'password'}
                 labelText={"Password"}
             />
 
-            <button
-                disabled={isSubmitting}
-                css={auth_form_submit_button}
-            >
+            <FormButton disabled={isSubmitting || !isValid} type={"submit"}>
                 Log In
-            </button>
+            </FormButton>
         </form>
     );
 };

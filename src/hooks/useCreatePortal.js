@@ -6,10 +6,8 @@ const useCreatePortal = ({id}) => {
     const portalEl = useMemo(() => {
         const element = document.createElement('div');
         element.setAttribute('id', id);
-        const portalStyles = css`position: absolute; left: 0; top: 0; width: 100%;`
-        element.style = portalStyles.styles
         return element;
-    }, []);
+    }, [id]);
     useEffect(() => {
         document.body.appendChild(portalEl);
         return () => {

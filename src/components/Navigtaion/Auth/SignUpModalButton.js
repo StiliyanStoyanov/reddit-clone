@@ -1,16 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import {authModalActions, useAuthModalDispatch} from "../../../store/AuthModalStoreProvider";
+import {useAuthModalDispatch} from "../../../store/AuthModal/AuthModalProvider";
+import {openModal} from "../../../store/AuthModal/authModalActions";
 import {button_primary} from "../../../styles/button_styles";
-const {openModal} = authModalActions
 
 const SignUpModalButton = () => {
-    const authModalDispatch = useAuthModalDispatch();
+    const dispatch = useAuthModalDispatch();
     return (
-        <div css={{label: "signup-modal-button"}}>
+        <div>
             <button
-                onClick={() => {
-                    authModalDispatch({type: openModal, payload: {switchToForm: "signup"}})
-                }}
+                onClick={() => dispatch(openModal())}
                 css={[button_primary]}
             >
                 Sign Up

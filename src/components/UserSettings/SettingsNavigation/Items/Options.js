@@ -7,8 +7,7 @@ const Options = () => {
         <div css={[container]}>
             <OptionLink to={'account'}>Account</OptionLink>
             <OptionLink to={'profile'}>Profile</OptionLink>
-            <OptionLink to={'notifications'}>Notifications</OptionLink>
-            <OptionLink to={'privacy'}>Safety & Privacy</OptionLink>
+            <OptionLink to={'feed'}>Feed Settings</OptionLink>
         </div>
     );
 };

@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import React, {useCallback, useRef} from "react";
+import {useEffect, useRef} from "react";
 import {
     useAuthModalDispatch,
     useAuthModalStore,
-    authModalActions
-} from "../../../store/AuthModalStoreProvider";
+} from "../../../store/AuthModal/AuthModalProvider";
 import {useClickOutside} from "../../../hooks/useClickOutside";
 import useCreatePortal from "../../../hooks/useCreatePortal";
 import ReactFocusLock from "react-focus-lock";
@@ -13,31 +12,34 @@ import Heading from "./Heading";
 import FormSelect from "./FormSelect";
 import FormsWrapper from "./FormsWrapper";
 import CloseButton from "./CloseButton";
-import {pageOverlay} from "../../../styles/general_styles";
-const {openModal, closeModal} = authModalActions
+import {page_overlay} from "../../../styles/general_styles";
+import {closeModal} from "../../../store/AuthModal/authModalActions";
 
 const AuthModal = () => {
+    const containerRef = useRef();
+    const {Portal} = useCreatePortal({id: 'auth-modal'});
     const {isOpen} = useAuthModalStore();
     const dispatch = useAuthModalDispatch();
-    const formContainerRef = useRef();
-    const {Portal} = useCreatePortal({id: 'auth-modal'});
-    const closeModalCb = useCallback(event => {
-        dispatch({type: closeModal, payload: {event}});
-    }, [dispatch])
-    const openModalCb = useCallback(event => {
-        dispatch({type: openModal, payload: {event}})
-    }, [dispatch]);
+    const close = () => dispatch(closeModal());
 
-    useClickOutside(formContainerRef, closeModalCb, isOpen);
+    useEffect(() => {
+        if (!isOpen) return;
+        const body = document.getElementsByTagName("body")[0];
+        body.style.overflow = "hidden"
+        return () => {
+            body.style.overflow = null
+        }
+    }, [isOpen]);
+
+    useClickOutside(containerRef, close, isOpen);
     return (
         <>
-            <button onClick={openModalCb}>Open Modal</button>
             {isOpen && (
                 <Portal>
-                    <div css={[pageOverlay(`rgba(0, 0, 0, 0.5)`, 99)]}>
-                        <div ref={formContainerRef} css={[formContainer]}>
+                    <div css={[page_overlay(99)]}>
+                        <div ref={containerRef} css={[container]}>
                             <ReactFocusLock disabled={!isOpen} returnFocus={true}>
-                                <CloseButton closeModal={closeModalCb}/>
+                                <CloseButton closeModal={close}/>
                                 <Heading/>
                                 <FormSelect/>
                                 <FormsWrapper/>
@@ -50,7 +52,7 @@ const AuthModal = () => {
 
     );
 };
-const formContainer = theme => css`
+const container = theme => css`
   min-width: 340px;
   max-width: 440px;
   position: absolute;

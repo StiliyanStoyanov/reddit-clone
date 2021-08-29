@@ -5,7 +5,7 @@ import Description from "../../../Form/Items/Description";
 import InputsContainer from "../../../Form/Items/InputsContainer";
 import Input from "../../../Form/Items/Input/Input";
 import Form from "../../../Form/Form";
-import {useUserStore} from "../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../store/UserStore/UserStoreProvider";
 import firebase ,{auth} from "../../../../../firebase";
 import {useForm} from "react-hook-form";
 import React, {useCallback, useState} from "react";
@@ -39,10 +39,10 @@ const DeactivateForm = ({visible, closeForm}) => {
             }
         }
     })
-    const resetAndClose = useCallback(event => {
+    const resetAndCloseForm = event => {
         reset();
         closeForm(event)
-    }, [reset, closeForm])
+    }
 
     const onSubmit = async (data) => {
         const {email, password} = data;
@@ -65,7 +65,7 @@ const DeactivateForm = ({visible, closeForm}) => {
     }
     return (
         <Form
-            reset={reset}
+            resetAndCloseForm={resetAndCloseForm}
             visible={visible}
             closeForm={closeForm}
             onSubmit={onSubmit}
@@ -95,7 +95,7 @@ const DeactivateForm = ({visible, closeForm}) => {
                     placeholder={'Password'}
                 />
             </InputsContainer>
-            <SubmitOrCancel resetAndClose={resetAndClose} isSubmitting={isSubmitting}/>
+            <SubmitOrCancel resetAndCloseForm={resetAndCloseForm} isSubmitting={isSubmitting}/>
         </Form>
     );
 };

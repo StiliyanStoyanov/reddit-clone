@@ -2,9 +2,7 @@
 import {css} from "@emotion/react";
 
 const ErrorMessage = ({error}) => {
-    if (!error) {
-        return null;
-    }
+    if (!error) return null;
     return (
         <div css={[container]}>
             {error && error.message}

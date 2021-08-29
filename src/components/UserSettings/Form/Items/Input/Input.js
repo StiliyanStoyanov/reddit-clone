@@ -1,30 +1,29 @@
 /** @jsxImportSource @emotion/react */
-import {memo} from "react";
 import {css} from "@emotion/react";
-import {useCallback, useState} from "react";
+import {useState} from "react";
 import ShowHidePasswordButton from "./ShowHidePasswordButton";
 import ErrorMessage from "./ErrorMessage";
 
-const Input = memo(({visible, register, rules, error, isDirty, name, type, placeholder}) => {
+const Input = ({visible, register, rules, error, isDirty, autoComplete, name, type, placeholder}) => {
     const [inputType, setInputType] = useState(type);
 
-    const showHidePassword = useCallback((event) => {
+    const showHidePassword = () => {
         inputType !== "password" ? setInputType(type) : setInputType("text");
-    }, [type, inputType]);
+    };
 
     return (
         <div css={[container]}>
             <input
-                autoComplete="off"
+                autoComplete={autoComplete}
                 {...register(name, rules)}
-                css={[input, error && inputError]}
+                css={[input, error && input_error]}
                 type={inputType}
             />
             <label
                 css={[
                     label,
                     isDirty && labelTransform,
-                    visible && labelTransition
+                    visible && label_transition
                 ]}
             >
                 {placeholder}
@@ -34,7 +33,7 @@ const Input = memo(({visible, register, rules, error, isDirty, name, type, place
         </div>
 
     );
-});
+};
 
 const container = css`
   position: relative;
@@ -47,7 +46,7 @@ const labelTransform = css`
   transform: translate3d(0, -12px, 0) scale(0.65);
   label: transformed
 `
-const labelTransition = css`
+const label_transition = css`
   transition: all 0.2s ease-in-out;
 `
 const label =  css`
@@ -78,6 +77,10 @@ const input = theme => css`
   &:focus-visible {
     border: 1px solid ${theme.colorHighlight1}
   }
+  &:-webkit-autofill {
+    -webkit-text-fill-color: ${theme.color1};
+    -webkit-box-shadow: 0 0 0 500px ${theme.background1} inset;
+  }
   border-radius: 4px;
   box-sizing: border-box;
   color: ${theme.color1};
@@ -91,7 +94,7 @@ const input = theme => css`
   }
   label: input
 `
-const inputError = theme => css`
+const input_error = theme => css`
   border: 1px solid ${theme.colorDanger1};
   label: error
 `

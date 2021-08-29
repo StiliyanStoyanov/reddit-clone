@@ -1,66 +1,61 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
-import { ScoresButton } from "./ScoresButton";
+import {count_span} from "../../../../styles/scores_styles";
+import UpvoteButton from "./UpvoteButton";
+import DownvoteButton from "./DownvoteButton";
+import {kFormatter} from "../../../../utils/kFormatter";
+import {useUserStore} from "../../../../store/UserStore/UserStoreProvider";
+import {useDebouncedCallback} from "use-debounce";
+import firebase, {firestore} from "../../../../firebase";
+import {useScoresStore} from "../../../../store/ScoresStoreProvider";
 
-export const Scores = ({ upvotes, hideOnSmallSize, hideOnBigSize }) => {
-    const theme = useTheme();
+export const Scores = ({initialScores, communityId, postId}) => {
+    const {user} = useUserStore();
+    const scoresStore = useScoresStore();
+    const {scores, [postId]: scoreLocal} = scoresStore;
+    const scoreRemote = scores.find(score => score.postId === postId);
+    const score = scoreLocal || scoreRemote || {score: 0, postId, communityId};
+    const debouncedScore = useDebouncedCallback((score) => {
+        const batch = firestore.batch();
+        const scoresUserPath = firestore.doc(`/users/${user.uid}/scores/${postId}`);
+        const postPath = firestore.doc(`/communities/${communityId}/posts/${postId}`);
+        scoresUserPath.get().then(snap => {
+            const oldScore = snap.data();
+            if (snap.exists) {
+                if (score === 0) {
+                    batch.delete(scoresUserPath, {communityId, postId, score});
+                    batch.update(postPath, {scores: firebase.firestore.FieldValue.increment(oldScore.score * -1)});
+                } else if (score === 1 && oldScore.score === -1) {
+                    batch.set(scoresUserPath, {communityId, postId, score}, {merge: true});
+                    batch.update(postPath, {scores: firebase.firestore.FieldValue.increment(2)});
+                } else if (score === -1 && oldScore.score === 1) {
+                    batch.set(scoresUserPath, {communityId, postId, score}, {merge: true});
+                    batch.update(postPath, {scores: firebase.firestore.FieldValue.increment(-2)});
+                }
+            } else {
+                if (score !== 0) {
+                    batch.set(scoresUserPath, {communityId, postId, score}, {merge: true});
+                    batch.update(postPath, {scores: firebase.firestore.FieldValue.increment(score)});
+                }
+            }
+            batch.commit().then(() => {
+                console.log("score count updated!", score);
+            }).catch(err => console.error(err));
+        }).catch(err => console.error(err));
+    }, 1000, {leading: true});
     return (
-        <div css={[
-            outerContainer(theme.scores),
-            hideOnSmallSize && hideSmall,
-            hideOnBigSize && hideBig
-        ]}>
-            <div css={innerContainer}>
-                <ScoresButton direction={'up'}/>
-                <span css={scoreCount(theme.scores)}>{upvotes}</span>
-                <ScoresButton direction={'down'}/>
-            </div>
-        </div>
-    )
-};
+        <>
+            <UpvoteButton
+                initialScores={initialScores}
+                score={score}
+                debouncedScore={debouncedScore}
+            />
+            <span css={count_span}>{kFormatter(score.scoreCount ?? initialScores)}</span>
+            <DownvoteButton
+                initialScores={initialScores}
+                score={score}
+                debouncedScore={debouncedScore}
+            />
+        </>
 
-const hideBig = css`
-  @media (min-width: 420px) {
-    display: none;
-  }
-`
-const hideSmall = css`
-  @media (max-width: 420px) {
-    display: none;
-  }
-`
-const outerContainer = theme => css`
-  position: absolute;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  background-color: ${theme.containerBackgroundColor};
-  top: 0;
-  left: 0;
-  padding: 8px 4px 8px 0;
-  border-left: 4px solid transparent;
-  height: 100%;
-  @media (max-width: 420px) {
-    position: relative;
-    background-color: transparent;
-    padding: 1px;
-    border: 0;
-    margin-right: 4px;
-  }
-`
-const innerContainer = css`
-  display: flex;
-  flex-direction: column;
-  z-index: 2;
-  font-size: 16px;
-  @media (max-width: 420px) {
-    flex-direction: row;
-    align-items: center;
-  }
-`
-const scoreCount = theme => css`
-  font-size: 12px;
-  font-weight: bolder;
-  text-align: center;
-  color: ${theme.textColor};
-  margin: 0 2px;
-`
+    );
+};

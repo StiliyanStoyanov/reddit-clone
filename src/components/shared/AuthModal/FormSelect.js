@@ -1,39 +1,28 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import {authModalActions, useAuthModalDispatch, useAuthModalStore} from "../../../store/AuthModalStoreProvider";
-const {switchActiveForm} = authModalActions
+import {useAuthModalDispatch, useAuthModalStore} from "../../../store/AuthModal/AuthModalProvider";
+import {openModal} from "../../../store/AuthModal/authModalActions";
+import FormSelectButton from "./FormSelectButton";
 
 const FormSelect = () => {
-    const {activeForm} = useAuthModalStore();
-    const loginActive = activeForm === "login"
-    const signUpActive = activeForm === "signup"
-    const authModalDispatch = useAuthModalDispatch();
-    const handleButtonClick = (switchToForm, event) => {
-        authModalDispatch({
-            type: switchActiveForm,
-            payload: {
-                event,
-                switchToForm
-            }
-        })
-    }
+    const dispatch = useAuthModalDispatch();
+    const store = useAuthModalStore();
+    const isLoginActive = store.activeForm === "login";
+    const isSignUpActive = store.activeForm === "signup";
+    const handleLoginSelectButton = () => dispatch(openModal("login"))
+    const handleSignupSelectButton = () => dispatch(openModal("signup"))
+
     return (
         <ul css={[ul]}>
             <li css={[li]}>
-                <button
-                    onClick={(event) => handleButtonClick("login", event)}
-                    css={[buttonBase, loginActive && buttonActive]}
-                >
-                    Log In
-                </button>
+                <FormSelectButton isActive={isLoginActive} onClick={handleLoginSelectButton}>
+                    Log in
+                </FormSelectButton>
             </li>
             <li css={[li]}>
-                <button
-                    onClick={(event) => handleButtonClick("signup", event)}
-                    css={[buttonBase, signUpActive && buttonActive]}
-                >
+                <FormSelectButton isActive={isSignUpActive} onClick={handleSignupSelectButton}>
                     Sign Up
-                </button>
+                </FormSelectButton>
             </li>
         </ul>
     );
@@ -49,25 +38,6 @@ const ul = theme => css`
 const li = css`
   padding: 0 20px 0 0;
   label: form-select-li;
-`
-
-const buttonBase = theme => css`
-  color: ${theme.color1};
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  line-height: 1.2;
-  outline-offset: 6px;
-  padding: 0;
-  height: 28px;
-  border: 0;
-  background-color: transparent;
-  label: form-select-button
-`
-
-const buttonActive = theme => css`
-  border-bottom: 3px solid ${theme.colorHighlight2};
-  label: -active
 `
 
 export default FormSelect;

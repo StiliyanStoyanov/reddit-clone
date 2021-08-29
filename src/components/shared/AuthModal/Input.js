@@ -3,8 +3,7 @@ import {css} from "@emotion/react";
 import React from "react";
 import ErrorMessage from "./ErrorMessage";
 
-const Input = (props) => {
-    const {register, rules, error, name, type, labelText} = props
+const Input = ({register, rules, error, autoComplete, name, type,  labelText}) => {
     return (
         <div css={[container]}>
             <label htmlFor={name} css={[label]}>
@@ -15,6 +14,7 @@ const Input = (props) => {
                 {...register(name, rules)}
                 type={type}
                 id={name}
+                autoComplete={autoComplete}
             />
             <ErrorMessage error={error}/>
         </div>

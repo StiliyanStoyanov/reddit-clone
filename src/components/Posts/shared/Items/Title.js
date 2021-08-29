@@ -1,14 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
 import {css} from "@emotion/react";
 
 // TODO: replace with title
 export const Title = ({ title, postId }) => {
-
-    return <h3 css={titleContainer}>{postId}</h3>;
+    return <h3 css={h3}>{postId}</h3>;
 }
 
-const titleContainer = theme => css`
+const h3 = theme => css`
   font-size: 16px;
   margin: 0 8px;
   font-weight: 600;

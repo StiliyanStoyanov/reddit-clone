@@ -1,32 +1,51 @@
-import makeStore from "../hooks/makeStore";
+import {createContext, useContext, useEffect, useReducer} from "react";
+import {useUserStore} from "./UserStore/UserStoreProvider";
+import {firestore} from "../firebase";
 
 const scoresStoreDefault = {
-    scores: [],
-    isLoading: true
+    scores: []
 }
 
 const scoresActions = {
-    updateScores: "UPDATE_SCORES",
-    resetStores: "RESET_STORE"
+    setScores: "SET_SCORES",
+    updateScore: "UPDATE_SCORE_COUNT",
+    resetScores: "RESET_SCORES"
 }
 const {
-    updateScores,
-    resetStores
+    setScores,
+    updateScore,
+    resetScores
 } = scoresActions
 
-const reducer = (state, action) => {
+const scoresReducer = (state, action) => {
     switch (action.type) {
-        case updateScores: {
-            const scores = action.payload.scores
+        case setScores: {
+            const newScores = action.payload
             return {
-                scores,
-                isLoading: false
-            }
+                ...state,
+                scores: newScores
+            };
         }
-        case resetStores: {
+        case updateScore: {
+            const {score, amount, initialScores} = action.payload;
+            if (!score || !score.postId || typeof score.score !== "number") {
+                console.error('invalid score', score)
+                return state
+            }
+            const localScore = state[score.postId];
+            const localScoreCount = localScore?.scoreCount ?? initialScores;
             return {
-                ...scoresStoreDefault,
-                isLoading: false
+                ...state,
+                [score.postId]: {
+                    score: score.score + amount,
+                    scoreCount: localScoreCount + amount,
+                    postId: score.postId
+                }
+            };
+        }
+        case resetScores: {
+            return {
+                ...scoresStoreDefault
             };
         }
         default: {
@@ -35,11 +54,38 @@ const reducer = (state, action) => {
         }
     }
 }
+const storeContext = createContext({});
+const dispatchContext = createContext({});
+const ScoresStoreProvider = ({ children }) => {
+    const {user} = useUserStore();
+    const [store, dispatch] = useReducer(scoresReducer, scoresStoreDefault);
+    useEffect(() => {
+        if (!user) return;
+        // More info about the code below - https://firebase.google.com/docs/firestore/query-data/listen
+        const path = firestore.collection(`/users/${user.uid}/scores`);
+        const unsubscribe = path.onSnapshot(async scoresSnapshot => {
+            const scores = scoresSnapshot.docs.map(doc => doc.data());
+            dispatch({type: setScores, payload: scores})
+        });
+        return () => {
+            dispatch({type: resetScores})
+            unsubscribe();
+        }
+    }, [user, dispatch])
 
-const [
-    ScoresStoreProvider,
-    useScoresStore,
-    useScoresDispatch
-] = makeStore(reducer, scoresStoreDefault);
+    return (
+        <dispatchContext.Provider value={dispatch}>
+            <storeContext.Provider value={store}>
+                {children}
+            </storeContext.Provider>
+        </dispatchContext.Provider>
+    )
+}
+function useScoresStore() {
+    return useContext(storeContext);
+}
+function useScoresDispatch() {
+    return useContext(dispatchContext);
+}
 
 export {ScoresStoreProvider, useScoresStore, useScoresDispatch, scoresActions}

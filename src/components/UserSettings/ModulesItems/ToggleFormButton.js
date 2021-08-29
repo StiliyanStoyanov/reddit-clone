@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import {button_reset, overlay} from "../../../styles/general_styles";
+import {overlay} from "../../../styles/general_styles";
 
 const ToggleFormButton = ({children, ...props}) => {
     return (
@@ -21,7 +21,6 @@ const buttonContainer = css`
 `
 
 const button = theme => css`
-  ${button_reset};
   ${overlay(theme.hover2, 1)};
   border: 1px solid ${theme.colorHighlight2};
   color: ${theme.colorHighlight2};

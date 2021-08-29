@@ -2,13 +2,11 @@
 import React from "react";
 import {css} from "@emotion/react";
 import {customSelectActions} from "../../../../hooks/useCustomSelect/customSelectReducer";
-
 const {setHighlight, clearHighlight, add} = customSelectActions
-
-const Options = React.memo(({optionsRefs, options, highlight, dispatch, className, notify}) => {
+const Options = ({optionsRefs, options, highlight, dispatch, notify, className}) => {
     const handleMouseDown = ({option, optionIndex}, event) => {
         event.preventDefault();
-        notify(option);
+        notify();
         dispatch({type: add, payload: {option: highlight, highlightIndex: optionIndex}})
     }
     const handleMouseEnter = ({option, optionIndex}, event) => {
@@ -51,7 +49,7 @@ const Options = React.memo(({optionsRefs, options, highlight, dispatch, classNam
             </ul>
         </div>
     );
-});
+};
 const outerDiv = css`
   position: relative;
   visibility: hidden;

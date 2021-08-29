@@ -65,14 +65,17 @@ const fetchPostsReducer = (state, action) => {
             }
         }
         case initFetch: {
+            const {shouldResetCommunity} = action.payload
+            const {isFetching, isLoading} = state;
+            if (isFetching && isLoading) return state
             return {
                 ...state,
                 isLoading: true,
                 isFetching: true,
                 isLastIndex: false,
                 communityNotFound: false,
-                community: null
-            }
+                community: shouldResetCommunity ? null : state.community
+            };
         }
         case setFetching: {
             return {

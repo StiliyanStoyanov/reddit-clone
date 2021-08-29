@@ -4,11 +4,8 @@ import React from "react";
 import {
     ul,
     list_heading,
-    li,
-    li_image,
-    li_community_subs,
-    li_community_name
 } from "../../../../styles/community_selector_styles";
+import ListItem from "./ListItem";
 
 const SubscriptionsList = () => {
     const {subscriptions} = useCommunitySelectorStore();
@@ -26,18 +23,12 @@ const SubscriptionsList = () => {
                 onMouseLeave={clearHighlight}
             >
                 {subscriptions.map(subscription =>
-                    <li
-                        css={li}
-                        ref={el => addToRefs(el, subscription)}
+                    <ListItem
                         key={subscription.id}
-                        onMouseEnter={setHighlight}
-                    >
-                        <img css={li_image} src={subscription.imageUrl} alt="Whoops"/>
-                        <div>
-                            <div css={li_community_name}>e/{subscription.id}</div>
-                            <div css={li_community_subs}>{subscription.subscribers.toLocaleString()} members</div>
-                        </div>
-                    </li>
+                        community={subscription}
+                        setHighlight={setHighlight}
+                        addToRefs={addToRefs}
+                    />
                 )}
             </ul>
         </>

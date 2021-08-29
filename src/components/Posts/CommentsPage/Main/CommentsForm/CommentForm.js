@@ -2,7 +2,7 @@
 import {css} from "@emotion/react";
 import firebase, {firestore} from "../../../../../firebase";
 import {useParams} from "react-router";
-import {useUserStore} from "../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../store/UserStore/UserStoreProvider";
 import {useState} from "react";
 import {isEmpty} from "../../../../../utils/stringCheckers";
 import TextareaAutosize from "react-textarea-autosize";

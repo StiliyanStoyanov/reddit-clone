@@ -2,42 +2,38 @@
 import {css} from "@emotion/react";
 import {Routes} from "react-router";
 import SettingsNavigation from "./SettingsNavigation/SettingsNavigation";
-import {useUserStore} from "../../store/UserStoreProvider";
+import {useUserStore} from "../../store/UserStore/UserStoreProvider";
 import AccountView from "./Modules/Account/AccountView";
 import ProfileView from "./Modules/Profile/ProfileView";
+import FeedSettings from "./Modules/FeedSettings/FeedSettings";
 
 const UserSettings = () => {
     const {user} = useUserStore();
-    if (!user) {
-        return null
-    }
+    if (!user) return null
     return (
-        <div css={[pageContainer]}>
-            <div css={[itemsContainer]}>
+        <div css={[page_container]}>
+            <div css={[items_container]}>
                 <SettingsNavigation/>
                 <Routes>
                     <AccountView path="account"/>
                     <ProfileView path="profile"/>
+                    <FeedSettings path="feed"/>
                 </Routes>
             </div>
         </div>
     );
 };
 
-const pageContainer = css`
-  padding: 0 8px;
-  @media screen and (max-width: 1000px) {
-    padding: 0 4px;
-  }
+const page_container = theme => css`
+  background-color: ${theme.background1};
+  margin: 8px auto;
+  max-width: 1000px;
+  border-radius: 4px;
   label: settings-page-container
 `
-const itemsContainer = theme => css`
+const items_container = css`
   padding: 1em;
-  background-color: ${theme.background1};
-  max-width: 1000px;
-  min-width: 380px;
-  margin: 8px auto;
-  label: settings-main-container
+  label: settings-items-container
 `
 
 export default UserSettings;

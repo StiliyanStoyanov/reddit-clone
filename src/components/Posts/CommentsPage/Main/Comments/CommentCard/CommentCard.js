@@ -3,7 +3,7 @@ import {css} from "@emotion/react";
 import CommentAvatar from "./Items/CommentAvatar";
 import CommentAuthor from "./Items/CommentAuthor";
 import CommentContent from "./Items/CommentContent";
-import {useUserStore} from "../../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../../store/UserStore/UserStoreProvider";
 import {memo, useState} from "react";
 import CommentEditMode from "./Items/CommentEditMode";
 import ButtonOne from "../../../../../shared/Buttons/ButtonOne";

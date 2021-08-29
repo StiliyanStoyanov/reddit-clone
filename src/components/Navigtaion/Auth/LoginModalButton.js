@@ -1,17 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import {authModalActions, useAuthModalDispatch} from "../../../store/AuthModalStoreProvider";
+import {useAuthModalDispatch} from "../../../store/AuthModal/AuthModalProvider";
+import {openModal} from "../../../store/AuthModal/authModalActions";
 import {button_primary} from "../../../styles/button_styles";
-const {openModal} = authModalActions
 
 const LoginModalButton = () => {
-    const authModalDispatch = useAuthModalDispatch();
+    const dispatch = useAuthModalDispatch();
     return (
-        <div css={{label: "login-modal-button"}}>
+        <div>
             <button
-                onClick={() => {
-                    authModalDispatch({type: openModal, payload: {switchToForm: "login"}})
-                }}
+                onClick={() => dispatch(openModal('login'))}
                 css={[button_primary, button]}
             >
                 Log In
@@ -19,7 +17,5 @@ const LoginModalButton = () => {
         </div>
     )
 }
-const button = css`
-  margin-right: 5px;
-`
+const button = css`margin-right: 5px;`
 export default LoginModalButton

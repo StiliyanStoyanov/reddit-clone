@@ -6,32 +6,38 @@ import {Posts} from "./Posts/Posts";
 import CreatePost from "./CreatePost/CreatePost";
 import CreateCommunity from "./CreateCommunity/CreateCommunity";
 import UserSettings from "./UserSettings/UserSettings";
-import {Routes} from "react-router";
-import TestButtonsBar from "../testing/TestButtonsBar";
 import AuthModal from "./shared/AuthModal/AuthModal";
-import Listeners from "./Listeners/Listeners";
+import {Routes} from "react-router";
 import {SubscriptionsStoreProvider} from "../store/SubscriptionsStoreProvider";
 import {ScoresStoreProvider} from "../store/ScoresStoreProvider";
+import {CommunityStoreProvider} from "../store/CommunityStore/CommunityStoreProvider";
+import {MockData} from "../testing/MockData/MockData";
+import Leaderboards from "./Leaderboards/Leaderboards";
+import {StyledToastContainer} from "./shared/StyledToastContainer";
 
 const App = () => {
     return (
         <>
-            <SubscriptionsStoreProvider>
-                <ScoresStoreProvider>
-                    <div css={container}>
-                        <Navigation/>
-                        <TestButtonsBar/>
-                        <Routes>
-                            <Posts path="/*"/>
-                            <CreateCommunity path="/create-community"/>
-                            <CreatePost path="/create-post"/>
-                            <UserSettings path="/settings/*"/>
-                        </Routes>
-                        <AuthModal/>
-                    </div>
-                    <Listeners/>
-                </ScoresStoreProvider>
-            </SubscriptionsStoreProvider>
+            <CommunityStoreProvider>
+                <SubscriptionsStoreProvider>
+                    <ScoresStoreProvider>
+                        <div css={container}>
+                            <Navigation/>
+                            {/*<TestButtonsBar/>*/}
+                            <Routes>
+                                <Posts path="/*"/>
+                                <CreateCommunity path="/community/create"/>
+                                <CreatePost path="/submit"/>
+                                <UserSettings path="/settings/*"/>
+                                <Leaderboards path="/leaderboards/*"/>
+                            </Routes>
+                            <MockData/>
+                            <AuthModal/>
+                            <StyledToastContainer/>
+                        </div>
+                    </ScoresStoreProvider>
+                </SubscriptionsStoreProvider>
+            </CommunityStoreProvider>
         </>
 
     );

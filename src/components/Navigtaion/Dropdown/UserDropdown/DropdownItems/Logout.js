@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import {auth} from "../../../../../firebase";
-import {useUserStore} from "../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../store/UserStore/UserStoreProvider";
 import DropdownIcon from "../../DropdownItems/DropdownIcon";
 import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons/faSignOutAlt";
 import {dropdown_item_button} from "../../../../../styles/dropdown_styles";
@@ -12,7 +12,7 @@ const Logout = () => {
     const {user} = useUserStore();
     const {closeDropdown} = useDropdownMethods();
     const handleLogoutButtonClick = async (event) => {
-        auth.signOut().catch(err => console.error(err));
+        await auth.signOut().catch(err => console.error(err));
         closeDropdown(event);
     }
 

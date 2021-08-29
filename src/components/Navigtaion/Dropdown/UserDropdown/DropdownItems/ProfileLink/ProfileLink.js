@@ -1,19 +1,19 @@
-import React from "react";
+/** @jsxImportSource @emotion/react */
 import {Username} from "./Username";
-import {Avatar} from "./Avatar";
-import {useUserStore} from "../../../../../../store/UserStoreProvider";
+import ProfileAvatar from "../../../../../shared/Avatar/ProfileAvatar";
 import DropdownLink from "../../../DropdownItems/DropdownLink";
+import {useUserStore} from "../../../../../../store/UserStore/UserStoreProvider";
+import {css} from "@emotion/react";
 
 export const ProfileLink = () => {
-    const {user} = useUserStore();
-    if (!user) {
-        return null
-    }
+    const {user, username} = useUserStore();
+    if (!user) return null;
     return (
-        <DropdownLink to={`/user/${user.displayName}`}>
-            <Avatar/>
-            <Username username={user.displayName}/>
+        <DropdownLink to={`/user/${username}`}>
+            <ProfileAvatar size={60} css={profile_avatar}/>
+            <Username username={username}/>
         </DropdownLink>
     );
 }
+const profile_avatar = css`margin: 8px 8px 12px 0;`
 export default ProfileLink

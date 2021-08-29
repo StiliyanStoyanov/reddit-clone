@@ -1,56 +1,62 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import React from "react";
-import ViewSelector from "../ViewSelector/ViewSelector";
 import PostsListing from "./PostListing";
-import {useFetchPosts} from "../../../hooks/usePostsFetch/useFetchPosts";
-import {useBaseLocation} from "../../../hooks/useBaseLocation";
-import CommunityBar from "../CommunityBar/CommunityBar";
+import CommunityBarIntermediate from "../../CommunityBar/CommunityBarIntermediate";
+import ViewSelector from "../../shared/ViewSelector/ViewSelector";
+import {useCommunityStore} from "../../../store/CommunityStore/CommunityStoreProvider";
+import {useCustomParams} from "../../../hooks/useCustomRoutes";
+import CommunityNotFound from "../CommunityNotFound";
+import CommunityPageAbout from "../CommunityPageAbout";
 
-const PostListingsWrapper = (props) => {
-    const {view, setView, sort, setSort} = props
-    const [baseLocation, communityId] = useBaseLocation();
-    const postDataAndStatus = useFetchPosts(sort, baseLocation, communityId);
-    const {
-        data,
-        startAfterIndex,
-        isLoading,
-        isFetching,
-        isError,
-        isLastIndex,
-        communityNotFound,
-        community,
-        query,
-        updateQuery
-    } = postDataAndStatus
-    if (!baseLocation) {
-        return null;
-    }
-    if (communityNotFound) {
-        return <div>Community does not exist</div>;
+const PostListingsWrapper = () => {
+    const {isLoading, community} = useCommunityStore();
+    const {communityId} = useCustomParams();
+    if (communityId && !community && !isLoading) {
+        return <CommunityNotFound/>
     }
     return (
         <>
-            {community && <CommunityBar community={community}/>}
-            <div css={[container]}>
-                <ViewSelector
-                    view={view}
-                    setView={setView}
-                    sort={sort}
-                    setSort={setSort}
-                />
-                <PostsListing view={view} sort={sort} {...postDataAndStatus}/>
+            <div css={theme => css`background-color: ${theme.background3};`}>
+                <div css={css`max-width: 1200px; margin: 0 auto`}>
+                    <CommunityBarIntermediate community={community}/>
+                </div>
+            </div>
+            <div css={content_layout}>
+                <main>
+                    <ViewSelector/>
+                    <PostsListing/>
+                </main>
+                <aside>
+                    <CommunityPageAbout/>
+                </aside>
             </div>
         </>
 
     );
 };
 
-const container = css`
-  max-width: 700px;
-  min-width: 380px;
-  margin: 0 auto;
-  label: post-listings-wrapper
+const content_layout = css`
+  display: flex;
+  max-width: 1200px; 
+  flex-grow: 1;
+  justify-content: center;
+  margin:0 auto;
+  main {
+    flex-basis: 69%;
+    margin: 16px;
+  }
+  aside {
+    flex-basis: 30%;
+    margin: 16px;
+  }
+  @media (max-width: 1100px) {
+    main {
+      flex-basis: 98%;
+    }
+    aside {
+      display: none;
+    }
+  }
 `
 
 export default PostListingsWrapper;

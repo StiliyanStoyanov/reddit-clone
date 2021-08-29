@@ -7,8 +7,9 @@ export const useBaseLocation = () => {
         baseLocation: "",
         communityId: null,
     });
-    const baseMatch = useMatch("/");
-    const communityMatch = useMatch('/e/:id');
+    const baseMatch = useMatch("/") || {path: null, params: {id: null}};
+    console.log(baseMatch);
+    const communityMatch = useMatch('/e/:id') || {path: null, params: {id: null}};
     useEffect(() => {
         if (baseMatch && baseMatch.path !== baseLocation) {
             setLocation({

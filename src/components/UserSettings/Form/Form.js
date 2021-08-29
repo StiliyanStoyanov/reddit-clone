@@ -1,31 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import {css, useTheme} from "@emotion/react";
+import {css} from "@emotion/react";
 import {useClickOutside} from "../../../hooks/useClickOutside";
 import {useRef} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons/faTimes";
 import FocusLock from "react-focus-lock";
 
-const Form = ({visible, closeForm, children, onSubmit, handleSubmit}) => {
-    const theme = useTheme();
+const Form = ({resetAndCloseForm, visible,  handleSubmit, onSubmit, children}) => {
     const formRef = useRef();
-    const handleCloseButtonKeyDown = event => {
-        if (event.key === "Enter") {
-            return closeForm();
-        }
-    }
-
-    useClickOutside(formRef, closeForm, visible);
+    useClickOutside(formRef, resetAndCloseForm, visible);
     return (
-        <div css={container(visible)}>
-            <form css={form(theme)} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+        <div css={[container, visible && container_visible]}>
+            <form css={[form]} ref={formRef} onSubmit={handleSubmit(onSubmit)}>
                 <FocusLock disabled={!visible} returnFocus={true}>
                     <button
-                        type="button" css={closeButton(theme)}
-                        onMouseDown={closeForm}
-                        onKeyDown={handleCloseButtonKeyDown}
+                        css={[close_button]}
+                        type="button"
+                        onClick={resetAndCloseForm}
                     >
-                        <FontAwesomeIcon css={iconCss} icon={faTimes}/>
+                        <FontAwesomeIcon css={[icon_css]} icon={faTimes}/>
                     </button>
                     {children}
                 </FocusLock>
@@ -35,9 +28,8 @@ const Form = ({visible, closeForm, children, onSubmit, handleSubmit}) => {
 }
 
 
-const container = visible => css`
+const container = css`
   position: absolute;
-  visibility: ${visible ? 'visible' : 'hidden'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,31 +38,39 @@ const container = visible => css`
   z-index: 91;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(28, 28, 28, 0.9)
+  background-color: rgb(28, 28, 28, 0.9);
+  label: form-container
+`
+const container_visible = css`
+  visibility: visible;
+  label: visible
 `
 
 const form = theme => css`
-  background-color: ${theme.settings.backgroundColor};
-  border: 1px solid ${theme.settings.borderColor};
+  background-color: ${theme.background1};
+  border: 1px solid ${theme.border1};
   position: relative;
   padding: 24px 32px;
   max-width: 430px;
   min-width: 300px;
   width: 100%;
+  label: form
 `
 
-const closeButton = theme => css`
+const close_button = theme => css`
   position: absolute;
   cursor: pointer;
-  color: ${theme.settings.color};
+  color: ${theme.color1};
   right: 12px;
   top: 12px;
   background-color: transparent;
   border: 0;
+  label: form-close-button
 `
 
-const iconCss = css`
+const icon_css = css`
   font-size: 20px;
+  label: form-icon
 `
 
 export default Form;

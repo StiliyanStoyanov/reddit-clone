@@ -1,36 +1,33 @@
 import {useEffect, useReducer} from "react";
-import {firestore} from "../firebase";
 
 const actions = {
-    update: "update",
-    error: "error",
-    reset: 'reset',
-    clearLoading: 'clearLoading'
+    setDocument: "SET_DOCUMENT",
+    setError: "ERROR",
+    reset: 'RESET',
 }
-const {update, error, reset} = actions
+const {setDocument, setError, reset} = actions
 const initialState = {
     data: {},
-    error: null,
+    error: {},
     isLoading: true,
     isError: false
 }
 const init = (initialState) => initialState;
 const reducer = (state, action) => {
-    const {payload} = action
     switch (action.type) {
-        case update: {
+        case setDocument: {
             return {
                 ...state,
-                data: payload,
+                data: action.payload,
                 isLoading: false
             }
         }
-        case error: {
+        case setError: {
             return {
                 ...state,
                 isError: true,
                 isLoading: false,
-                error: payload
+                error: action.payload
             }
         }
         case reset: {
@@ -43,31 +40,37 @@ const reducer = (state, action) => {
     }
 }
 
-export function useFetchDocument(path, skipFetch = false) {
+export function useFetchDocument(path, stateAsProp = null) {
     const [state, dispatch] = useReducer(reducer, initialState, init);
-    const location = path ? firestore.doc(path) : null;
+
     useEffect(() => {
         let ignore = false;
-        const fetchDocument = async () => {
-            if (skipFetch || !location) return null;
+        if (stateAsProp) return dispatch({type: setDocument, payload: stateAsProp})
 
-            const doc = await location.get().catch(err => {
-                const errorMessage = 'something went wrong';
+        const fetchDocument = async () => {
+            if (!path) return null;
+
+            const doc = await path.get().catch(err => {
                 console.error(err);
-                return dispatch({type: error, payload: errorMessage});
+                return dispatch({type: setError, payload: err});
             });
             if (!ignore) {
                 if (!doc.exists) {
-                    const errorMessage = 'document not found'
-                    return dispatch({type: error, payload: errorMessage});
+                    return dispatch({
+                        type: setError,
+                        payload: {
+                            error: {
+                                message: 'Document does not exist'
+                            }
+                        }
+                    });
                 }
-                const data = doc.data();
-                dispatch({type: update, payload: data});
+                dispatch({type: setDocument, payload: doc.data()});
             }
-        }
+        };
         fetchDocument().catch(err => console.error(err));
         return () => { ignore = true }
-    }, []);
+    }, [path, stateAsProp]);
 
     return state
 }

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
-import {useUserStore} from "../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../store/UserStore/UserStoreProvider";
 import CommentForm from "./CommentForm";
 import {Link} from "react-router-dom";
 import CommentSignIn from "./CommentSignIn";

@@ -8,8 +8,9 @@ import Button from "../../../../Form/Items/Button";
 import Form from "../../../../Form/Form";
 import {useForm} from "react-hook-form";
 import firebase ,{auth} from "../../../../../../firebase";
-import {useUserStore} from "../../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../../store/UserStore/UserStoreProvider";
 import {toast} from "react-toastify";
+import {rules} from "../../../../../../utils/rules";
 
 const PasswordForm = ({visible, closeForm}) => {
     const {user} = useUserStore();
@@ -23,62 +24,50 @@ const PasswordForm = ({visible, closeForm}) => {
     });
     const {register, reset, setError, handleSubmit, watch, formState} = formMethods
     const {isSubmitting, errors, dirtyFields} = formState;
-    const [rules] = useState(() => {
-        return {
-            oldPassword: {
-                required: {value: true, message: "Field is required"},
-                minLength: {value: 6, message: "Password must be at least 6 characters long"},
-            },
-            newPassword: {
-                required: {value: true, message: "Field is required"},
-                minLength: {value: 6, message: "Password must be at least 6 characters long"}
-            },
-            confirmPassword: {
-                required: {value: true, message: "Field is required"},
-                minLength: {value: 6, message: "Password must be at least 6 characters long"},
-                validate: (value) => {
-                    if (value === watch(newPassword)) {
-                        return true
-                    }
-                    return "Passwords do not match"
-
+    const [confirmPasswordRules] = useState(() => ({
+        confirmPassword: {
+            ...rules.password,
+            validate: (value) => {
+                if (value === watch(newPassword)) {
+                    return true
                 }
+                return "Passwords do not match"
+
             }
         }
-    })
+    }))
+    const resetAndCloseForm = (e) => {
+        reset();
+        closeForm(e)
+    }
     const onSubmit = async (data) => {
-        const {oldPassword, newPassword, confirmPassword} = data
+        const {oldPassword, newPassword} = data
         const credential = firebase.auth.EmailAuthProvider.credential(
             user.email,
             oldPassword
         )
-        await auth.currentUser.reauthenticateWithCredential(credential).catch(err => {
-            console.error(err);
+        const authenticatedUser = await auth.currentUser.reauthenticateWithCredential(credential).catch(error => {
+            console.error(error);
             setError("oldPassword", {
                 type: "manual",
-                message: "Something went wrong try again later"
-            })
+                message: "The password is invalid"
+            });
         })
 
-        auth.currentUser.updatePassword(newPassword).then(res => {
-            toast.dark("🚀 password updated!", {
-                autoClose: 2000,
-                hideProgressBar: true
-            })
-            console.log("Password successfully updated");
-            reset();
-            closeForm();
-        }).catch(err => {
-            console.error(err);
-            toast.dark("Something went wrong try again later");
-        });
+        if (authenticatedUser) {
+            await auth.currentUser.updatePassword(newPassword).then(() => {
+                toast.success("Password updated");
+                resetAndCloseForm();
+            }).catch(error => {
+                toast.error('Server error please try again later');
+            });
+        }
     }
 
     return (
         <Form
-            reset={reset}
+            resetAndCloseForm={resetAndCloseForm}
             visible={visible}
-            closeForm={closeForm}
             onSubmit={onSubmit}
             handleSubmit={handleSubmit}
         >
@@ -88,10 +77,11 @@ const PasswordForm = ({visible, closeForm}) => {
                 <Input
                     visible={visible}
                     register={register}
-                    rules={rules.oldPassword}
+                    rules={rules.password}
                     error={errors.oldPassword || null}
                     isDirty={dirtyFields.oldPassword || false}
                     name={oldPassword}
+                    autoComplete={'current-password'}
                     type={'password'}
                     placeholder={'Old password'}
 
@@ -99,20 +89,22 @@ const PasswordForm = ({visible, closeForm}) => {
                 <Input
                     visible={visible}
                     register={register}
-                    rules={rules.newPassword}
+                    rules={rules.password}
                     error={errors.newPassword || null}
                     isDirty={dirtyFields.newPassword || false}
                     name={newPassword}
+                    autoComplete={'new-password'}
                     type={'password'}
                     placeholder={'New password'}
                 />
                 <Input
                     visible={visible}
                     register={register}
-                    rules={rules.confirmPassword}
+                    rules={confirmPasswordRules}
                     error={errors.confirmPassword}
                     isDirty={dirtyFields.confirmPassword || false}
                     name={confirmPassword}
+                    autoComplete={'new-password'}
                     type={'password'}
                     placeholder={'Confirm new password'}
                 />

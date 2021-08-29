@@ -3,7 +3,7 @@ import {css} from "@emotion/react";
 import React from "react";
 import LoginModalButton from "./LoginModalButton";
 import SignUpModalButton from "./SignUpModalButton";
-import {useUserStore} from "../../../store/UserStoreProvider";
+import {useUserStore} from "../../../store/UserStore/UserStoreProvider";
 
 const AuthContainer = () => {
     const {user, isLoading} = useUserStore();

@@ -24,6 +24,7 @@ const SearchCaretDown = ({inputRef, svgRef}) => {
 };
 
 const svgIcon = css`
+  tab-index: -1;
   &:hover {
     cursor: pointer;
   }

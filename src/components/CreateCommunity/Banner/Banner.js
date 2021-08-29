@@ -13,7 +13,7 @@ const bannerPlaceholder = css`
   width: 200px;
   min-width: 100px;
   min-height: 100%;
-  background-color: #2e89ff;
+  background-color: #333dff;
   @media screen and (max-width: 560px) {
     display: none;
   }

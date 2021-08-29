@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import Header from "../../../../Form/Items/Header";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
 import Description from "../../../../Form/Items/Description";
@@ -7,68 +6,72 @@ import Input from "../../../../Form/Items/Input/Input";
 import Button from "../../../../Form/Items/Button";
 import Form from "../../../../Form/Form";
 import {useForm} from "react-hook-form";
-import {useUserStore} from "../../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../../store/UserStore/UserStoreProvider";
 import firebase, {auth} from "../../../../../../firebase";
-import {validateEmail} from "../../../../../../utils/validateEmail";
 import {toast} from "react-toastify";
+import {rules} from "../../../../../../utils/rules";
+import ButtonOne from "../../../../../shared/Buttons/ButtonOne";
 
 const EmailForm = ({visible, closeForm}) => {
     const {user} = useUserStore();
     const [currentPassword, newEmail] = ["currentPassword", "newEmail"];
-    const formMethods = useForm({
+    const {register, reset, setError, handleSubmit, formState} = useForm({
         defaultValues: {
             [currentPassword]: "",
             [newEmail]: "",
         },
     });
-    const {register, reset, setError, handleSubmit, formState} = formMethods
+
     const {isSubmitting, errors, dirtyFields} = formState
-    const [rules] = useState(() => {
-        return {
-            currentPassword: {
-                required: {value: true, message: "Field is required"},
-                minLength: {value: 6, message: "Password must be at least 6 characters long"},
-            },
-            newEmail: {
-                required: {value: true, message: "Field is required"},
-                validate: validateEmail
-            }
-        }
-    })
-    const notify = message => toast.dark(message);
+    const resetAndCloseForm = (e) => {
+        reset();
+        closeForm(e)
+    }
     const onSubmit = async (data) => {
         const {currentPassword, newEmail} = data
         const credential = firebase.auth.EmailAuthProvider.credential(
             user.email,
             currentPassword
         );
-        await auth.currentUser.reauthenticateWithCredential(credential).catch(err => {
+        const authenticatedUser = await auth.currentUser.reauthenticateWithCredential(credential).catch(err => {
             console.error(err);
-            setError('currentPassword', {
+            setError("currentPassword", {
                 type: "manual",
-                message: err.message,
+                message: 'The password is invalid',
             }, {
                 shouldFocus: true
             });
         })
-
-        return auth.currentUser.updateEmail(newEmail).then(() => {
-            notify("🚀 Email successfully updated");
-            reset();
-            closeForm();
-        }).catch(err => {
-            console.error(err);
-            setError("newEmail", {
-                type: "manual",
-                message: "Something went wrong updating your email",
-            })
-        });
+        if (authenticatedUser) {
+            auth.currentUser.updateEmail(newEmail).then(() => {
+                toast.success('Email updated successfully')
+                reset();
+                closeForm();
+            }).catch(error => {
+                if (error.code?.includes('invalid-email')) {
+                    setError("newEmail", {
+                        type: "manual",
+                        message: error.message,
+                    }, {
+                        shouldFocus: true
+                    });
+                } else if (error.code?.includes('already-in-use')) {
+                    setError("newEmail", {
+                        type: "manual",
+                        message: error.message,
+                    }, {
+                        shouldFocus: true
+                    });
+                } else {
+                    toast.error('Server error please try again later');
+                }
+            });
+        }
     }
     return (
         <Form
-            reset={reset}
+            resetAndCloseForm={resetAndCloseForm}
             visible={visible}
-            closeForm={closeForm}
             onSubmit={onSubmit}
             handleSubmit={handleSubmit}
         >
@@ -82,24 +85,27 @@ const EmailForm = ({visible, closeForm}) => {
                 <Input
                     visible={visible}
                     register={register}
-                    rules={rules.currentPassword}
+                    rules={rules.password}
                     error={errors.currentPassword || null}
                     isDirty={dirtyFields.currentPassword || false}
                     name={currentPassword}
+                    autoComplete={'current-password'}
                     type={'password'}
                     placeholder={'Current password'}
                 />
                 <Input
                     visible={visible}
                     register={register}
-                    rules={rules.newEmail}
+                    rules={rules.email}
                     error={errors.newEmail || null}
                     isDirty={dirtyFields.newEmail || false}
                     name={newEmail}
+                    autoComplete={'email'}
                     type={'text'}
                     placeholder={'New email'}
                 />
             </InputsContainer>
+            <ButtonOne disabled={isSubmitting}>Save Email</ButtonOne>
             <Button disabled={isSubmitting}>Save Email</Button>
         </Form>
     );

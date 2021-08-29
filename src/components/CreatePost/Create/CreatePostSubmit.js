@@ -4,14 +4,14 @@ import {toast} from "react-toastify";
 import {usePostStore} from "../../../store/CreatePostStoreProvider";
 import firebase, {firestore, storage} from "../../../firebase";
 import {css} from "@emotion/react";
-import {useUserStore} from "../../../store/UserStoreProvider";
+import {useUserStore} from "../../../store/UserStore/UserStoreProvider";
 import {useNavigate} from "react-router";
 import {urlRegex} from "../../../utils/urlValidators";
 import {isBlank} from "../../../utils/stringCheckers";
 import {Spinner} from "../../Loaders/Spinner";
-import {authModalActions, useAuthModalDispatch} from "../../../store/AuthModalStoreProvider";
+import {useAuthModalDispatch} from "../../../store/AuthModal/AuthModalProvider";
+import {openModal} from "../../../store/AuthModal/authModalActions";
 import FormButton from "../../shared/Buttons/FormButton";
-const {openModal} = authModalActions
 
 const CreatePostSubmit = () => {
     const {user} = useUserStore();
@@ -36,7 +36,7 @@ const CreatePostSubmit = () => {
     }, [activeForm, community, imageFile, linkContent, postContent, title]);
 
     const handleSubmit = async event => {
-        if (!user) return authModalDispatch({type: openModal})
+        if (!user) return authModalDispatch(openModal())
         setDisabled(true);
         setLoading(true);
         const postDoc = firestore.collection(`/communities/${community.id}/posts`).doc();

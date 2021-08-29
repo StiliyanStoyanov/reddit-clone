@@ -18,6 +18,7 @@ export const global_styles = theme => css`
   }
   button {
     ${button_reset};
+    font-family: inherit;
   }
   a {
     text-decoration: none;

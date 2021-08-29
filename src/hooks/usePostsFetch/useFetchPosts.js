@@ -33,9 +33,9 @@ export function useFetchPosts(sort, baseLocation, communityId) {
         : baseLocation === "/"
             ? firestore.collectionGroup('posts')
             : null;
-    const limit = 5;
+    const limit = 1;
     const newSort = fetchLocation && fetchLocation.orderBy('createdAt', 'desc').limit(limit);
-    const topSort = fetchLocation && fetchLocation.orderBy('upvotes', 'desc').orderBy('createdAt', 'desc').limit(limit);
+    const topSort = fetchLocation && fetchLocation.orderBy('scores', 'desc').orderBy('createdAt', 'desc').limit(limit);
     const fetchBySort = sort === 'new' ? newSort : topSort;
 
     const updateQuery = () => {
@@ -46,24 +46,24 @@ export function useFetchPosts(sort, baseLocation, communityId) {
     }
     useEffect(() => {
         let ignore = false;
-        const fetchData = async () => {
-            if (!fetchLocation) {
-                return null;
-            }
-            dispatch({type: initFetch});
-            if (communityId) {
+        if (!fetchLocation) return;
+        const shouldResetCommunity = baseLocation === "/"
+        dispatch({type: initFetch, payload: {shouldResetCommunity}});
+        const handler = setTimeout(async () => {
+            if ((!community || community.name !== communityId) && baseLocation !== "/") {
                 const path = firestore.doc(`communities/${communityId}`);
                 const community = await path.get().catch(e => console.error(e));
-                if (!community.exists && !ignore.current) {
+                if (!community?.exists && !ignore.current) {
                     return dispatch({type: setCommunityNotFound});
                 }
                 dispatch({type: setCommunity, payload: community.data()});
             }
-            const query = await fetchBySort.get();
-            if (!ignore) {
+            const query = await fetchBySort.get().catch(e => console.error(e));
+            if (!ignore && query) {
                 if (query.empty) {
                     return dispatch({type: setLastIndex});
                 }
+
                 const fetchedData = query.docs.map(docSnapshot => ({
                     id: docSnapshot.id,
                     ...docSnapshot.data(),
@@ -71,9 +71,11 @@ export function useFetchPosts(sort, baseLocation, communityId) {
                 }));
                 dispatch({type: setData, payload: fetchedData});
             }
+        }, 400);
+        return () => {
+            clearTimeout(handler);
+            ignore = true;
         }
-        fetchData().catch(e => console.error(e));
-        return () => { ignore = true; }
     }, [sort, communityId, baseLocation]);
 
     useEffect(() => {

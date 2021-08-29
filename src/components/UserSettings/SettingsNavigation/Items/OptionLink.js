@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {useParams} from "react-router";
 
 const OptionLink = ({to, children}) => {
-    let {['*']: paramOption} = useParams();
+    let {'*': paramOption} = useParams();
     const isSelected = paramOption === to;
 
     return (
@@ -22,6 +22,7 @@ const link = theme => css`
   font-size: 14px;
   font-weight: 700;
   &:hover, &:focus-visible {
+    text-decoration: none;
     color: ${theme.colorHighlight1};
   }
   padding: 15px 12px 12px;

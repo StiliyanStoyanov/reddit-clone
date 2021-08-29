@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import {BrowserRouter} from "react-router-dom";
-import {UserStoreProvider} from "./store/UserStoreProvider";
+import {UserStoreProvider} from "./store/UserStore/UserStoreProvider";
 import {ThemeProvider} from "./store/ThemeProvider";
-import {AuthModalStoreProvider} from "./store/AuthModalStoreProvider";
+import {AuthModalStoreProvider} from "./store/AuthModal/AuthModalProvider";
 
 ReactDOM.render(
     <BrowserRouter>

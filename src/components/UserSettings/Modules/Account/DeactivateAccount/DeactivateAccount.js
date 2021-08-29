@@ -23,7 +23,7 @@ const DeactivateAccount = () => {
                 <FontAwesomeIcon css={[iconCss]} icon={faTrashAlt}/>
                 Deactivate Account
             </ToggleFormButton>
-            <DeactivateForm visible={visible} closeForm={closeForm}/>
+            {visible && <DeactivateForm visible={visible} closeForm={closeForm}/>}
         </div>
     );
 };

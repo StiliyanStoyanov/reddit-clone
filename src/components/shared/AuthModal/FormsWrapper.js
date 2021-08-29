@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
-import {useAuthModalStore} from "../../../store/AuthModalStoreProvider";
+import {useAuthModalStore} from "../../../store/AuthModal/AuthModalProvider";
 import React from "react";
 
 const FormsWrapper = () => {

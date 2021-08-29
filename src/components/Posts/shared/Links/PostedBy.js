@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import {Link} from "react-router-dom";
 import {css} from "@emotion/react";
+import {TimeAgo} from "../../../shared/TimeAgo/TimeAgo";
 
 const PostedBy = ({author}) => {
     return (
@@ -19,15 +20,8 @@ const container = theme => css`
 const link = css`
   position: relative;
   z-index: 2;
-  margin-left: 3px;
-  display: inline-block;
-  text-decoration: none;
-  span, a {
-    color: inherit;
-  }
-  &:hover { 
-    text-decoration: underline;
-  }
+  margin: 3px;
+  color: inherit;
 `;
 
 export default PostedBy

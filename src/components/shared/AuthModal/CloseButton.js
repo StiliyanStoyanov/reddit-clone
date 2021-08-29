@@ -7,7 +7,7 @@ const CloseButton = ({closeModal}) => {
     return (
         <div css={[container]}>
             <button css={[button]} onClick={closeModal}>
-                <FontAwesomeIcon css={[iconCss]} icon={faTimes}/>
+                <FontAwesomeIcon css={[icon_css]} icon={faTimes}/>
             </button>
         </div>
     );
@@ -26,7 +26,7 @@ const button = theme => css`
   border: 0;
   label: close-button;
 `
-const iconCss = css`
+const icon_css = css`
   font-size: 20px;
   label: close-button-icon;
 `

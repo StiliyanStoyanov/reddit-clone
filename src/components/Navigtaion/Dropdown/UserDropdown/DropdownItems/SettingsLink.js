@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import {useUserStore} from "../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../store/UserStore/UserStoreProvider";
 import DropdownIcon from "../../DropdownItems/DropdownIcon";
 import {faCog} from "@fortawesome/free-solid-svg-icons/faCog";
 import DropdownLink from "../../DropdownItems/DropdownLink";

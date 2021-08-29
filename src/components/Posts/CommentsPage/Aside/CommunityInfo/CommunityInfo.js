@@ -8,7 +8,7 @@ import Hr from "./Items/Hr";
 import CreatedAt from "./Items/CreatedAt";
 import CreatePostLink from "./Items/CreatePostLink";
 import AboutLoader from "../../../../Loaders/AboutLoader";
-import {useCommunityStore} from "../../../../../store/CommunityStoreProvider";
+import {useCommunityStore} from "../../../../../store/CommunityStore/CommunityStoreProvider";
 
 const CommunityInfo = () => {
     const {community, isLoading} = useCommunityStore();

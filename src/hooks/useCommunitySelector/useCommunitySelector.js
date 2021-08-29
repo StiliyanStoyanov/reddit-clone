@@ -1,10 +1,9 @@
-import {useCallback, useEffect, useMemo, useReducer, useRef} from "react";
+import {useEffect, useReducer} from "react";
 import {firestore} from "../../firebase";
 import {communitySelectorReducer, init, communitySelectorActions} from "./communitySelectorReducer";
 import {findFirstLetter} from "./utils";
 import useHighlight from "../useHighlight";
 import {useSubscriptionsStore} from "../../store/SubscriptionsStoreProvider";
-
 const {updateCommunities, setFetching} = communitySelectorActions
 
 const findCommunityByLetter = async (letter) => {
@@ -17,36 +16,21 @@ const findCommunityByLetter = async (letter) => {
 }
 
 const useCommunitySelector = () => {
-    const {subscriptionsData, isLoading} = useSubscriptionsStore();
+    const {subscriptions, isLoading} = useSubscriptionsStore();
     const [state, dispatch] = useReducer(communitySelectorReducer, {}, init);
     const {userInput, isFetching, communities, skipQueryParams} = state
-    const refs = useRef([]);
-    refs.current = [];
-    const {highlight, ...highlightMethods} = useHighlight(refs);
-    const addToRefs = useCallback((el, content) => {
-        if (el) {
-            refs.current.push({
-                ref: el,
-                content,
-                index: refs.current.length
-            });
-        }
-    }, []);
-    const subscriptions = useMemo(() => {
-        if (!userInput) return subscriptionsData
-        return subscriptionsData.filter(subscription => {
-            return subscription.id.includes(userInput);
-        })
-    }, [userInput, subscriptionsData]);
-    const others = useMemo(() => {
-        if (!userInput) return [];
+    const {highlight, addToRefs, ...highlightMethods} = useHighlight();
 
-        return communities.filter(community => {
-            const isUserSubscription = subscriptionsData.some(subscription => subscription.id === community.id);
-            if (isUserSubscription) return false;
-            return community.id.includes(userInput);
-        })
-    }, [userInput, communities, subscriptionsData]);
+    const subs = userInput ? subscriptions.filter(subscription => {
+        return subscription.id?.includes(userInput);
+    }) : subscriptions
+
+    const others = userInput ? communities.filter(community => {
+        const isUserSubscription = subscriptions.some(subscription => subscription.id === community.id);
+        if (isUserSubscription) return false;
+        return community.id?.includes(userInput);
+    }) : []
+
 
     useEffect(() => {
         const char = findFirstLetter(userInput);
@@ -62,7 +46,10 @@ const useCommunitySelector = () => {
         });
     }, [userInput, skipQueryParams, isFetching]);
 
-    return {state:{...state, isLoading, highlight: highlight.current, subscriptions, others}, methods: {dispatch, highlightMethods, addToRefs}}
+    return {
+        state: {...state, isLoading, highlight: highlight.current, subscriptions: subs, others},
+        methods: {dispatch, highlightMethods, addToRefs}
+    }
 };
 
 export default useCommunitySelector;

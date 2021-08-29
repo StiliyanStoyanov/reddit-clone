@@ -7,7 +7,7 @@ export const input_field_base = (theme) => css`
   outline: none;
   border: 1px solid ${theme.border1};
   font-size: 18px;
-  height: 40px;
+  padding: 8px;
   border-radius: 4px;
   width: 100%;
   margin-top: 5px;

@@ -1,16 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import {useForm} from "react-hook-form";
 import Input from "./Input";
-import {auth, functions} from "../../../firebase";
-import {auth_form, auth_form_submit_button} from "./styles/auth-modal-styles";
+import {getFormError} from "./getFormError";
+import {auth, firestore, functions} from "../../../firebase";
+import {auth_form} from "./styles/auth-modal-styles";
 import React, {useState} from "react";
-import {validateEmail} from "../../../utils/validateEmail";
-import {validateUsername} from "../../../utils/validateUsername";
-import {useAuthModalDispatch, authModalActions} from "../../../store/AuthModalStoreProvider";
-const {closeModal} = authModalActions
-
+import {useAuthModalDispatch} from "../../../store/AuthModal/AuthModalProvider";
+import {closeModal} from "../../../store/AuthModal/authModalActions";
+import {toast} from "react-toastify";
+import {useLocation, useNavigate} from "react-router";
+import {rules} from "../../../utils/rules";
+import {Spinner} from "../../Loaders/Spinner";
+import FormButton from "./FormButton";
+// https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands
+// https://stackoverflow.com/questions/15738259/disabling-chrome-autofill
+// https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tags
+// https://stackoverflow.com/questions/27988418/login-form-changed-username-to-email-autocomplete-keeps-entering-in-saved-emai
 const SignupForm = () => {
     const authModalDispatch = useAuthModalDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
     const [username, email, password, confirmPassword] = ["username", "email", "password", "confirmPassword"]
     const [currentPassword, newEmail] = ["currentPassword", "newEmail"];
     const formMethods = useForm({
@@ -18,69 +27,44 @@ const SignupForm = () => {
             [currentPassword]: "",
             [newEmail]: "",
         },
+        mode: "onChange"
     });
     const {register, setError, handleSubmit, watch, formState} = formMethods
-    const {isSubmitting, errors, dirtyFields} = formState
-    const [rules] = useState(() => {
-        return {
-            username: {
-                required: {value: true, message: "Field is required"},
-                validate: validateUsername,
-            },
-            email: {
-                required: {value: true, message: "Field is required"},
-                validate: validateEmail,
-            },
-            password: {
-                required: {value: true, message: "Field is required"},
-                minLength: {value: 1, message: "Password must be at least 6 characters"},
-                maxLength: {value: 254, message: "Password cannot exceed 254 characters"}
-            },
-            confirmPassword: {
-                required: {value: true, message: "Field is required"},
-                minLength: {value: 1, message: "Password must be at least 6 characters long"},
-                validate: (value) => {
-                    if (value === watch(password)) {
-                        return true
-                    }
-                    return "Passwords do not match"
-                }
+    const {isSubmitting, isValid, errors, dirtyFields} = formState
+    const [confirmPasswordRules] = useState(() => ({
+        ...rules.password,
+        validate: (value) => {
+            if (value === watch(password)) {
+                return true
             }
+            return "Passwords do not match"
         }
-    })
-
-    const onSubmit = async ({username, password, email}) => {
-        const createUser = functions.httpsCallable("createUser");
-        const { data } = await createUser({username, password, email}).catch(err => console.log(err));
-        if (data.error) {
-            if (data.error?.code?.includes("username")) {
-                return setError("username", {
-                    type: data.error.code,
-                    message: data.error.message
-                }, {shouldFocus: true});
-            } else if (data.error?.code?.includes("password")) {
-                return setError("username", {
-                    type: data.error.code,
-                    message: data.error.message
-                }, { shouldFocus: true});
-            } else if (data.error?.code?.includes("email")) {
-                return setError("email", {
-                    type: data.error.code,
-                    message: data.error.message
-                }, { shouldFocus: true});
+    }))
+    const onSubmit = async (data) => {
+        const {username, password, email} = data;
+        const user = await firestore.doc(`users/${username}`).get();
+        if (user.exists) {
+            return setError("username",{
+                type: 'auth/username-already-exists',
+                message: 'The username is already taken'
+            }, {shouldFocus: true})
+        }
+        const createUser =  functions.httpsCallable('createUser');
+        await createUser(data).then(async user => {
+            await auth.signInWithEmailAndPassword(email, password);
+            navigate(location.pathname, {replace: true})
+            authModalDispatch(closeModal());
+            // TODO: Update
+            await auth.currentUser.sendEmailVerification({url: "http://localhost:3000"})
+        }).catch(err => {
+            const errorCode = err?.details?.code
+            const errorMessage = err?.details?.message
+            const {name, error} = getFormError(errorCode, errorMessage);
+            if (name === "internal") {
+                return toast.error('Server error please try again later');
             }
-            // TODO: Add notification something went wrong
-            return null;
-        }
-
-        await auth.signInWithEmailAndPassword(email, password).catch(err => console.error(err));
-        if (auth.currentUser) {
-            auth.currentUser.sendEmailVerification({
-                url: "http://localhost:3000"
-            }).catch(err => console.error(err));
-        }
-        authModalDispatch({type: closeModal})
-        // TODO: Add notification sign up successful
+            setError(name, error)
+        });
     }
 
     return (
@@ -91,8 +75,19 @@ const SignupForm = () => {
                 error={errors.username || null}
                 isDirty={dirtyFields.username || false}
                 name={username}
+                autoComplete={"username"}
                 type={"text"}
                 labelText={"Username"}
+            />
+            <Input
+                register={register}
+                rules={rules.email}
+                error={errors.email || null}
+                isDirty={dirtyFields.email || false}
+                name={email}
+                autoComplete={"email"}
+                type={"email"}
+                labelText={"Email"}
             />
             <Input
                 register={register}
@@ -100,39 +95,25 @@ const SignupForm = () => {
                 error={errors.password || null}
                 isDirty={dirtyFields.password || false}
                 name={password}
+                autoComplete={"new-password"}
                 type={"password"}
                 labelText={"Password"}
             />
 
             <Input
                 register={register}
-                rules={rules.confirmPassword}
+                rules={confirmPasswordRules}
                 error={errors.confirmPassword || null}
                 isDirty={dirtyFields.confirmPassword || false}
                 name={confirmPassword}
+                autoComplete={"new-password"}
                 type={"password"}
                 labelText={"Confirm Password"}
             />
-
-
-            <Input
-                register={register}
-                rules={rules.email}
-                error={errors.email || null}
-                isDirty={dirtyFields.email || false}
-                name={email}
-                type={"email"}
-                labelText={"Email"}
-            />
-
-
-            <button
-                disabled={isSubmitting}
-                css={[auth_form_submit_button]}
-                type="submit"
-            >
+            {isSubmitting && <Spinner/>}
+            <FormButton disabled={isSubmitting || !isValid} type={"submit"}>
                 Sign Up
-            </button>
+            </FormButton>
         </form>
     );
 };

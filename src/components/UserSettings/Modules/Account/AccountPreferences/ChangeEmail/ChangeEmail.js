@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import {css} from "@emotion/react";
 import React, {useCallback, useState} from 'react';
-import {useUserStore} from "../../../../../../store/UserStoreProvider";
+import {useUserStore} from "../../../../../../store/UserStore/UserStoreProvider";
 import DescriptionContainer from "../../../../ModulesItems/Field/DescriptionContainer";
 import DescriptionHeading from "../../../../ModulesItems/Field/DescriptionHeading";
 import Description from "../../../../ModulesItems/Field/Description";
@@ -28,7 +28,7 @@ const ChangeEmail = () => {
             >
                 CHANGE
             </ToggleFormButton>
-            <EmailForm visible={visible} closeForm={closeForm}/>
+            {visible && <EmailForm visible={visible} closeForm={closeForm}/>}
         </div>
     );
 };

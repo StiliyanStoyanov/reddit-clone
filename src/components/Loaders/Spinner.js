@@ -1,13 +1,24 @@
 /** @jsxImportSource @emotion/react */
 import {css, keyframes} from "@emotion/react";
-
 // Credit to https://github.com/lukehaas/css-loaders Awesome thanks!
-export const Spinner = ({absoluteCenter = true, className}) => {
-    return <div css={[spinner, absoluteCenter && spinner_absolute_center]} className={className || null}/>
+export const Spinner = ({absoluteCenter = true, className = null, spinnerRGB = '255, 255, 255'}) => {
+    return (
+        <div css={relative}>
+            <div
+                css={
+                    theme => [
+                        spinner(theme, spinnerRGB),
+                        absoluteCenter && absolute_center
+                    ]
+                }
+                className={className}
+            />
+        </div>
+    )
 }
-
-export const spinner_absolute_center = css`position:absolute; left: 50%; transform: translate(50%)`
-export const spinner = (theme, rgb = '255, 255, 255') => css`
+const relative = css`position: relative`
+const absolute_center = css`position: absolute; left: 50%; transform: translate(-50%, 0);`
+export const spinner = (theme, rgb) => css`
   margin: 0 auto;
   font-size: 10px;
   width: 1em;
@@ -18,7 +29,7 @@ export const spinner = (theme, rgb = '255, 255, 255') => css`
   animation: ${spinner_keyframes(rgb)} 1.1s infinite ease;
   transform: translateZ(0);
 `
-const spinner_keyframes = (rgb = '255, 255, 255') => keyframes`
+const spinner_keyframes = (rgb) => keyframes`
   0%,
   100% {
     box-shadow:0em -2.6em 0em 0em rgba(${rgb},1),
