@@ -1,42 +1,24 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# Temporary testing files
-src/testing
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# production
-/build
-
-# misc
-.idea
-.vscode
-.DS_Store
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-#debug logs
+# Logs
 logs
-debug.log
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Firebase
-.firebaserc
-firestore.rules
-storage.rules
+node_modules
+dist
+dist-ssr
+*.local
 
-# Firebase cache
-.firebase/
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

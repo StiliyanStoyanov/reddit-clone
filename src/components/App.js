@@ -11,7 +11,6 @@ import {Routes} from "react-router";
 import {SubscriptionsStoreProvider} from "../store/SubscriptionsStoreProvider";
 import {ScoresStoreProvider} from "../store/ScoresStoreProvider";
 import {CommunityStoreProvider} from "../store/CommunityStore/CommunityStoreProvider";
-import {MockData} from "../testing/MockData/MockData";
 import Leaderboards from "./Leaderboards/Leaderboards";
 import {StyledToastContainer} from "./shared/StyledToastContainer";
 
@@ -23,7 +22,6 @@ const App = () => {
                     <ScoresStoreProvider>
                         <div css={container}>
                             <Navigation/>
-                            {/*<TestButtonsBar/>*/}
                             <Routes>
                                 <Posts path="/*"/>
                                 <CreateCommunity path="/community/create"/>
@@ -31,7 +29,6 @@ const App = () => {
                                 <UserSettings path="/settings/*"/>
                                 <Leaderboards path="/leaderboards/*"/>
                             </Routes>
-                            <MockData/>
                             <AuthModal/>
                             <StyledToastContainer/>
                         </div>
