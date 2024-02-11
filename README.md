@@ -1,3 +1,51 @@
+# Reddit Clone
+
+## Installation and Usage
+
+Setup the packages
+
+```shell
+npm install
+```
+
+Install Git hooks and husky
+
+```shell
+npm run prepare
+```
+
+Run the app in development mode
+
+```shell
+npm run dev
+```
+
+Generate a production build
+
+```shell
+npm run build
+```
+
+## Firebase
+### Setting up the Emulators
+
+There are a few prequisites for the emulators to work such as Firebase Tools CLI, NodeJS and JDK.\
+Please refer to the Firebase documentation:
+- [Install, configure and integrate Local Emulator Suite](https://firebase.google.com/docs/emulator-suite/install_and_configure)
+
+To initialize the emulators run:
+```shell
+firebase init emulators
+```
+The project currently uses the following emulators:
+- Authentication
+- Firestore
+- Storage
+
+### Firebase Javascript SDK
+
+- [Firebase Javascript SDK Documentation](https://github.com/firebase/firebase-js-sdk#firebase-javascript-sdk)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
