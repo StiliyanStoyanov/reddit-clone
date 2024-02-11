@@ -1,7 +1,7 @@
 {
-  "name": "echo-blue",
+  "name": "reddit-clone",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "author": "Stiliyan Stoyanov",
+  "homepage": "https://github.com/StiliyanStoyanov/reddit-clone#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
     "firebase": "^10.7.2",
