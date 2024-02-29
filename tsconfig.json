@@ -21,11 +21,17 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Path Aliases */
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"],
-      "@assets/*": ["src/assets/*"],
-      "@common/*": ["src/common/*"]
+      "@/*": ["./*"],
+      "@app/*": ["./app/*"],
+      "@common/*": ["./common/*"],
+      "@features/*": ["./features/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@config/*": ["./config/*"],
+      "@types/*": ["./types/*"],
+      "@assets/*": ["./assets/*"],
+      "@styles/*": ["./styles/*"],
     }
   },
   "include": ["src"],

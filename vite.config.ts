@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import svgr from 'vite-plugin-svgr'
 import react from '@vitejs/plugin-react-swc'
 import path from 'node:path'
 
@@ -8,8 +9,14 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src/'),
+      '@app': path.resolve(__dirname, './src/app/'),
+      '@common': path.resolve(__dirname, './src/common/'),
+      '@features': path.resolve(__dirname, './src/features/'),
+      '@hooks': path.resolve(__dirname, './src/hooks/'),
+      '@config': path.resolve(__dirname, './src/config/'),
+      '@types': path.resolve(__dirname, './src/types/'),
       '@assets': path.resolve(__dirname, './src/assets/'),
-      '@common': path.resolve(__dirname, './src/common/')
+      '@styles': path.resolve(__dirname, './src/styles/'),
     }
   },
   plugins: [svgr(), react()]
