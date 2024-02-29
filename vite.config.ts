@@ -12,5 +12,5 @@ export default defineConfig({
       '@common': path.resolve(__dirname, './src/common/')
     }
   },
-  plugins: [react()]
+  plugins: [svgr(), react()]
 })
