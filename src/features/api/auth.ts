@@ -1,9 +1,9 @@
-import { api } from '../api/api'
+import { api } from './api'
 
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     example: builder.mutation({
-      queryFn: async ({ email, password }) => {
+      queryFn: async (args) => {
         return { data: null }
       }
     })
