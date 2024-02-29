@@ -2,7 +2,7 @@ import { initializeApp } from '@firebase/app'
 import { connectAuthEmulator, getAuth } from '@firebase/auth'
 import { connectFirestoreEmulator, getFirestore } from '@firebase/firestore'
 import { connectStorageEmulator, getStorage } from '@firebase/storage'
-import emulatorsConfig from '../firebase.json'
+import emulatorsConfig from '../../firebase.json'
 const { emulators } = emulatorsConfig
 // Initialize Firebase
 // https://firebase.google.com/docs/web/setup#available-libraries
