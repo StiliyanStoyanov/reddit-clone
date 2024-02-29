@@ -14,13 +14,14 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-		"*.{ts,tsx,js,jsx}": "eslint --fix",
-		"src/**/*.+(ts|tsx|js|jsx|json|css|md)": "prettier --write --ignore-unknown"
-	},
+    "*.{ts,tsx,js,jsx}": "eslint --fix",
+    "src/**/*.+(ts|tsx|js|jsx|json|css|md)": "prettier --write --ignore-unknown"
+  },
   "author": "Stiliyan Stoyanov",
   "homepage": "https://github.com/StiliyanStoyanov/reddit-clone#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
+    "classnames": "^2.5.1",
     "firebase": "^10.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -29,6 +30,7 @@
     "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
+    "@svgr/rollup": "^8.1.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -41,6 +43,7 @@
     "lint-staged": "^15.2.2",
     "prettier": "3.2.4",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }
