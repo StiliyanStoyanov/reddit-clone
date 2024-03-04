@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "emulators": "firebase emulators:start --import=./emulators-data --export-on-exit=./emulators-data",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "format": "prettier --write \"src/**/*.+(js|jsx|json|css|md)\"",
