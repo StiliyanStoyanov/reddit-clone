@@ -9,6 +9,7 @@ export interface ModalProps extends React.PropsWithChildren {
   onClickOutside?: (e?: MouseEvent) => void
   onEscapeKeyPress?: (e?: KeyboardEvent) => void
   onCloseButtonClick?: MouseEventHandler<HTMLButtonElement>
+  overlayContainerProps?: ReactDivProps
   containerProps?: ReactDivProps
   closeButtonProps?: ReactButtonProps
   portalElement?: HTMLElement
@@ -19,6 +20,7 @@ export const Modal = ({
   onClickOutside,
   onEscapeKeyPress,
   onCloseButtonClick,
+  overlayContainerProps,
   containerProps,
   closeButtonProps,
   portalElement,
@@ -38,7 +40,7 @@ export const Modal = ({
   if (!isOpen) return null
   return (
     <Portal portalElement={portalElement}>
-      <div className="page-overlay">
+      <div className="page-overlay" {...overlayContainerProps}>
         <div className="absolute-center modal-default-size" ref={ref} {...containerProps}>
           <CloseButton onClick={onCloseButtonClick} {...closeButtonProps} />
           {children}
