@@ -1,7 +1,7 @@
 import { Moon } from '@assets/svg'
 import { Switch } from '@common/Switch'
-import { DropdownIcon } from '@features/navigation'
 import { useTheme } from '@hooks/useTheme'
+import { DropdownIcon } from './DropdownIcon'
 
 export function ThemeSwitch() {
   const [theme, { toggleTheme }] = useTheme()
