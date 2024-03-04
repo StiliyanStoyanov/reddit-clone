@@ -1,0 +1,23 @@
+.ml-auto {
+  margin-left: auto;
+}
+
+.mt-1 {
+  margin-top: 8px;
+}
+
+.mt-2 {
+  margin-top: 12px;
+}
+
+.mb-1 {
+  margin-bottom: 8px;
+}
+
+.mb-2 {
+  margin-bottom: 12px;
+}
+
+.p-1 {
+  padding: 8px;
+}
