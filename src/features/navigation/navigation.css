@@ -1,0 +1,66 @@
+.navigation {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 8px;
+  background-color: var(--surface-container);
+  border-bottom: 1px solid var(--outline);
+
+  > :is(.left, .right, .center) {
+    display: flex;
+    flex-basis: 30%;
+    gap: 8px;
+  }
+
+  > .left {
+    justify-content: flex-start;
+  }
+
+  > .center {
+    justify-content: center;
+    flex-basis: 40%;
+    min-width: 120px;
+  }
+
+  > .right {
+    justify-content: flex-end;
+  }
+}
+
+.nav-dropdown-container {
+  position: absolute;
+  right: 8px;
+  top: 60px;
+  width: 320px;
+  border-radius: var(--small);
+  padding: 8px;
+  background-color: var(--surface-container);
+  border: 1px solid var(--outline);
+  user-select: none;
+}
+
+.nav-dropdown-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  gap: 8px;
+  padding: 8px;
+  width: 100%;
+  color: var(--on-surface);
+  border-radius: var(--small);
+}
+
+.nav-dropdown-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--round);
+  background-color: var(--surface-container-highest);
+}
