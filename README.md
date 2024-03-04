@@ -27,17 +27,26 @@ npm run build
 ```
 
 ## Firebase
+
 ### Setting up the Emulators
 
 There are a few prequisites for the emulators to work such as Firebase Tools CLI, NodeJS and JDK.\
 Please refer to the Firebase documentation:
+
 - [Install, configure and integrate Local Emulator Suite](https://firebase.google.com/docs/emulator-suite/install_and_configure)
 
 To initialize the emulators run:
+
 ```shell
 firebase init emulators
 ```
+For local development the emulators require firestore.rules and storage.rules. A default setup that fully allows read and writes are present in the repository. However in production mode the rules differ and will not be added to the repository as they might contain sensitive information in regards to the allowed access.
+
+For more information regarding the securities rules language refer to:
+- [Security Rules language](https://firebase.google.com/docs/rules/rules-language)
+
 The project currently uses the following emulators:
+
 - Authentication
 - Firestore
 - Storage
