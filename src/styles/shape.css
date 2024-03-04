@@ -1,0 +1,42 @@
+:root {
+  /* Fully rounded */
+  --corner-round: 50%;
+  /* Large rounding */
+  --corner-large: 16px;
+  /* Medium rounding */
+  --corner-medium: 12px;
+  /* Small rounding */
+  --corner-small: 8px;
+  /* No rounding */
+  --corner-none: 0px;
+
+  --small: var(--corner-small);
+  --medium: var(--corner-medium);
+  --large: var(--corner-large);
+  --round: var(--corner-round);
+}
+
+.shape-none {
+  border-radius: var(--corner-none);
+}
+
+.shape-round {
+  border-radius: var(--corner-round);
+}
+
+.shape-small {
+  border-radius: var(--small);
+}
+
+.shape-medium {
+  border-radius: var(--medium);
+}
+
+.shape-large {
+  border-radius: var(--large);
+}
+
+.shape-top-small {
+  border-top-right-radius: var(--small);
+  border-top-left-radius: var(--small);
+}
