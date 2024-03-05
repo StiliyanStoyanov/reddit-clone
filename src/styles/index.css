@@ -2,6 +2,7 @@
 @import url(./keyframes.css);
 @import url(./tokens.css);
 @import url(./shape.css);
+@import url(./typography.css);
 @import url(./sizing.css);
 @import url(./spacing.css);
 @import url(./buttons.css);
@@ -54,6 +55,7 @@ input {
 }
 
 a {
+  position: relative;
   color: currentColor;
   text-decoration: none;
 }

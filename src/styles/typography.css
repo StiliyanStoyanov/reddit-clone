@@ -9,3 +9,19 @@
   letter-spacing: 0;
   line-height: 36px;
 }
+
+.font-12 {
+  font-size: 0.75rem;
+}
+
+.font-16 {
+  font-size: 1rem;
+}
+
+.font-24 {
+  font-size: 1.5rem;
+}
+
+.font-28 {
+  font-size: 1.75rem;
+}

@@ -2,22 +2,30 @@
   margin-left: auto;
 }
 
-.mt-1 {
+.mb-4 {
+  margin-bottom: 4px;
+}
+
+.ml-8 {
+  margin-left: 8px;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+.mt-8 {
   margin-top: 8px;
 }
 
-.mt-2 {
+.mt-12 {
   margin-top: 12px;
 }
 
-.mb-1 {
-  margin-bottom: 8px;
-}
-
-.mb-2 {
+.mb-12 {
   margin-bottom: 12px;
 }
 
-.p-1 {
+.p-8 {
   padding: 8px;
 }
