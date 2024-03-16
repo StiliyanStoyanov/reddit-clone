@@ -1,7 +1,7 @@
 import { Children, cloneElement, useMemo, useRef, isValidElement } from 'react'
 import { useKeyPressListener } from '@hooks/useKeyPressHandler'
 import { useOnClickOutside } from '@hooks/useOnClickOutside'
-import useToggle from '@hooks/useToggle'
+import { useToggle } from '@/hooks'
 
 interface DropdownProps extends React.PropsWithChildren {
   Toggle: React.ReactElement<{
@@ -37,8 +37,8 @@ export function Dropdown({ Toggle, outerContainer, innerContainer, children }: D
     })
   }, [children, toggleMethods])
 
-  useOnClickOutside({ ref, handler: close, skipHandler: !isActive })
-  useKeyPressListener({ keyHandlers, skipHandler: !isActive })
+  useOnClickOutside({ ref, handler: close, disableListener: !isActive })
+  useKeyPressListener({ keyHandlers, disableListener: !isActive })
   return (
     <div ref={ref} {...outerContainer}>
       {ToggleClone}

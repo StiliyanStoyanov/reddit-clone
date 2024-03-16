@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-interface DropdownToggleProps extends ReactButtonProps {
+interface DropdownToggleProps extends React.ComponentProps<'button'> {
   Icon: React.JSX.Element
   isActive?: boolean
 }

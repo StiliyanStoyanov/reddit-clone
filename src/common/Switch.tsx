@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-interface SwitchProps extends ReactButtonProps {
+interface SwitchProps extends React.ComponentProps<'button'> {
   checked: boolean
   trackClassName?: string
   handleClassName?: string

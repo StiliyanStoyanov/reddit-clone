@@ -9,9 +9,9 @@ export interface ModalProps extends React.PropsWithChildren {
   onClickOutside?: (e?: MouseEvent) => void
   onEscapeKeyPress?: (e?: KeyboardEvent) => void
   onCloseButtonClick?: MouseEventHandler<HTMLButtonElement>
-  overlayContainerProps?: ReactDivProps
-  containerProps?: ReactDivProps
-  closeButtonProps?: ReactButtonProps
+  overlayContainerProps?: React.ComponentProps<'div'>
+  containerProps?: React.ComponentProps<'div'>
+  closeButtonProps?: React.ComponentProps<'button'>
   portalElement?: HTMLElement
 }
 
@@ -35,8 +35,8 @@ export const Modal = ({
     }
   }, [])
 
-  useOnClickOutside({ ref, handler: onClickOutside, skipHandler: !isOpen })
-  useKeyPressListener({ keyHandlers: { Escape: onEscapeKeyPress }, skipHandler: !isOpen })
+  useOnClickOutside({ ref, handler: onClickOutside, disableListener: !isOpen })
+  useKeyPressListener({ keyHandlers: { Escape: onEscapeKeyPress }, disableListener: !isOpen })
   if (!isOpen) return null
   return (
     <Portal portalElement={portalElement}>
