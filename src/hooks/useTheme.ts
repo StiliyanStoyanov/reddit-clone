@@ -1,10 +1,9 @@
-import { useAppDispatch } from '@/app/hooks'
 import { selectTheme, set, toggle } from '@features/theme/themeSlice'
-import { useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
 export const useTheme = () => {
   const dispatch = useAppDispatch()
-  const theme = useSelector(selectTheme)
+  const theme = useAppSelector(selectTheme)
   const nextTheme = theme.isDark ? 'light' : 'dark'
 
   const toggleTheme = () => {

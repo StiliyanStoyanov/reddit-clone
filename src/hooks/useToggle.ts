@@ -6,7 +6,7 @@ export interface UseToggleMethods {
   toggle: () => void
 }
 
-const useToggle = (initial: boolean = false) => {
+export const useToggle = (initial: boolean = false) => {
   const [state, setState] = useState(initial)
 
   const methods = useMemo(
@@ -20,5 +20,3 @@ const useToggle = (initial: boolean = false) => {
 
   return [state, methods] as const
 }
-
-export default useToggle
