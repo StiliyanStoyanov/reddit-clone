@@ -1,4 +1,4 @@
-import { FormFields } from '../types'
+import { FormFields } from './types'
 
 export const fields: FormFields = {
   username: {
