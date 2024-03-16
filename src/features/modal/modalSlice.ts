@@ -10,6 +10,6 @@ const modalSlice = createSlice({
   },
 })
 
-export const selectModal = (state: RootState) => state.modalId
+export const selectModal = (state: RootState) => state.modal
 export const { setModal } = modalSlice.actions
 export default modalSlice.reducer
