@@ -1,11 +1,7 @@
 import classNames from 'classnames'
 import { DropdownIcon } from '@/features/navigation/DropdownIcon'
-import { Link, LinkProps } from 'react-router-dom'
-
-interface DropdownLinkProps extends LinkProps {
-  text: string
-  Icon: React.JSX.Element
-}
+import { Link } from 'react-router-dom'
+import { DropdownLinkProps } from './types'
 
 export function DropdownLink({ to, text, Icon, className, ...rest }: DropdownLinkProps) {
   return (

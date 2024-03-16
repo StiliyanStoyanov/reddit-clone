@@ -1,8 +1,5 @@
 import classNames from 'classnames'
-
-interface DropdownIconProps extends React.ComponentProps<'div'> {
-  Icon: React.JSX.Element
-}
+import { DropdownIconProps } from './types'
 
 export function DropdownIcon({ Icon, className, ...rest }: DropdownIconProps) {
   return (
