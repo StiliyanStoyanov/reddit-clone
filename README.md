@@ -1,5 +1,9 @@
 # Reddit Clone
 
+## Project Information
+
+This project is currently under development and does not have a deployed preview version. Following the bellow instructions would allow running it in a local enviorment for preview purposes.
+
 ## Installation and Usage
 
 Setup the packages
