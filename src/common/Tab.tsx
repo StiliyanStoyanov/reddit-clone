@@ -1,17 +1,24 @@
 import classNames from 'classnames'
-
-interface TabProps extends React.PropsWithChildren {
+export type TabVariants = 'primary' | 'secondary'
+export interface TabProps extends React.ComponentProps<'button'> {
+  variant?: TabVariants
   className?: string
-  onClick?: () => void
   isActive?: boolean
+  spanProps?: React.JSX.IntrinsicElements['span']
 }
 
-export const Tab = ({ className, onClick, isActive = false, children }: TabProps) => {
-  const tabClass = classNames('tab', { active: isActive }, 'flex-center', 'overlay', className)
+export const Tab = ({
+  variant = 'primary',
+  className,
+  isActive = false,
+  spanProps,
+  children,
+  ...buttonProps
+}: TabProps) => {
   return (
-    <button type="button" onClick={onClick} className={tabClass}>
+    <button type="button" className={classNames('tab', variant, { active: isActive }, className)} {...buttonProps}>
       {children}
-      <span />
+      <span className="tab-outline" {...spanProps} />
     </button>
   )
 }
