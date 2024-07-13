@@ -9,5 +9,8 @@ import Login from './login.svg?react'
 import Groups from './groups.svg?react'
 import Close from './close.svg?react'
 import Edit from './edit.svg?react'
+import Description from './description.svg?react'
+import Image from './image.svg?react'
+import Link from './link.svg?react'
 
-export { Logo, Arrow, Card, Compact, Person, Add, Moon, Login, Groups, Close, Edit }
+export { Logo, Arrow, Card, Compact, Person, Add, Moon, Login, Groups, Close, Edit, Description, Image, Link }
