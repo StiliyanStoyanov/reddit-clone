@@ -22,7 +22,7 @@ export function Auth({ id, btnText, heading, tabs, fields, action }: AuthProps) 
     } catch (error) {
       if (error instanceof FirebaseError) {
         const { id, type, message } = getError(error.code)
-        setError(id, { type, message })
+        setError(id, { type, message }, { shouldFocus: true })
       }
     }
   }
@@ -37,7 +37,7 @@ export function Auth({ id, btnText, heading, tabs, fields, action }: AuthProps) 
         {tabs.map(({ id: tabId, tabHeading }) => (
           <Tab
             key={tabId}
-            className="shape-top-small"
+            className="flex-center overlay shape-top-small"
             isActive={id === tabId}
             onClick={() => {
               dispatch(setModal(tabId))
