@@ -1,0 +1,7 @@
+.create-post-container {
+  min-height: 500px;
+  min-width: 380px;
+  max-width: 740px;
+  padding: 0 8px;
+  margin: 0 auto;
+}

@@ -1,0 +1,28 @@
+.outline-bottom {
+  border-bottom: 1px solid var(--outline);
+}
+
+.outline-x {
+  border-left: 1px solid var(--outline);
+  border-right: 1px solid var(--outline);
+}
+
+.outline-left {
+  border-left: 1px solid var(--outline);
+}
+
+.outline-right {
+  border-right: 1px solid var(--outline);
+}
+
+.outline-top {
+  border-top: 1px solid var(--outline);
+}
+
+.outline-bottom-transperent {
+  border-bottom: 1px solid transparent;
+}
+
+.outline-bottom-current-color {
+  border-bottom: 1px solid currentColor;
+}

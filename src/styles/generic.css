@@ -16,8 +16,45 @@
   align-items: center;
 }
 
+.resize-none {
+  resize: none;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.outline-current-color {
+  border: 1px solid currentColor;
+}
+
+.outline {
+  border: 1px solid var(--outline);
+}
+
 .outline-bottom {
   border-bottom: 1px solid var(--outline);
+}
+
+.outline-x {
+  border-left: 1px solid var(--outline);
+  border-right: 1px solid var(--outline);
+}
+
+.outline-left {
+  border-left: 1px solid var(--outline);
+}
+
+.outline-right {
+  border-right: 1px solid var(--outline);
+}
+
+.outline-top {
+  border-top: 1px solid var(--outline);
+}
+
+.relative {
+  position: relative;
 }
 
 .absolute {

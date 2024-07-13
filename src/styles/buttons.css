@@ -102,18 +102,36 @@ button.switch {
 }
 
 .tab {
+  > .tab-outline {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.tab.primary {
   height: 48px;
   min-width: 120px;
   font-weight: 600;
   outline-offset: 6px;
+  color: var(--on-surface);
+
+  &.active {
+    > .tab-outline {
+      border-bottom: 2px solid var(--outline-1);
+    }
+  }
 }
 
-.tab.active {
-  > span {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    border-bottom: 2px solid var(--outline-1);
+.tab.secondary {
+  color: var(--on-surface-inactive);
+
+  &.active {
+    color: var(--outline-1);
+
+    > .tab-outline {
+      border-bottom: 1px solid var(--outline-1);
+    }
   }
 }
 

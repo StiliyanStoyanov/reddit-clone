@@ -7,6 +7,8 @@
   --corner-medium: 12px;
   /* Small rounding */
   --corner-small: 8px;
+  /* Very small rounding */
+  --corner-very-small: 4px;
   /* No rounding */
   --corner-none: 0px;
 
@@ -24,6 +26,10 @@
   border-radius: var(--corner-round);
 }
 
+.shape-very-small {
+  border-radius: var(--corner-very-small);
+}
+
 .shape-small {
   border-radius: var(--small);
 }
@@ -39,4 +45,12 @@
 .shape-top-small {
   border-top-right-radius: var(--small);
   border-top-left-radius: var(--small);
+}
+
+.shape-top-left-very-small {
+  border-top-left-radius: var(--corner-very-small);
+}
+
+.shape-top-right-very-small {
+  border-top-right-radius: var(--corner-very-small);
 }

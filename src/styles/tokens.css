@@ -4,8 +4,8 @@
   --surface-container-highest: rgb(255 255 255 / 10%);
 
   --on-surface: #ffffff;
-  --on-surface-variant: #e4e6eb;
-  --on-surface-variant-1: #d7dadc;
+  --on-surface-variant: #d7dadc;
+  --on-surface-inactive: #818384;
 
   --primary: #0059cd;
   --on-primary: #ffffff;
@@ -31,8 +31,8 @@
   --surface-container-highest: rgb(0 0 0 / 10%);
 
   --on-surface: #030303;
-  --on-surface-variant: #1a1a1b;
-  --on-surface-variant-1: #7c7c7c;
+  --on-surface-variant: #0079d3;
+  --on-surface-inactive: #7c7c7c;
 
   --primary: #0079d3;
   --on-primary: #ffffff;
@@ -56,6 +56,18 @@
   background-color: var(--surface-container-highest);
 }
 
-.on-surface-container {
+.surface-container {
+  background-color: var(--surface-container);
+}
+
+.on-surface-text {
   color: var(--on-surface);
+}
+
+.on-surface-variant-text {
+  color: var(--on-surface-variant);
+}
+
+.on-surface-variant-text {
+  color: var(--on-surface-variant);
 }

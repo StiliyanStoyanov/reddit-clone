@@ -21,6 +21,12 @@
   }
 }
 
+.overlay.fixed-background {
+  &::after {
+    background-color: var(--on-surface);
+  }
+}
+
 .page-overlay {
   position: absolute;
   top: 0;
